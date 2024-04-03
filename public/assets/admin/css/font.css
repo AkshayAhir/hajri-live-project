@@ -1,0 +1,119 @@
+@font-face {
+    font-family: "proxima-black";
+    src: url('../font/Proxima/Proxima_Nova_Black.otf');
+}
+
+@font-face {
+    font-family: "proxima-bold";
+    src: url('../font/Proxima/Proxima_Nova_Bold.otf');
+}
+
+@font-face {
+    font-family: "proxima-extrabold";
+    src: url('../font/Proxima/Proxima_Nova_Extrabold.otf');
+}
+
+@font-face {
+    font-family: "proxima-light";
+    src: url('../font/Proxima/Proxima_Nova_Light.otf');
+}
+
+@font-face {
+    font-family: "proxima_regular";
+    src: url('../font/Proxima/Proxima_Nova_Regular.otf');
+}
+
+@font-face {
+    font-family: "proxima-semibold";
+    src: url('../font/Proxima/Proxima_Nova_Semibold.otf');
+}
+
+@font-face {
+    font-family: "proxima-thin";
+    src: url('../font/Proxima/Proxima_Nova_Thin.otf');
+}
+
+@font-face {
+    font-family: "proxima-medium";
+    src: url('../font/Proxima/Proxima_Nova_Medium.otf');
+}
+
+
+/* 700 */
+.proxima_nova_bold {
+    font-family: "proxima-bold";
+}
+
+/* 600 */
+.proxima_nova_semibold {
+    font-family: "proxima-semibold" !important;
+}
+
+/* 400 */
+.proxima_nova_regular {
+    font-family: "proxima_regular";
+}
+
+body,
+p,
+span,
+div,
+li,
+input,
+text-area,
+select,
+::placeholder,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'proxima_regular';
+
+}
+
+body {
+    font-size: 16px;
+}
+
+/* font size 24 */
+.section_title_heading {
+    font-size: 24px;
+    color: #050E17;
+    line-height: 29.23px;
+}
+
+/* font size 20 */
+.section_title {
+    font-size: 20px;
+    color: #050E17;
+    line-height: 24.36px;
+}
+
+/* font size 14 */
+.section_sub_title {
+    font-size: 14px;
+    color: #808080;
+    line-height: 17.05px;
+}
+/* btn hover */
+.theme_btn_hover_color:hover {
+    background-color: #136DDC;
+}
+
+/*  */
+.cursor_pointer,
+.back_button{
+    cursor: pointer;
+}
+
+@media(max-width:767px) {
+    .section_title {
+        font-size: 16px;
+        color: #050E17;
+        line-height: 20px;
+    }
+
+}

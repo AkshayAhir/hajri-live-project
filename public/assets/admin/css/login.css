@@ -1,0 +1,1043 @@
+body,
+p,
+span,
+div,
+li,
+input,
+text-area,
+select,
+::placeholder,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'proxima_regular';
+
+}
+
+.hajri-signup {
+    height: 100vh;
+    display: flex;
+}
+
+.hajri-left-bg {
+    background-color: #F5F8FF;
+    position: relative;
+    max-width: 441px;
+    width: 100%;
+    height: inherit;
+}
+
+.hajri-main-logo {
+    padding-top: 50px;
+    padding-left: 38px;
+    padding-right: 38px;
+}
+
+.hajri-steps {
+    padding-top: 70px;
+}
+
+.hajri-left-right {
+    /* max-width: 925px; */
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.loader {
+    width: 100%;
+    max-width: 30px;
+}
+button[disabled] {
+    cursor: not-allowed;
+}
+
+
+/******************************* steps *******************************/
+
+.navigation_menu {
+    padding-left: 45px;
+    padding-right: 45px;
+}
+
+.navigation_menu ul {
+    list-style-type: none;
+}
+
+.navigation_menu li {
+    position: relative;
+    /* counter-increment: list; */
+}
+
+.navigation_menu li:before {
+    display: inline-block;
+    content: '';
+    position: absolute;
+    left: -27px;
+    height: 80px;
+    /* width: 10px; */
+    border-left: 3px dotted #DFDFDF;
+    bottom: 100%;
+}
+
+.navigation_tabs {
+    counter-reset: step;
+    height: 500px;
+}
+
+.navigation_menu li:after {
+    content: counter(step);
+    counter-increment: step;
+    position: absolute;
+    top: 0;
+    left: -39px;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 50%;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    font-size: 13px;
+    font-family: "proxima-semibold";
+    color: #fff;
+    background-color: #fff;
+    z-index: 99;
+    border: 1px solid #809FB8;
+}
+
+.navigation_menu li:not(:last-child) {
+    padding-bottom: 40px;
+}
+
+.navigation_menu li.tab_active:before {
+    border-left: 3px dotted #2F8CFF;
+    /* border-color: #2F8CFF; */
+    left: -27px;
+    bottom: 100%;
+}
+
+.navigation_menu li.tab_active:after {
+    border: 1px solid #2F8CFF;
+    background-color: #2F8CFF;
+    box-shadow: 0px 0px 0px 2px #fff inset;
+}
+
+.navigation_menu ul li:first-child::before {
+    display: none;
+}
+
+/* .navigation_menu ul li:last-child::before {
+    display: none;
+} */
+
+.navigation_menu li.tab_inactive:after {
+    content: "";
+    border: 1px solid #809FB8;
+}
+
+
+.nav_field_active .nav-tab-title {
+    font-size: 16px;
+    color: #050E17;
+    margin-bottom: 2px;
+}
+
+.nav_field_active .nav-tab-des {
+    font-size: 14px;
+    color: #050E17;
+}
+
+.nav-tab-title {
+    font-size: 16px;
+    color: #808080;
+    margin-bottom: 2px;
+}
+
+.nav-tab-des {
+    font-size: 14px;
+    color: #808080;
+}
+
+
+/******************************* footer *******************************/
+
+.hajri-main-footer {
+    padding-left: 37px;
+    padding-right: 37px;
+    position: absolute;
+    bottom: 0;
+}
+
+.footer-title {
+    font-size: 18px;
+    color: #050E17;
+    margin-bottom: 0px;
+}
+
+.footer-title-sub {
+    font-size: 18px;
+    color: #050E17;
+}
+
+.footer-content {
+    font-size: 14px;
+    color: #808080;
+    margin-bottom: 18px;
+}
+
+.footer-number {
+    font-size: 10px;
+    color: #808080;
+    padding-right: 10px;
+    border-right: 1px solid #DFDFDF;
+    margin-bottom: 20px;
+}
+
+.footer-email {
+    font-size: 10px;
+    color: #808080;
+    padding-left: 10px;
+    margin-bottom: 25px;
+}
+
+.footer-inner-sec {
+    display: flex;
+    /* justify-content: space-around; */
+
+}
+
+/******************************* footer *******************************/
+.hajri-right {
+    /* width: 30%;
+    margin: auto; */
+    max-width: 300px;
+    width: 100%;
+    margin: auto;
+
+}
+
+.hajri-main-right {
+    padding-top: 80px;
+}
+
+.hajri-right-main-logo {
+    text-align: center;
+}
+
+.hajri-right-text {
+    text-align: center;
+}
+
+.hajri-right-title {
+    font-size: 28px;
+    color: #050E17;
+    margin-bottom: 0px;
+}
+
+.hajri-right-con {
+    font-size: 13px;
+    color: #808080;
+}
+
+.hajri-right-main-logo img {
+    padding-bottom: 25px;
+}
+
+.phone-field {
+    width: 85%;
+    text-align: start;
+    margin-bottom: 8px;
+}
+
+.hajri-form-btn {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hajri-submit-btn {
+    background-color: #2F8CFF;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    height: 40px;
+    width: 260px;
+}
+
+.hajri-submit-btn-submit {
+    background-color: #2F8CFF;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    height: 40px;
+    width: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* button.hajri-submit-btn-submit.otp-button:disabled {
+    color: #808080;
+    background: #F5F8FF;
+} */
+
+.hajri-submit-btn-submit:hover {
+    background-color: #136DDC;
+}
+
+.hajri-submit-btnss {
+    background-color: #2F8CFF;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    height: 40px;
+    width: 260px;
+}
+
+.hajri-submit-btnss:hover {
+    background-color: #136DDC;
+}
+
+.iti--separate-dial-code .iti__selected-flag {
+    background-color: unset !important;
+    /* border-right: 1px solid #CCC; */
+}
+
+.iti__selected-dial-code {
+    font-size: 14px;
+}
+
+.phone_input {
+    border-radius: 10px !important;
+    border: 1px solid #BBC6D8 !important;
+    font-size: 14px !important;
+    height: 40px;
+    padding-left: 105px !important;
+}
+
+.iti--allow-dropdown .iti__flag-container:hover .iti__selected-flag {
+    background-color: unset;
+}
+
+.iti__selected-flag {
+    padding: 0px 0px 0 20px !important;
+}
+
+.iti__selected-flag::after {
+    content: '';
+    border-right: 1px solid #F0F1F5;
+    height: 28px;
+    margin-left: 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+.hajri-form-link {
+    margin-top: 15px;
+}
+
+.hajri-form-link p {
+    color: #808080;
+    font-size: 14px;
+}
+
+.hajri-form-link a {
+    color: #2F8CFF !important;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.iti.iti--allow-dropdown.iti--separate-dial-code {
+    width: 100%;
+    max-width: 260px;
+}
+
+.iti__country-list {
+    max-width: 280px;
+}
+
+.iti--separate-dial-code .iti__selected-dial-code {
+    margin-left: 10px !important;
+}
+
+.form-control:focus {
+    color: #212529 !important;
+    border: 2px solid #2F8CFF !important;
+    outline: 0 !important;
+    box-shadow: unset !important;
+}
+
+.error_message {
+    color: #FF5E5E;
+    font-size: 13px;
+    /* margin-right: 112px; */
+    /* width: 263px; */
+    /* text-align: start; */
+}
+.manage_staff_attent_con{
+    max-width: 550px !important;
+    width: 100% !important;
+}
+
+/********************************* otp screen  **************************/
+
+.hajri-inner-otp {
+    display: flex;
+    margin-top: -7px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.otp_num {
+    font-size: 22px;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 12px;
+}
+
+.digit_text {
+    color: #808080;
+    font-size: 14px;
+}
+
+.form-btn-otp-btn {
+    margin-top: 10px;
+}
+
+.hajri-inner-text {
+    margin-top: 10px;
+}
+
+.digit-inner-num {
+    background: white;
+    display: flex;
+    gap: 15px;
+}
+
+.digit-inner-num input {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 10px;
+    border: 0px;
+    background-color: #F5F8FF;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.digit-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phone-number-text {
+    margin-left: -18px;
+}
+
+.inner-loadr-text {
+    font-size: 12px;
+    color: #808080;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-bottom: 0px !important;
+}
+
+.digit-inner-num input:focus {
+    border: 2px solid #2F8CFF;
+}
+
+.main-loader {
+    display: flex;
+    justify-content: center;
+}
+
+.main-loader img {
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+}
+
+input:focus-visible {
+    outline: none;
+}
+
+.main-counter {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.main-counter a {
+    color: #2F8CFF !important;
+    text-decoration: underline !important;
+    font-size: 12px !important;
+}
+
+.main-counter span {
+    color: #808080;
+    font-size: 14px;
+}
+
+.step {
+    display: none;
+}
+
+#step-1 {
+    display: block;
+}
+
+/* #progress-dots {
+    bottom: 0;
+    position: absolute;
+    text-align: center;
+    width: 70%;
+} */
+#progress-dots {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background-color: #808080;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 0 3px;
+}
+
+.dot.active {
+    background-color: #2F8CFF;
+    height: 6px;
+    width: 28px;
+    border-radius: 5px;
+}
+
+/*********************************** step 2 ***********************************/
+.input-field-form {
+    border-radius: 10px !important;
+    border: 1px solid #BBC6D8 !important;
+    font-size: 14px !important;
+    height: 40px;
+    padding-left: 23px !important;
+}
+
+.input_form-fields {
+    /* width: 90%;
+    margin-left: 16px; */
+    width: 263px;
+    text-align: start;
+}
+
+.hajri-form-info {
+    margin-top: 17px;
+}
+
+.business-info-field {
+    /* width: 90%; */
+    width: 263px;
+    text-align: start;
+    font-size: 14px;
+}
+
+.hajri-continue-btn:hover {
+    background-color: #136DDC;
+}
+
+.hajri-continue-btn {
+    background-color: #2F8CFF;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    height: 40px;
+    width: 263px;
+}
+
+.step-3-button:disabled {
+    color: #808080;
+    background: #F5F8FF;
+}
+
+/******************************* step 3 *******************************/
+
+.hajri-step-3-title {
+    width: 360px;
+}
+
+.hajri-step-3-con {
+    font-size: 14px;
+    width: 310px;
+}
+
+.hajri-main-con {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.hajri-salary-pay-main {
+    width: 322px;
+    background-color: white;
+    height: 112px;
+    border-radius: 10px;
+    border: 2px solid #BBC6D8;
+    /* padding: 25px; */
+    padding-left: 23px;
+    padding-bottom: 22px;
+    padding-top: 16px;
+}
+
+.border-color-checked {
+    border: 2px solid #2F8CFF;
+    background-color: #F5F8FF;
+}
+
+.radio-button-container {
+    font-size: 14px;
+    color: #050E17;
+}
+
+input[type='radio'] {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    /* outline: none; */
+    border: 2px solid #BBC6D8;
+}
+
+input[type="radio"]:checked {
+    border: 2px solid #2F8CFF;
+    background-color: #2F8CFF;
+    box-shadow: 0px 0px 0px 2px #fff inset;
+}
+
+.salary-main-box {
+    display: flex;
+}
+
+.salary-inner-label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 10px;
+}
+
+.salary-date {
+    font-size: 12px;
+    color: #050E17;
+    margin-top: 10px;
+    margin-bottom: 6px;
+}
+
+.salary-days {
+    font-size: 12px;
+    color: #808080;
+}
+
+.salary_pay_gap {
+    margin-top: 20px;
+}
+
+.hajri-salary-field {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.hajri-structure {
+    font-size: 20px;
+    color: #050E17;
+    width: 364px;
+}
+
+.login_shift_hours_group {
+    max-width: 260px;
+}
+
+.salary-stru-field {
+    width: 260px;
+}
+
+.hajri_shift_hours {
+    border-radius: 10px !important;
+    border: 1px solid #BBC6D8 !important;
+    font-size: 14px;
+    height: 40px;
+}
+
+.shift-hour-label {
+    text-align: start;
+    width: 260px;
+    font-size: 14px;
+    color: #050E17;
+}
+
+input[type="time"]::after {
+    content: "Hrs ";
+    padding-right: 10px;
+}
+
+/* input[type="time"]::-webkit-calendar-picker-indicator {
+    background: none;
+} */
+
+.hajri_shift_hours::-webkit-datetime-edit-ampm-field {
+    display: none;
+}
+
+.salary-stru-field {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.salary-stru-field input[type="time"]::-webkit-calendar-picker-indicator {
+    display: block;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: transparent;
+    cursor: pointer;
+}
+
+.hajri-continue-btns {
+    background-color: #2F8CFF;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    height: 40px;
+    width: 260px;
+}
+
+.hajri-continue-btns:hover {
+    background-color: #136DDC;
+}
+
+.hajri-main-footer-mobile {
+    display: none;
+}
+
+.hajri-main-footer {
+    display: block;
+}
+
+.navigation_menu_mobile {
+    display: none;
+}
+
+/******************************* media screen *******************************/
+
+@media screen and (max-width: 575px) {
+    .navigation_menu_mobile {
+        display: block;
+    }
+
+    .hajri-left-bg {
+        background-color: #F5F8FF;
+        position: relative;
+        max-width: unset;
+        width: 100%;
+        height: inherit;
+    }
+
+    .hajri-main-footer {
+        display: none;
+    }
+
+    .hajri-main-footer-mobile {
+        background-color: #F5F8FF;
+        width: 100%;
+        padding-left: 37px;
+        padding-right: 37px;
+        padding-top: 30px;
+        display: block;
+        /*position: absolute;*/
+        bottom: -180px;
+        margin-top: 130px;
+    }
+
+    .navigation_tabs {
+        height: 225px;
+    }
+
+    .hajri-main-right {
+        padding-top: 50px;
+    }
+
+    #progress-dots {
+        margin-bottom: 40px;
+    }
+
+    .hajri-steps {
+        padding-top: 40px;
+    }
+
+    .navigation_menu li:not(:last-child) {
+        padding-bottom: 25px;
+    }
+
+    .navigation_menu li:before {
+        height: 65px;
+    }
+
+    .navigation_menu {
+        display: none;
+    }
+
+    .hajri-step-3-title {
+        width: 300px;
+    }
+
+    .navigation_menu_mobile .navigation_tabs {
+        display: flex;
+        height: 85px;
+        padding: 0;
+    }
+
+    .hajri-salary-pay-main {
+        width: 300px;
+    }
+
+    .navigation_menu_mobile li {
+        color: white;
+        font-size: 9px;
+        width: 33.33%;
+        float: left;
+        position: relative;
+    }
+
+    .navigation_menu_mobile li.tab_actives:before {
+        border-top: 3px dotted #2F8CFF;
+        border-color: #2F8CFF;
+        left: -100%;
+        width: 100%;
+    }
+
+    .navigation_menu_mobile li:before {
+        display: inline-block;
+        content: '';
+        position: absolute;
+        left: -100%;
+        height: 80px;
+        border-top: 3px dotted #DFDFDF;
+        top: 15%;
+        width: 100%;
+    }
+
+    .navigation_menu_mobile {
+        padding-left: 45px;
+    }
+
+    .navigation_menu_mobile ul {
+        list-style-type: none;
+    }
+
+    .navigation_menu_mobile li:after {
+        content: counter(step);
+        counter-increment: step;
+        position: absolute;
+        top: 0;
+        left: -8px;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        border-radius: 50%;
+        display: block;
+        text-align: center;
+        margin: 0 auto 10px auto;
+        font-size: 13px;
+        font-family: "proxima-semibold";
+        color: #fff;
+        background-color: #fff;
+        z-index: 99;
+        border: 1px solid #809FB8;
+    }
+
+    .navigation_menu_mobile li:not(:last-child) {
+        padding-bottom: 40px;
+    }
+
+    .navigation_menu_mobile li.tab_actives:after {
+        border: 1px solid #2F8CFF;
+        background-color: #2F8CFF;
+        box-shadow: 0px 0px 0px 2px #fff inset;
+    }
+
+    .navigation_menu_mobile ul li:first-child::before {
+        display: none;
+    }
+
+    .navigation_menu_mobile li.tab_inactive:after {
+        content: "";
+        border: 1px solid #809FB8;
+    }
+
+
+    .navigation_menu_mobile .nav_field_actives .nav-tab-title {
+        font-size: 14px;
+        color: #050E17;
+        margin-bottom: 2px;
+    }
+
+    .navigation_menu_mobile .nav_field_actives .nav-tab-des {
+        font-size: 14px;
+        color: #050E17;
+    }
+
+    .navigation_menu_mobile .nav-tab-title {
+        font-size: 14px;
+        color: #808080;
+        margin-bottom: 2px;
+        margin: 35px 0px 5px -7px;
+    }
+
+    .navigation_menu_mobile .nav-tab-des {
+        font-size: 14px;
+        color: #808080;
+    }
+
+    .hajri-signup {
+        height: unset !important;
+        display: flex !important;
+        flex-direction: column;
+    }
+}
+
+
+/* 575 end  */
+
+@media screen and (max-width: 767px) {
+
+    .hajri-step-3-title,
+    .hajri-salary-pay-main {
+        width: 300px;
+    }
+
+
+    /* landing page */
+
+    .landing-main-sections .hajri-signup {
+        flex-direction: column-reverse;
+        height: unset;
+    }
+
+    .landing-main-section {
+        padding: 60px 0 0 0;
+    }
+
+    .landing-main-sections .hajri-main-footer-mobile {
+        margin-top: 0;
+    }
+
+    .landing-main-section #progress-dots {
+        position: unset !important;
+    }
+
+    .landing-left-main-text {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .landing-left-main-text p {
+        text-align: center;
+    }
+
+}
+
+
+/******************************* main header *******************************/
+
+.main-header {
+    background: #FFF;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.06);
+    width: 100%;
+    height: 80px;
+    padding-top: 15px;
+    padding-bottom: 22px;
+}
+
+.manage-hajri {
+    color: #050E17;
+    font-size: 30px;
+    margin-bottom: 6px;
+}
+
+.landing-left-section img,
+.landing-left-section {
+    width: 100%;
+    max-width: 534px;
+}
+
+.left-main-landing {
+    padding-top: 10px;
+    width: 100%;
+}
+
+/* .landing-right{
+    justify-content: center;
+} */
+.hajri-main-landing-right {
+    padding-top: 0px;
+}
+
+.manage-sub-text {
+    width: 100%;
+    margin-bottom: 32px;
+    max-width: 939px;
+}
+
+.landing-main-sections .hajri-signup {
+    min-height: calc(100vh - 80px);
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.landing-main-section {
+    position: relative;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-around;
+    /* max-width: 900px; */
+    margin: auto;
+}
+
+.landing-right {
+    /* width: unset; */
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.landing-main-section #progress-dots {
+    position: absolute;
+    bottom: 0;
+}
+.main-inner-header{
+    /* max-width: 900px !important; */
+    /* width: 100% !important; */
+}

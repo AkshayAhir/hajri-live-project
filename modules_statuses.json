@@ -1,0 +1,9 @@
+{
+    "Dashboard": true,
+    "StaffManagement": true,
+    "Setting": true,
+    "Attendance": true,
+    "Test": true,
+    "Weeklyholidaypolicy": true,
+    "Report": true
+}

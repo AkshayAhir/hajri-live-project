@@ -1,0 +1,1041 @@
+/* min 1200
+max 1199
+max 991
+mac 767
+575
+480
+400
+340
+
+ */
+/* 1230 */
+@media(max-width:1200px) {
+    .dashborad_todo_info_main {
+        height: 100px !important;
+    }
+}
+
+@media(max-width:1400px) {
+
+    /* .chart-main-sec {
+        display: flex;
+        flex-direction: column;
+    } */
+    .dashboard-this-month {
+        width: 40% !important;
+    }
+
+    .charts-date-main {
+        width: 60% !important;
+    }
+
+    .chart-shift-info-main {
+        width: 100% !important;
+
+    }
+
+    .chart-shift-info-main {
+        margin-top: 30px;
+        margin-left: 0 !important;
+    }
+
+    .bonus-chart-section {
+        display: flex;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        flex-direction: column;
+    }
+
+    .bonus-chart-main {
+        width: 100% !important;
+    }
+
+    .bonus-chart-payment {
+        margin-top: 30px;
+        width: 100% !important;
+        padding: 30px !important;
+    }
+
+    #chart1 .apexcharts-canvas,
+    #chart1 .apexcharts-canvas foreignObject,
+    #chart1 .apexcharts-canvas svg {
+        margin-top: -40px;
+    }
+
+    #payment-chart .apexcharts-canvas,
+    #payment-chart .apexcharts-canvas foreignObject,
+    #payment-chart .apexcharts-canvas svg {
+        margin-top: -45px;
+        margin-left: 100px;
+
+    }
+
+    .staff-atten-profile-main .nav-tabs {
+        gap: 0px !important;
+    }
+
+    .plan-right-section {
+        padding-left: 0 !important;
+    }
+
+    .date-total-employe {
+        height: auto !important;
+    }
+}
+
+/* 1400 end */
+
+@media(max-width:1199px) {
+    .dashborad-data-today-employe {
+        flex-direction: column;
+    }
+
+    .today-report-data-dashboard {
+        width: 100% !important;
+        margin-bottom: 30px;
+    }
+
+    .dash_atten_main_no_data {
+        padding-top: 10% !important;
+        /* padding-bottom: 10%; */
+    }
+}
+
+@media(max-width:1040px) {
+    .weekly_off_preference_txt {
+        display: block !important;
+    }
+
+}
+
+@media(max-width:991px) {
+
+    .staff-left-header,
+    .staff-right-header {
+        padding-right: 0px !important;
+    }
+
+    /*  dashboard */
+    .chart-main-sec {
+        flex-direction: column;
+    }
+
+    .charts-date-main {
+        width: 100% !important;
+    }
+
+    .dashboard-this-month {
+        width: 100% !important;
+    }
+
+    .dashborad_main {
+        display: block !important;
+    }
+
+    .main-atten .atten-datas {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .report_atten_right_data {
+        justify-content: flex-start !important;
+    }
+
+    .report-user-list-data {
+        justify-content: flex-start !important;
+    }
+
+    .main-atten .staff-right-length,
+    .report-main-list .approve-right-data {
+        justify-content: flex-start !important;
+    }
+}
+
+/* 991 end */
+
+@media(max-width:767px) {
+
+    .staff-right-length {
+        justify-content: flex-start !important;
+    }
+
+    .all-employe-data {
+        flex-direction: column;
+    }
+
+    .dashborad_todo_info_main {
+        width: 50% !important;
+        margin: 15px auto !important;
+    }
+
+    .employe-leave,
+    .employe-absent,
+    .employe-late,
+    .employe-time,
+    .date-total-employe {
+        max-width: 300px;
+        width: 100% !important;
+        height: 100% !important;
+        margin: 15px auto !important;
+    }
+
+    .date-titles,
+    .dashboard-main-todo {
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    #staff_datas {
+        overflow-x: scroll;
+        max-width: 100%;
+        display: block;
+        white-space: nowrap;
+    }
+
+    #payment-chart .apexcharts-canvas,
+    #payment-chart .apexcharts-canvas foreignObject,
+    #payment-chart .apexcharts-canvas svg {
+        margin-top: -30px;
+        margin-left: 0px;
+    }
+
+    .payment-chart-sub #payment-chart .apexcharts-canvas,
+    .payment-chart-sub #payment-chart .apexcharts-canvas foreignObject,
+    .payment-chart-sub #payment-chart .apexcharts-canvas svg {
+        width: 430px !important;
+    }
+
+    .scroll-container {
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    .on-time-main,
+    .staff-atten-profile-main {
+        overflow: hidden;
+    }
+
+    .atten-status-main,
+    #deduction_data_wrapper,
+    .approve-datas.staff-profile-leaves,
+    .atten-status-main.staff-atten-profile {
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .staff-atten-profile-main .nav-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 100%;
+        /* justify-content: space-between; */
+    }
+
+    .atten-third-section-box {
+        width: 49% !important;
+        flex: 0 0 49%;
+        margin-bottom: 2%;
+
+    }
+
+    .create-save-btn {
+        padding-bottom: 35px;
+        display: flex !important;
+        justify-content: center !important;
+        /* position: unset !important; */
+        /* right: 30% !important; */
+        flex-direction: column;
+    }
+
+    .employe-Views-record3,
+    .employe-Views-record2,
+    .employe-Views-record {
+        padding-left: 0 !important;
+    }
+
+    .atten-status-sub {
+        display: flex;
+        gap: 2% !important;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    /*  staff view profile */
+
+    .staff-view-profile-main .shift-main-inner-edit {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0 !important;
+    }
+
+    /* .staff-view-profile-main .staff-pay-title {
+        text-align: center;
+    } */
+
+    .business_weekly_holiday_inner_form h2 {
+        text-align: left !important;
+    }
+
+    .staff-profile-btn {
+        /* justify-content: center !important; */
+    }
+
+    .holiday-policy {
+        flex-direction: column;
+    }
+
+    .right-holiday-policy {
+        width: unset !important;
+        max-width: unset !important;
+        border-left: 0px solid #DFDFDF !important;
+        padding-left: 0px !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+
+    /* staff-profile-attendence */
+    .staff-main-header {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 7px;
+    }
+
+    .staff-left-header {
+        display: flex;
+        padding-right: 0 !important;
+        padding-bottom: 10px;
+    }
+
+    .staff-profile-main {
+        height: auto !important;
+    }
+
+    .staff-profile {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+
+    .staff-right-header {
+        display: flex;
+    }
+
+    .staff_edit_profile {
+        margin-left: 20px;
+    }
+
+    .staff-profile-details {
+        border-left: 0px !important;
+    }
+
+    .staff-atten-profile-main .nav-tabs {
+        flex-wrap: nowrap;
+    }
+
+    /* .staff-atten-profile-main .nav-tabs .nav-link {
+        font-size: 12px;
+    } */
+
+    .staff-atten-profile-main .shift-main-inner-edit {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .account-business-save-btn {
+        justify-content: center !important;
+    }
+
+    .Subscription-plan {
+        justify-content: center;
+    }
+
+    .assign-edit-btn {
+        justify-content: center !important;
+    }
+
+    .leave-policy-edit-btn {
+        /* justify-content: center !important; */
+    }
+
+    .horizontal-scroll-container {
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+
+
+    .attendance_reports_table_top .approve-right-data {
+        margin-top: 0px;
+        justify-content: flex-start;
+        /* margin-top: 20px !important; */
+    }
+
+    .date-titles.dashboard_current_day_txt {
+        margin-bottom: 0;
+    }
+
+    .dashboard_current_day_txt h2 {
+        font-size: 20px;
+    }
+
+    .shift-main-inner-edit {
+        flex-direction: column;
+        /* align-items: center; */
+        gap: 0 !important;
+    }
+
+    .account_setting_manage_business .staff-images {
+        width: 100%;
+    }
+
+    .policy-weekly-holiday {
+        align-items: flex-start !important;
+        flex-direction: column;
+    }
+
+    .policy-date-inner {
+        align-items: flex-start !important;
+    }
+
+    .first-icon-delete {
+        margin-top: 0px !important;
+    }
+
+    .append-policy-data {
+        display: block !important;
+    }
+
+    .shift-inner-sub-label-edit,
+    .shift_hour_field {
+        width: 100% !important;
+        max-width: unset !important;
+    }
+
+
+
+    .shift-inner-sub-label-edit div#images-dropzone {
+        margin-left: unset;
+        width: 100%;
+    }
+
+
+
+    .profile_col_main_field {
+        width: 100% !important;
+    }
+
+    .report-main-list {
+        /* flex-direction: column; */
+        /* display: block !important; */
+    }
+
+    .staff_profile_atten .approve-right-data,
+    .report_salary_report .approve-right-data,
+    .report_atten_report .approve-right-data {
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .dropzone {
+        margin-left: 0;
+    }
+
+    .holiday-policy-edit {
+        flex-direction: column;
+    }
+
+    .holiday-sub-policy {
+        max-width: unset !important;
+    }
+
+    .policy-weekly-shifttime .policy-start-to-time,
+    .policy-weekly-shifttime .policy-start-time {
+        width: 100%;
+    }
+
+    .weekly-policy-level {
+        max-width: unset !important;
+    }
+
+    .leave-policy-main .policy-date-inner,
+    .leave-policy-main .shift-edit-input,
+    .leave-policy-main .holiday-date-sub {
+        width: 100%;
+    }
+
+    .leave-policy-main .policy-holiday-inner {
+        width: calc(100% - 45px);
+    }
+
+    .edit_profile_form_inner {
+        max-height: unset !important;
+    }
+
+    .main-staff-data-list {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 20px;
+    }
+
+    .staff-option_select .select2-container--default {
+        width: auto !important;
+    }
+
+    .staff-option_select {
+        max-width: unset !important;
+    }
+
+    /* .main-atten .atten-data-search {
+        margin-top: 0px !important;
+    } */
+    .staff-right-length {
+        width: 100%;
+        justify-content: flex-start !important;
+    }
+
+    .staff-right-length {
+        margin-top: 0px;
+    }
+
+    .staff-option_select .select2-container--default {
+        max-width: unset !important;
+    }
+
+    #attendance_datepicker.attence_datepicker {
+        width: 100%;
+        max-width: unset;
+    }
+
+    .bulk-dataformate-upload {
+        width: 100%;
+    }
+    .upload-instru-data-show{
+       width: 100%;
+    }
+
+}
+
+/* 767 end */
+
+@media(max-width:575px) {
+
+    .staff-profile-names .staff-name {
+        font-size: 18px !important;
+    }
+
+    .staff-profile-num p {
+        font-size: 14px !important;
+    }
+
+    .staff-profile-details-sec {
+        margin-left: 50px !important;
+    }
+
+    /* .shift-main-inner-edit {
+        flex-direction: column;
+        align-items: center;
+    } */
+
+    /* .staff-pay-title {
+        text-align: center;
+    } */
+
+    .leavel-data {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+
+    .leavel-btn {
+        margin-top: 10px;
+    }
+
+    .account-login-detail {
+        flex-direction: column;
+        border-bottom: 1px solid #dfdfdf;
+    }
+
+    .account-setting {
+        border-bottom: 0px !important;
+    }
+
+    .left-field p {
+        margin-bottom: 5px;
+    }
+
+    .setting_detail_inner_content .left-field p {
+        line-height: 1.2;
+    }
+
+    .details-right-sec {
+        margin-bottom: 5px;
+    }
+
+    .account-login-detail {
+        padding-top: 8px;
+    }
+
+    .account-login-detail:last-child {
+        border: none;
+    }
+
+
+    .account-login-detail .left-field {
+        width: 100% !important;
+    }
+
+    .account-setting {
+        padding-bottom: 5px !important;
+    }
+
+
+
+    .holiday-policy-edit-third {
+        /* flex-direction: column; */
+        align-items: center;
+    }
+
+    /* .create-leave-bttn {
+        justify-content: center !important;
+    } */
+
+    .datepicker-dropdown {
+        left: 0 !important;
+    }
+
+    .main-left-sec {
+        flex-direction: column;
+    }
+
+    .account-login-detail-sec {
+        border-bottom: 1px solid #dfdfdf !important;
+        padding-top: 10px;
+    }
+
+    .account-login-detail-sec:last-child {
+        border-bottom: 0px !important;
+    }
+
+    .main-left-sec {
+        width: 94% !important;
+    }
+
+    .holiday_staff_level_day {
+        width: 41%;
+    }
+
+    .holiday_staff_level_day.text-end {
+        width: 18%;
+    }
+
+    .page-wrapper.toggled .page-content {
+        padding-left: 12px;
+    }
+
+    .page-wrapper.toggled .page-content {
+        padding-right: 8px;
+    }
+
+    .approve-datas.staff-profile-leaves {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .staff_profile_atten {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    .added-images {
+        min-width: unset !important;
+        width: 340px !important;
+    }
+
+    .bulk-dataformate-upload {
+        gap: 20px !important;
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    .upload-instru-data-show {
+        flex-direction: column;
+    }
+
+    .excel-upload-template,
+    .upload-instru-data-show,
+    .excel-instruction {
+        width: 100%;
+    }
+    .upload-instru-data-show .shift-inner-sub-label-edit {
+        padding-right: 0px !important;
+        margin-bottom: 50px;
+    }
+    .excel-instruction {
+        padding-left: 0px !important;
+        border-left: 0px solid #BBC6D8 !important;
+    }
+}
+
+/* 575px end */
+
+@media(max-width:480px) {
+    .staff-main-header {
+        flex-direction: column !important;
+    }
+
+    .staff_edit_profile {
+        margin-left: 0px;
+        margin-bottom: 20px;
+    }
+
+    .staff-profile-details {
+        padding-left: 0px !important;
+    }
+
+    .staff-profile-details-sec {
+        padding-left: 20px !important;
+        margin-left: 20px !important;
+    }
+
+    .review-approve-time {
+        flex-direction: column;
+    }
+
+    .atten-third-section-box {
+        width: 100% !important;
+        flex: 0 0 100%;
+        margin-bottom: 10px;
+    }
+
+    .staff_profile_attendance {
+        flex-direction: column;
+        align-items: flex-start !important;
+        height: unset !important;
+        margin-bottom: 20px !important;
+    }
+
+    .reject-approve-bttn {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-right.datepicker-orient-bottom {
+        left: 8% !important;
+    }
+
+    .attendance_reports_table_top .assign-data-search {
+        display: block;
+    }
+
+    .staff-profile-leaves .approve-right-data {
+        align-items: center;
+    }
+
+    .staff-profile-leaves .approve-data-download,
+    .staff_profile_atten .approve-data-download {
+        margin-top: 0 !important;
+    }
+
+    .approve-data-download {
+        margin-top: 25px !important;
+    }
+
+    .report_user_list_download_data {
+        margin-top: 0 !important;
+    }
+
+    .atten-data-search.assign-data-search.report_data.col-md-8 {
+        width: 100%;
+    }
+
+    .attendance_main_data .approve-data-download {
+        margin-top: 0 !important;
+    }
+
+    .report_salary_report .approve-data-download,
+    .report_atten_report .approve-data-download {
+        margin-top: 0px !important;
+    }
+
+    .staff-profile-leaves form {
+        width: 100%;
+    }
+
+    .staff-profile-leaves .assign-data-search,
+    .staff-profile-leaves .approve-data-search,
+    .staff-profile-leaves .input-search-rounded,
+    .report_salary_report .input-search-rounded,
+    .report_atten_report .report_data .input-search-rounded,
+    .report_atten_report .report_data {
+        width: 100%;
+    }
+
+    .business-managedata-search {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .approve_punches .approve-data-search,
+    .approve_punches .input-search-rounded,
+    .leave_manage_list .input-search-rounded,
+    .report_user_list_export .input-search-rounded,
+    .report_user_list_export form,
+    .business-policy-staff-list .input-search-rounded,
+    .business-policy-staff-list form,
+    .business-managedata-search .input-search-rounded,
+    .business-managedata-search form {
+        width: 100%;
+    }
+
+    .approve_punches,
+    .main-atten .atten-datas {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    .approve_punches_calender {
+        justify-content: flex-start !important;
+    }
+
+    .report_user_list_export .atten-datas {
+        flex-direction: row;
+        /* align-items: center !important; */
+    }
+
+    table.dataTable>tbody>tr.child span.dtr-title {
+        display: block !important;
+    }
+
+    .weekly-left-policy {
+        width: unset !important;
+    }
+
+    .added-images {
+        min-width: unset !important;
+        width: 250px !important;
+    }
+
+    .main-staff-data-list .input-search-rounded {
+        width: 100% !important;
+        max-width: unset !important;
+    }
+}
+
+/* 480px end */
+
+@media(max-width:470px) {
+    #datepicker2 {
+        margin-top: 10px;
+    }
+}
+
+@media(max-width:340px) {
+    .staff-image-dragdrop {
+        font-size: 12px;
+    }
+
+    .edit_holiday_calendar_template_form .policy-holiday,
+    .add_holiday_template_form .policy-holiday {
+        width: 100%;
+    }
+
+    .edit_holiday_calendar_template_form .holiday-input,
+    .add_holiday_template_form .holiday-input {
+        width: 100%;
+    }
+
+    .staff-option_select .select2-container--default {
+        max-width: 120px !important;
+    }
+
+}
+
+@media(max-width:380px) {
+    /* steps */
+
+    .staff-view-profile p#step1 {
+        border-bottom: 0;
+    }
+
+    .staff-view-profile:first-child .staff-personal-info {
+        width: 100% !important;
+        max-width: unset !important;
+    }
+
+    .staff-personal-info.staff-personal-first {
+        margin: 0px !important;
+        border-bottom-right-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+    }
+
+    .staff-view-profile .staff-personal-info {
+        width: 100% !important;
+        max-width: 310px !important;
+        border-right: 2px solid #DFDFDF;
+        border-left: 2px solid #DFDFDF !important;
+        border-radius: 15px 15px 0px 0px !important;
+        justify-content: flex-start !important;
+    }
+
+    .staff-view-profile:last-child .staff-personal-info {
+        padding: 0 15px 0 12px !important;
+        border-bottom-right-radius: 18px !important;
+        border-bottom-left-radius: 18px !important;
+    }
+
+    .staff-personal-info.staff-personal-secound {
+        border-top: 0;
+        border-radius: 0 !important;
+        margin: 0;
+    }
+
+    .staff-view-profile:last-child .staff-personal-info {
+        width: 100% !important;
+        max-width: unset !important;
+    }
+
+    .staff-form-muti-step {
+        flex-direction: column;
+    }
+
+    .staff-personal-info::after {
+        content: unset !important;
+    }
+
+    .staff-personal-info.staff-personal-third {
+        border-top: 0;
+        margin: 0;
+        border-top-right-radius: 0px !important;
+        border-top-left-radius: 0px !important;
+    }
+
+    .profile-staff-content {
+        flex-direction: column;
+    }
+
+    .staff-avatar-upload {
+        margin-bottom: 12px;
+    }
+
+    .staff-main-header {
+        padding-left: 0px !important;
+    }
+
+    .staf-add-btn-top {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 10px;
+    }
+
+    .staff_profile_datepicker {
+        flex-direction: column;
+    }
+
+    .staff_profile_atten .approve-right-data {
+        align-items: flex-start;
+        /* flex-direction: column; */
+    }
+
+}
+
+/* 340 ends */
+
+@media(max-width:660px) {
+
+    .report_salary_report,
+    .report_atten_report {
+        display: block !important;
+    }
+
+    .report_salary_report .approve-right-data,
+    .report_atten_report .approve-right-data {
+        margin-top: 20px !important;
+        justify-content: flex-start;
+    }
+
+    .main-atten .atten-datas {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    /* .staff-option_select .select2-container--default {
+        width: 100% !important;
+    }
+    .staff-option_select .select2-container--default{
+        max-width: unset !important;
+    }
+    .staff-option_select{
+        width: unset !important;
+        max-width: unset !important;
+    } */
+    .staff-option_select .select2-container--default {
+        padding: 9px 40px !important;
+    }
+
+    .report-main-list .approve-right-data {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .report_atten_right_data .calender-picker {
+        margin-left: 0 !important;
+    }
+
+    .pagination_all_data {
+        right: -120px !important;
+    }
+
+}
+
+@media screen and (min-width: 660px) and (max-width: 767px) {
+
+    .report_atten_right_data,
+    .report-main-list .approve-right-data {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+}
+
+@media screen and (min-width: 990px) and (max-width: 1135px) {
+    .report-main-list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 15px;
+    }
+
+    .report_atten_right_data {
+        width: 100%;
+        justify-content: flex-start !important;
+    }
+}
+
+
+@media screen and (min-width: 991px) and (max-width: 1041px) {
+    .staff-profile-details-sec {
+        margin-left: 50px !important;
+    }
+
+    .staff-left-header,
+    .staff-right-header {
+        padding-right: 50px !important;
+    }
+
+
+}
