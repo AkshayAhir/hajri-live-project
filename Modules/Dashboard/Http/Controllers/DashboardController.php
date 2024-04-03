@@ -40,6 +40,7 @@ class DashboardController extends Controller
 //        return Business::select('id','name')->whereIn('id',$business_id)->get();
 //    }
     public function setSession(Request $request){
+        // dd($request);
         Session::put('business_id',$request->business_id);
         return response()->json(['message' => 'Session value set successfully']);
     }
@@ -52,6 +53,7 @@ class DashboardController extends Controller
         $header_title = "Dashboard";
         $current_day = Carbon::now()->format('l, d M Y');
         $total_staff = Staff::where('business_id', $business_id)->where('is_deactivate',0)->count();
+        // dd($total_staff);
         // current day count
             $present_count = Attendance::whereHas('Staff', function ($query) use ($business_id){
                     $query->where('business_id', $business_id)->where('is_deactivate',0);
@@ -60,6 +62,8 @@ class DashboardController extends Controller
                 ->where('status', 'LIKE', 'Present')
                 ->distinct('staff_id')
                 ->count();
+
+            
             // $absent_count = Attendance::whereHas('Staff', function ($query) use ($business_id){
             //         $query->where('business_id', $business_id);
             //     })
@@ -67,7 +71,7 @@ class DashboardController extends Controller
             //     ->where('status', 'LIKE', 'Absent')
             //     ->distinct('staff_id')
             //     ->count();
-
+            // dd($present_count);
             $half_day = Attendance::whereHas('Staff', function ($query) use ($business_id){
                 $query->where('business_id', $business_id)->where('is_deactivate',0);
             })
@@ -77,41 +81,47 @@ class DashboardController extends Controller
             ->count();
 
             $absent_count = $total_staff - ($present_count + $half_day);
+            // dd($absent_count);
         // end current day count
 
         // this month holiday
             
             $currentMonth = Carbon::now()->format('M Y');
             $currentYear = now()->year;
+            
             $holiday_template = HolidayPolicy::where('business_id', $this->business_id) ->where(function ($query) use ($currentYear) {
                 $query->where('shift_start_time', 'like', "%$currentYear%")
                     ->orWhere('shift_end_time', 'like', "%$currentYear%");
             })  ->value('id');
             $holiday = HolidayList::where('template_id', $holiday_template) ->where('holiday_date', 'LIKE', '%' . $currentMonth . '%')->get();
-        // end this month holiday
+     
+            // end this month holiday
 
         // staff status
             $presentstaff = Attendance::with('Staff.Department')->whereHas('Staff',function($query){
                 $query->where('business_id', $this->business_id)->where('is_deactivate',0);
             })->where('status', 'Present')->where('date', Carbon::now()->toDateString())->orderBy('in_time', 'desc')->groupBy('staff_id')->get()->take(5);
+               
             $presentstaff_count = Attendance::with('Staff.Department')->whereHas('Staff',function($query){
                 $query->where('business_id', $this->business_id)->where('is_deactivate',0);
             })->where('status', 'Present')->where('date', Carbon::now()->toDateString())->distinct('staff_id')->count();
-
+            
             $absentstaff = Attendance::with('Staff.Department')->whereHas('Staff',function($query){
                 $query->where('business_id', $this->business_id)->where('is_deactivate',0);
             })->where('status', 'Absent')->where('date', Carbon::now()->toDateString())->orderBy('in_time', 'desc')->groupBy('staff_id')->get()->take(5);
             $absentstaff_count = Attendance::with('Staff.Department')->whereHas('Staff',function($query){
                 $query->where('business_id', $this->business_id)->where('is_deactivate',0);
             })->where('status', 'Absent')->where('date', Carbon::now()->toDateString())->distinct('staff_id')->count();
+            
             // return $absentstaff[0]->Staff[0]->StaffPhoto[0];
             $halfleave = Attendance::with('Staff.Department')->whereHas('Staff',function($query){
                 $query->where('business_id', $this->business_id)->where('is_deactivate',0);
             })->where('status', 'Half Day')->where('date', Carbon::now()->toDateString())->orderBy('in_time', 'desc')->groupBy('staff_id')->get()->take(5);
+           
             $halfleave_count = Attendance::with('Staff.Department')->whereHas('Staff',function($query){
                 $query->where('business_id', $this->business_id)->where('is_deactivate',0);
             })->where('status', 'Half Day')->where('date', Carbon::now()->toDateString())->distinct('staff_id')->count();
-
+            
         // end staff status
         
         return view('dashboard::dashboard', [
@@ -133,9 +143,11 @@ class DashboardController extends Controller
             'halfleave' => $halfleave,
             'halfleave_count' => $halfleave_count,
         ]);
+        
     }
 
     public function monthAttendanceChart(Request $request){
+       
         //  attendance status chart
             DB::statement("SET SQL_MODE=''");  
             // Carbon::parse($request->start_month)->startOfMonth()->toDateString();
@@ -155,10 +167,10 @@ class DashboardController extends Controller
 
 
             $start_month = Carbon::parse($request->start_month)->startOfMonth()->toDateString();
+           
             $end_month = Carbon::parse($request->start_month)->endOfMonth()->toDateString();
             $days = [];  
             $currentDate = Carbon::parse($start_month);
-
             while ($currentDate->lte(Carbon::parse($end_month))) {
                 $days[] = $currentDate->format('d M');
                 $currentDate->addDay();
@@ -166,11 +178,12 @@ class DashboardController extends Controller
 
             // return $filteredMonths = collect($days);
             $daysCollection = collect($days);
+            
             $filteredMonths = $daysCollection->filter(function ($days) use ($start_month, $end_month) {
                 return $currentMonth = Carbon::parse("$days")->startOfMonth();
                 // return $currentMonth->between($start_month, $end_month);
             });
-
+            
             $present_status = Attendance::selectRaw('COUNT(DISTINCT staff_id) as count, DATE_FORMAT(date, "%e %b") as month')
             ->whereHas('Staff', function ($query) {
                 $query->where('business_id', $this->business_id)->where('is_deactivate',0);
@@ -191,6 +204,7 @@ class DashboardController extends Controller
                     'month' => ucfirst($days),
                     'count' => isset($present_status[$formattedDay]) ? $present_status[$formattedDay] : 0,
                 ];
+                
             });
 
             $absent_status = Attendance::selectRaw('COUNT(DISTINCT staff_id) as count, DATE_FORMAT(date, "%e %b") as month')
@@ -206,6 +220,7 @@ class DashboardController extends Controller
             ->map(function ($item) {
                 return $item->count();
             });
+            
 
             $absent_statusData = $filteredMonths->map(function ($days) use ($absent_status) {
                 $formattedDay = Carbon::parse($days)->format('j M');
@@ -238,7 +253,7 @@ class DashboardController extends Controller
             });
             return response()->json(['message'=>'success', 'status'=>'1', 'present_statusData'=>$present_statusData,'absent_statusData'=>$absent_statusData,'halfday_statusData'=>$halfday_statusData, 'filteredMonths' => $filteredMonths]);
         //  attendance status chart
-             
+            
     }
 
     public function profile(){

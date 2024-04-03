@@ -5,7 +5,7 @@
             <h3 class="topbar_title mb-0 ">
                 <a id="show-sidebar" class="sidebar_toggle cursor_pointer">
                     <img class="topbar_title_icon" src="{{asset('assets/admin/images/header/ic_layout.svg')}}" alt="">
-                </a><span class="proxima_nova_bold">{{$header_title}}</span>
+                </a><span class="proxima_nova_bold header_title">{{$header_title}}</span>
             </h3>
         </div>
         <div class="col-6 topbar_right">

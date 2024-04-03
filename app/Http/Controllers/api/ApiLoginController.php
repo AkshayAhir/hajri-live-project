@@ -67,16 +67,8 @@ class ApiLoginController extends Controller
                     Auth::login($user);
                     $token = $user->createToken('token')->accessToken;
                     User::where('id', $user->id)->update(["token" => $token]);
-<<<<<<< HEAD
-                    $user_data = User::with('UserPhoto:id,user_id,photo','BusinessUser.business','BusinessUser.Department','BusinessUser.Department.Staff')->where('id', $user->id)->first(); // Append the business data to the user data.
-=======
                     $user_data = User::with('UserPhoto:id,user_id,photo','BusinessUser.business','BusinessUser.Department','BusinessUser.Department.departmentStaff')->where('id', $user->id)->first(); // Append the business data to the user data.
-<<<<<<< HEAD
                     return response()->json(["message" => 'You are logged in successfully.','is_register'=>1 ,"status" => "1",'data'=>$user_data]);
-=======
->>>>>>> 4f832deba4ea79fb5a57cb0329b081dc6a8c41de
-                    return response()->json(["message" => 'Login successfully','is_register'=>1 ,"status" => 1,'data'=>$user_data]);
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
                 }
             }else{
                 $user_data = User::with('UserPhoto:id,user_id,photo','BusinessUser.business','BusinessUser.Department','BusinessUser.Department.departmentStaff')->where('id', $user->id)->first();
@@ -86,7 +78,55 @@ class ApiLoginController extends Controller
             return response()->json(['message'=>'Wrong otp.', 'status'=> 0]);
         }
     }
-    public function storeBusiness(Request $request){
+    public function staffLogin(Request $request){
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|regex:/^[6-9]\d{9}$/|min:10',
+        ]);
+        if($validator->fails()){
+            $error_msg = $validator->errors()->first();
+            return response()->json(['message' => $error_msg, 'status' => 0]);
+        }
+        $otp = rand(1000, 9999);
+        if(Staff::where('phone_number',$request->phone)->exists()) {
+            $staff_id = Staff::where('phone_number', $request->phone)->value('id');
+            $staff_data = Staff::where('id', $staff_id)->update(['otp' => $otp]);
+            if ($staff_data) {
+                return response()->json(['message' => 'OTP Sent', 'status' => 1, 'data' => ['phone' => $request->phone, 'otp' => $otp]]);
+            } else {
+                return response()->json(['message' => 'error', 'status' => 0]);
+            }
+        }else{
+            return response()->json(['message'=>'Something is wrong.', 'status'=> 0]);
+        }
+    }
+    public function staffVerifyOtp(Request $request){
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|regex:/^[6-9]\d{9}$/|min:10',
+            'otp'=>'required'
+        ]);
+        if($validator->fails()){
+            $error_msg = $validator->errors()->first();
+            return response()->json(['message' => $error_msg, 'status' => 0]);
+        }
+        if(Staff::where('phone_number',$request->phone)->where('otp',$request->otp)->exists()) {
+            $staff = Staff::where('phone_number', $request->phone)->first();
+            if($staff->token == ''){
+                if ($staff) {
+                    Auth::guard('staff')->login($staff);
+                    $token = $staff->createToken('token')->accessToken;
+                    Staff::where('id', $staff->id)->update(["token" => $token]);
+                    $staff_data = Staff::with(['StaffPhoto:id,staff_id,photo', 'StaffBankDetail:id,staff_id,account_holder_name,account_number,IFSC_code,UPI_id', 'Department:id,name'])->where('id', $staff->id)->first(); // Append the business data to the user data.
+                    return response()->json(["message" => 'You are logged in successfully.','is_register'=>1 ,"status" => "1",'data'=>$staff_data]);
+                }
+            }else{
+                $staff_data = Staff::with(['StaffPhoto:id,staff_id,photo', 'StaffBankDetail:id,staff_id,account_holder_name,account_number,IFSC_code,UPI_id', 'Department:id,name'])->where('id', $staff->id)->first();
+                return response()->json(["message" => 'You are logged in successfully.','is_register'=>0, "status" => "1",'data'=>$staff_data]);
+            }
+        }else{
+            return response()->json(['message'=>'Wrong otp.', 'status'=> 0]);
+        }
+    }
+    public function addBusiness(Request $request){
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
             'name' => 'required',
@@ -115,18 +155,13 @@ class ApiLoginController extends Controller
             $token = $user->createToken('token')->accessToken;
             User::where('id', $user->id)->update(["token" => $token]);
         }
-<<<<<<< HEAD
-        $user_data = User::with('UserPhoto:id,user_id,photo','BusinessUser.business','BusinessUser.Department','BusinessUser.Department.Staff')->where('id', $user->id)->first();
-=======
         $user_data = User::with('UserPhoto:id,user_id,photo','BusinessUser.business','BusinessUser.Department','BusinessUser.Department.departmentStaff')->where('id', $user->id)->first();
->>>>>>> 4f832deba4ea79fb5a57cb0329b081dc6a8c41de
         if (!$business_user) {
             return response()->json(['message'=>'Something is wrong.', 'status'=>0]);
         } else {
             return response()->json(["message" => 'Account successfully created', "status" => "1",'data'=>$user_data]);
         }
     }
-
     public function editBusiness(Request $request){
         $login_user = Auth::user()->id;
         if(BusinessUser::where('user_id', $login_user)->where('business_id', $request->business_id)->exists()){
@@ -150,11 +185,7 @@ class ApiLoginController extends Controller
             $error_msg = $validator->errors()->first();
             return response()->json(['message' => $error_msg, 'status' => 0]);
         }
-<<<<<<< HEAD
-        $user = User::with('UserPhoto:id,user_id,photo','BusinessUser.business','BusinessUser.Department','BusinessUser.Department.Staff')->where('id', $request->user_id)->first();
-=======
         $user = User::with('UserPhoto:id,user_id,photo','BusinessUser.business','BusinessUser.Department','BusinessUser.Department.departmentStaff')->where('id', $request->user_id)->first();
->>>>>>> 4f832deba4ea79fb5a57cb0329b081dc6a8c41de
         if (!$user) {
             return response()->json(['message'=>'Something is wrong.', 'status'=>0]);
         } else {
@@ -291,7 +322,6 @@ class ApiLoginController extends Controller
             return response()->json(['message' => $error_msg, 'status' => 0]);
         }
         if($request->id == null){
-
             $image_name = "";
             if($request->photo_face){
                 // $i=0;
@@ -304,20 +334,15 @@ class ApiLoginController extends Controller
                     // $imageNames[] = $image_name;
                 // }
             }
-
             if(Staff::where('id',$request->id)->value('email') == null){
                 if(Staff::where('email',$request->email)->exists()){
                     return response()->json(["message" => 'Email should not be duplicate (two employees can not have same email )', "status" => 2]);
                 }
             }
-
             $staff_id = Staff::insertGetId(['name'=>$request->name, 'phone_number'=>$request->phone_number, 'salary_amount'=>$request->salary_amount,
                 'salary_cycle'=>$request->salary_cycle, 'department_id'=>$request->department_id, 'business_id'=>$request->business_id, 'img_bytes' => $request->img_bytes,
-                'photo_face' => $image_name,'last_name'=>$request->last_name,'middle_name'=>$request->middle_name,'email' => $request->email]);
-
+                'photo_face' => $image_name,'last_name'=>$request->last_name,'middle_name'=>$request->middle_name,'email' => $request->email,'is_remote'=>$request->is_remote]);
             $staff_bank_detail = StaffBankDetail::insert(['staff_id'=>$staff_id,'account_holder_name'=>$request->account_holder_name,'account_number'=>$request->account_number,'IFSC_code'=>$request->IFSC_code,'UPI_id'=>$request->UPI_id]);
-
-
             if($request->photo){
                 $i=0;
                 foreach ($request->photo as $value){
@@ -385,9 +410,9 @@ class ApiLoginController extends Controller
                 }
             }
 
-            Staff::where('id',$request->id)->update(array_filter(['name'=>$request->name, 'last_name'=>$request->last_name,'middle_name'=> $request->middle_name,
+            Staff::where('id',$request->id)->update(['name'=>$request->name, 'last_name'=>$request->last_name,'middle_name'=> $request->middle_name,
                 'phone_number'=>$request->phone_number, 'salary_amount'=>$request->salary_amount, 'salary_cycle'=>$request->salary_cycle, 'department_id'=>$request->department_id,
-                'business_id'=>$request->business_id, 'img_bytes' => $request->img_bytes, 'photo_face' => $image_name, 'email' => $request->email]));
+                'business_id'=>$request->business_id, 'img_bytes' => $request->img_bytes, 'photo_face' => $image_name, 'email' => $request->email,'is_remote'=>$request->is_remote]);
 
             StaffBankDetail::where('id',$request->id)->update(['staff_id'=>$request->id,'account_holder_name'=>$request->account_holder_name,'account_number'=>$request->account_number,'IFSC_code'=>$request->IFSC_code,'UPI_id'=>$request->UPI_id]);
 
@@ -597,7 +622,108 @@ class ApiLoginController extends Controller
             return response()->json(['message'=>'Something is wrong.', 'status'=>0]);
         }
     }
-    public function addAttendance(Request $request){    
+//    public function addAttendance(Request $request){
+//        $validator = Validator::make($request->all(), [
+//            'staff_id' => 'required',
+//        ]);
+//        if($validator->fails()){
+//            $error_msg = $validator->errors()->first();
+//            return response()->json(['message' => $error_msg, 'status' => 0]);
+//        }
+//        if(Staff::where('id', $request->staff_id)->where('is_deactivate',1)->exists()){
+//            return response()->json(["message" => 'This staff is deactivated.', "status" => "0"]);
+//        } else {
+//            if($request->status == 1){
+//                if (Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->exists()) {
+//                    if (Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->where('status','LIKE',"Absent")->exists() OR
+//                    Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->where('status','LIKE',"Half Day")->exists()) {
+//                        Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['status' => "Present"]);
+//                        if(Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->value('in_time') == null){
+//                            $attendance = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['in_time'=> Carbon::now('Asia/Kolkata')->toTimeString()]);
+//                        }
+//                        // $attendance = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->delete();
+//                        return response()->json(["message" => 'success', "status" => "1"]);
+//                    }
+//                    $attendance = Attendance::where('staff_id', $request->staff_id)->orderBy('id','desc')->limit(1)->get();
+//                    // return Carbon::now('Asia/Kolkata')->toTimeString();
+//                    $in_time_diff = Carbon::createFromFormat('H:i:s', $attendance[0]['in_time'])->diff(Carbon::createFromFormat('H:i:s', $request->time))->format('%H:%I:%S');
+//                    $out_time_diff = $attendance[0]['out_time'] ? Carbon::createFromFormat('H:i:s', $attendance[0]['out_time'])->diff(Carbon::createFromFormat('H:i:s', $request->time))->format('%H:%I:%S') : '-';
+//                    if($in_time_diff < '00:15:00'){
+//                        return response()->json(["message" => 'Attendance Already Recorded', "status" => "0"]);
+//                    }
+//                    if($out_time_diff != '-'){
+//                        if($out_time_diff < '00:15:00'){
+//                            return response()->json(["message" => 'Attendance Already Recorded', "status" => "0"]);
+//                        }
+//                    }
+//                    if($attendance[0]->out_time == null){
+//                        $outTime = Carbon::parse($request->time);
+//                        $hours = $outTime->diffInHours($attendance[0]['in_time']);
+//                        $minutes = $outTime->diffInMinutes($attendance[0]['in_time']) % 60;
+//                        $seconds = $outTime->diffInSeconds($attendance[0]['in_time']) % 60;
+//                        $total_time = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
+//                        $attendance = Attendance::where('id',$attendance[0]->id)->update(['out_time'=>$request->time, 'total_time' => $total_time]);
+//                    }else{
+//                        $out_time = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->value('out_time');
+//                        $last_out_time = Carbon::parse($out_time);
+//                        $again_in_time = Carbon::parse($request->time);
+//                        $minutes = $last_out_time->diffInMinutes($again_in_time);
+//                        $hours = $last_out_time->diffInHours($again_in_time) % 60;
+//                        $break_time = sprintf("%02d:%02d:%02d", ($minutes / 60) % 60, $minutes % 60,($minutes / 60) / 60);
+//                        $attendance = Attendance::insert([
+//                            'staff_id' => $request->staff_id,
+//                            'in_time' => $request->time,
+//                            'status' => "Present",
+//                            'date' => $request->date,
+//                            'total_time' => '00:00:00',
+//                        ]);
+//                        // if(Attendance::where('staff_id', $request->['staff_id'])->where('date', $request->date)->where('out_time','!=' ,null)->exists()){
+//                        Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['break_time' => $break_time]);
+//                        // }
+//                    }
+//
+//                }else{
+//                    $attendance = Attendance::insert([
+//                        'staff_id' => $request->staff_id,
+//                        'in_time' => $request->time,
+//                        'status' => "Present",
+//                        'date' => $request->date,
+//                        'total_time' => '00:00:00',
+//                    ]);
+//                }
+//                if($attendance){
+//                    return response()->json(["message" => 'success', "status" => "1"]);
+//                }else{
+//                    return response()->json(["message" => 'Something is wrong.', "status" => 0]);
+//                }
+//            } else if ($request->status == 2){
+//                if (Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->exists()) {
+//                    $attendance = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['status' => "Absent"]);
+//                    // $attendance = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->delete();
+//                    return response()->json(["message" => 'success', "status" => "1"]);
+//                }
+//                // if($attendance){
+//                // }else{
+//                //     return response()->json(["message" => 'Something is wrong.', "status" => 0]);
+//                // }
+//            } else if ($request->status == 3){
+//                if (Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->exists()) {
+//                    $attendance = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['status' => "Half Day"]);
+//                    return response()->json(["message" => 'success', "status" => "1"]);
+//                    // $attendance = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->delete();
+//                }
+//            }
+//        }
+//
+//        // $today_date = Carbon::now()->toDateString();
+//        //return $attendance;
+//        // if($attendance){
+//        //     return response()->json(["message" => 'success', "status" => "1"]);
+//        // }else{
+//        //     return response()->json(["message" => 'Something is wrong.', "status" => 0]);
+//        // }
+//    }
+    public function addAttendance(Request $request){
         $validator = Validator::make($request->all(), [
             'staff_id' => 'required',
         ]);
@@ -611,7 +737,7 @@ class ApiLoginController extends Controller
             if($request->status == 1){
                 if (Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->exists()) {
                     if (Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->where('status','LIKE',"Absent")->exists() OR
-                    Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->where('status','LIKE',"Half Day")->exists()) {
+                        Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->where('status','LIKE',"Half Day")->exists()) {
                         Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['status' => "Present"]);
                         if(Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->value('in_time') == null){
                             $attendance = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['in_time'=> Carbon::now('Asia/Kolkata')->toTimeString()]);
@@ -625,12 +751,12 @@ class ApiLoginController extends Controller
                     $out_time_diff = $attendance[0]['out_time'] ? Carbon::createFromFormat('H:i:s', $attendance[0]['out_time'])->diff(Carbon::createFromFormat('H:i:s', $request->time))->format('%H:%I:%S') : '-';
                     if($in_time_diff < '00:15:00'){
                         return response()->json(["message" => 'Attendance Already Recorded', "status" => "0"]);
-                    } 
+                    }
                     if($out_time_diff != '-'){
                         if($out_time_diff < '00:15:00'){
                             return response()->json(["message" => 'Attendance Already Recorded', "status" => "0"]);
                         }
-                    } 
+                    }
                     if($attendance[0]->out_time == null){
                         $outTime = Carbon::parse($request->time);
                         $hours = $outTime->diffInHours($attendance[0]['in_time']);
@@ -639,12 +765,24 @@ class ApiLoginController extends Controller
                         $total_time = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
                         $attendance = Attendance::where('id',$attendance[0]->id)->update(['out_time'=>$request->time, 'total_time' => $total_time]);
                     }else{
-                        $out_time = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->value('out_time');
+                        $out_time = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->orderBy('id','desc')->value('out_time');
+                        $breakSeconds = Attendance::where('staff_id', $request->staff_id)->whereDate('date', $request->date)->orderBy('id','desc')->value('break_time');
+
                         $last_out_time = Carbon::parse($out_time);
                         $again_in_time = Carbon::parse($request->time);
                         $minutes = $last_out_time->diffInMinutes($again_in_time);
                         $hours = $last_out_time->diffInHours($again_in_time) % 60;
-                        $break_time = sprintf("%02d:%02d:%02d", ($minutes / 60) % 60, $minutes % 60,($minutes / 60) / 60);
+                        if($breakSeconds == null){
+                            $break_time = sprintf("%02d:%02d:%02d", ($minutes / 60) % 60, $minutes % 60,($minutes / 60) / 60);
+                        }else{
+                            $additionalBreakTime = sprintf("%02d:%02d:%02d", ($minutes / 60) % 60, $minutes % 60,($minutes / 60) / 60);
+                            list($breakHours, $breakMinutes, $breakSeconds) = explode(':', $breakSeconds);
+                            $totalBreakSeconds = $breakHours * 3600 + $breakMinutes * 60 + $breakSeconds;
+                            list($additionalHours, $additionalMinutes, $additionalSeconds) = explode(':', $additionalBreakTime);
+                            $additionalTotalSeconds = $additionalHours * 3600 + $additionalMinutes * 60 + $additionalSeconds;
+                            $totalBreakSeconds += $additionalTotalSeconds;
+                            $break_time = sprintf("%02d:%02d:%02d", ($totalBreakSeconds / 3600), ($totalBreakSeconds / 60 % 60), ($totalBreakSeconds % 60));
+                        }
                         $attendance = Attendance::insert([
                             'staff_id' => $request->staff_id,
                             'in_time' => $request->time,
@@ -656,7 +794,7 @@ class ApiLoginController extends Controller
                         Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['break_time' => $break_time]);
                         // }
                     }
-                    
+
                 }else{
                     $attendance = Attendance::insert([
                         'staff_id' => $request->staff_id,
@@ -689,7 +827,7 @@ class ApiLoginController extends Controller
                 }
             }
         }
-       
+
         // $today_date = Carbon::now()->toDateString();
         //return $attendance;
         // if($attendance){
@@ -791,4 +929,101 @@ class ApiLoginController extends Controller
     //     }
     // }
     //and attendance api function
+
+
+    //staff business api
+    public function staffBusinesses(Request $request){
+        $business = Staff::with('Business:id,name')->select('id','name','email','phone_number','business_id')->where('phone_number',$request->phone_number)->get();
+        if($business){
+             return response()->json(["message" => 'success', "status" => "1","data"=>$business]);
+        }else{
+             return response()->json(["message" => 'Something is wrong.', "status" => 0]);
+        }
+    }
+    public function getStaffAttendance(Request $request){
+        DB::statement("SET SQL_MODE=''");
+        $validator = Validator::make($request->all(), [
+            'month' => 'required',
+            'year' => 'required',
+            'staff_id' => 'required',
+        ]);
+        if($validator->fails()){
+            $error_msg = $validator->errors()->first();
+            return response()->json(['message' => $error_msg, 'status' => 0]);
+        }
+        $staff_id = $request->staff_id;
+        $month = $request->month;
+        $year = $request->year;
+        $business_id = $request->business_id;
+
+        $present_count = Attendance::whereHas('Staff', function ($query) use ($business_id) {
+                $query->where('business_id', $business_id)->where('is_deactivate', 0);
+            })
+            ->where('status', 'LIKE', 'Present')
+            ->whereYear('date', $request->year)
+            ->whereMonth('date', $request->month)
+            ->where('staff_id', $request->staff_id)
+            ->distinct('staff_id')
+            ->count();
+        $absent = Attendance::whereHas('Staff', function ($query) use ($business_id) {
+                $query->where('business_id', $business_id)->where('is_deactivate',0);
+            })
+            ->whereYear('date', $request->year)
+            ->whereMonth('date', $request->month)
+            ->where('staff_id', $request->staff_id)
+            ->where('status', 'LIKE', 'Absent')
+            ->distinct('staff_id')
+            ->count();
+        $half_day = Attendance::whereHas('Staff', function ($query) use ($business_id) {
+                $query->where('business_id', $business_id)->where('is_deactivate',0);
+            })
+            ->whereYear('date', $request->year)
+            ->whereMonth('date', $request->month)
+            ->where('staff_id', $request->staff_id)
+            ->where('status', 'LIKE', 'Half Day')
+            ->distinct('staff_id')
+            ->count();
+
+        $paid_leave = Attendance::whereHas('Staff', function ($query) use ($business_id) {
+                $query->where('business_id', $business_id)->where('is_deactivate',0);
+            })
+            ->whereYear('date', $request->year)
+            ->whereMonth('date', $request->month)
+            ->where('staff_id', $request->staff_id)
+            ->where('status', 'LIKE', 'Paid Leave')
+            ->distinct('staff_id')
+            ->count();
+        $count = [
+            'present_count'=>$present_count,
+            'absent_count'=>$absent,
+            'halfday_count'=>$half_day,
+            'leave'=>$paid_leave,
+            // 'fine'=>0,
+            // 'overtime'=>0,
+        ];
+        $attendance = Attendance::select('id', 'staff_id', 'in_time', 'out_time', 'total_time', 'status', 'break_time', 'overtime', 'fine', 'date')
+            ->whereYear('date', $request->year)
+            ->whereMonth('date', $request->month)
+            ->where('staff_id', $request->staff_id)
+            ->orderBy('date', 'desc')
+            ->groupBy('date')
+            ->get();
+
+        // Calculate total time for each date
+        foreach ($attendance as $record) {
+            $totalTime = DB::table('attendances')
+                ->select(DB::raw('SEC_TO_TIME(SUM(TIME_TO_SEC(total_time))) AS total_time'))
+                ->where('staff_id', $request->staff_id)
+                ->whereDate('date', $record->date)
+                ->value('total_time');
+
+            $record->total_time = $totalTime;
+        }
+        if($attendance){
+            return response()->json(["message" => 'success', "status" => "1",'count'=>$count,"attendance"=>$attendance]);
+        }else{
+            return response()->json(['message'=>'Something is wrong.', 'status'=>0]);
+        }
+    }
+    //end staff business api
 }

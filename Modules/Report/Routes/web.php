@@ -25,12 +25,19 @@ Route::group(['prefix'=>'report','middleware' => 'auth'], function () {
     Route::post('attendance_report_list', [ReportController::class, 'attendanceReportList'])->name('attendance_report_list');
     Route::post('user_report_list', [ReportController::class, 'UserReportList'])->name('user_report_list');
     Route::post('salary_report_list', [ReportController::class, 'SalaryReportList'])->name('salary_report_list');
-
+   
+    Route::post('staff_report_download_list', [ReportController::class, 'StaffReportDownloadList'])->name('staff_report_download_list');
+    Route::post('set_date_report_list', [ReportController::class, 'SetDateReportList'])->name('set_date_report_list');
 
     Route::get('attendance_report_excel', [ReportController::class, 'attendanceExport'])->name('attendance_report_excel');
     Route::get('user_export', [ReportController::class, 'userExport'])->name('user_export');
     Route::get('salary_export', [ReportController::class, 'salaryExport'])->name('salary_export');
 
+    Route::get('report_payroll', [ReportController::class, 'reportPayroll'])->name('report_payroll');
+    Route::get('bulk_salary_slip', [ReportController::class, 'bulkSalaryslip'])->name('bulk_salary_slip');
+    Route::get('staff_payroll_report', [ReportController::class, 'staffPayrollreport'])->name('staff_payroll_report');
 
+    Route::post('bulk_salary_slip_list', [ReportController::class, 'BulkSalarySlipList'])->name('bulk_salary_slip_list');
+    Route::get('bulk_salary_pdf', [ReportController::class, 'BulkSalaryPdf'])->name('bulk_salary_pdf');
 });
 

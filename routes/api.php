@@ -20,7 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login',[ApiLoginController::class,'login'])->name('api.login');
 Route::post('verify_otp',[ApiLoginController::class,'verifyOtp'])->name('api.verify_otp');
-Route::post('store_business',[ApiLoginController::class ,'storeBusiness'])->name('api.store-business');
+Route::post('add_business',[ApiLoginController::class ,'addBusiness'])->name('api.add-business');
+
+Route::post('staff_login',[ApiLoginController::class,'staffLogin'])->name('api.staff_login');
+Route::post('staff_verify_otp',[ApiLoginController::class,'staffVerifyOtp'])->name('api.staff_verify_otp');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('edit_business',[ApiLoginController::class ,'editBusiness'])->name('api.edit_business');
@@ -42,4 +45,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     //    attendance api route
     Route::post('get_attendance', [ApiLoginController::class, 'getAttendance'])->name('api.get-attendance');
     Route::post('add_attendance', [ApiLoginController::class, 'addAttendance'])->name('api.add-attendance');
+
+
+    //staff business
+    Route::post('staff_businesses', [ApiLoginController::class, 'staffBusinesses'])->name('api.staff-businesses');
+    Route::post('get_staff_attendance', [ApiLoginController::class, 'getStaffAttendance'])->name('api.get-staff-attendance');
 });

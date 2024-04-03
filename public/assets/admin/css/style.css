@@ -1308,6 +1308,9 @@ label.radio-button-container {
     background-repeat: no-repeat;
     background-position: right 6px center;
 }
+.datepicker_list{
+    max-width: 340px !important;
+}
 
 #datepicker5:focus,
 #datepicker4:focus,
@@ -4505,6 +4508,7 @@ input[type="time"]::after {
     display: none;
 }
 
+
 .staff-setting-holiday {
     color: #808080;
     font-size: 12px;
@@ -5749,7 +5753,6 @@ a.dz-remove {
     width: 50px;
     height: 50px;
 }
-<<<<<<< HEAD
 
 .input-search-rounded,
 #selectAllCheckbox,
@@ -5758,9 +5761,6 @@ a.dz-remove {
 .upload-images svg,
 .staff-image-dragdrop,
 .file-upload {
-=======
-.upload-images ,.upload-images svg ,.staff-image-dragdrop , .file-upload{
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
     cursor: pointer !important;
 }
 
@@ -6273,7 +6273,10 @@ select#business_salary_cal,
 .approve-punch-data .select-club-services select {
     display: none;
 }
-
+/* .shifts-data .approve-salary .select-salary-data>span,
+.shifts-data .approve-punch-data .select-club-services>span {
+    width: 190px;
+} */
 .approve-salary .select-salary-data>span,
 .approve-punch-data .select-club-services>span {
     cursor: pointer;
@@ -6291,6 +6294,15 @@ select#business_salary_cal,
     border-radius: 10px;
     height: 40px;
     width: 320px;
+}
+.main-payroll-sec{
+    display: flex;
+    padding-top: 30px;
+}
+
+.main-payroll-sec .approve-punch-data .select-club-services{
+    width: 100%;
+    /* max-width: 190px; */
 }
 
 .approve-salary .select-salary-data>span {
@@ -6502,10 +6514,6 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child:before {
     content: '-';
     background-color: #fff;
 }
-
-/* .report-main-list .input-search-rounded{
-   width: 100%;
-} */
 
 
 button[disabled] {
@@ -6745,4 +6753,224 @@ button[disabled] {
 
 .label_title {
     padding-bottom: 10px;
+}
+
+/************************ payroll css *************************/
+.payroll-btn {
+    width: 160px;
+    margin-top: 14px;
+}
+
+.payroll-right-svg{
+    margin-right: 10px;
+}
+
+.payroll-main{
+    margin-top:30px;
+}
+
+/************************* Payroll Approvals *******************/
+.review-details-form-data {
+    max-width: 196px !important;
+}
+.download-reports-form-data{
+    max-width: 234px !important;
+}
+.approval-form-muti-step{
+    margin-bottom: 30px !important;
+    display: flex;
+}
+.payroll-approval-main{
+    margin-top: 14px;
+}
+.payroll-approval-details p{
+    margin-bottom: 0px !important;
+}
+.payroll-approval-details{
+    margin-top: 20px;
+    border-top: 2px solid #DFDFDF;
+    padding-top: 10px;
+    border-bottom: 2px solid #DFDFDF;
+    padding-bottom: 20px;
+}
+.payroll-inner{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/****************************** payroll approval deta *******************************/
+.approve-payroll-data table thead tr {
+    background-color: #F5F8FF;
+    height: 46px;
+}
+.approve-payroll-data table tbody tr {
+    height: 60px;
+    font-size: 14px;
+    color: #050E17;
+}
+.approve-payroll-data table tbody tr:hover {
+    background-color: #fff !important;
+}
+.approve-payroll-data {
+    margin-bottom: 20px;
+}
+.approve-payroll-data{
+    margin-top: 40px;
+}
+.payroll-datas {
+    border-bottom: 1px solid #EDF2FF;
+}
+.payroll-datas-svg{
+    margin-right: 15px;
+}
+#approve_datas span.data_lists::before, span.data_lists::after{
+    content: none !important;
+}
+.approve-title{
+    padding-left: 56px;
+}
+.payroll-inner-btn {
+    width: 160px;
+    margin-top: 14px;
+}
+.payroll-manage-summary-btn a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.payroll-manage-summary-btn:hover,
+.profile-edit-submit-btn:hover {
+    background-color: #136DDC;
+}
+.payroll-manage-summary-btn {
+    background-color: #2F8CFF;
+    color: #fff;
+    border-radius: 10px;
+    width: 128px;
+    height: 40px;
+    border: none;
+}
+.payroll-manage-summary-btn a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.approve-payroll-data{
+    min-height: calc(100vh - 530px);
+    height: 100%;
+    margin-top: 20px;
+}
+.learn-more-btn {
+    text-decoration: underline !important;
+    color: #2F8CFF;
+}
+.payroll-approvals.active {
+    display: block;
+}
+.payroll-approvals {
+    display: none;
+}
+.payroll-approval-review{
+    margin-top: 30px;
+    border-top: 1px solid #DFDFDF;
+    padding-top: 30px;
+}
+.checkbox-label {
+    color: rgba(128, 128, 128, 1);
+    font-weight: 400;
+    
+}
+.inner-div{
+    padding-bottom: 10px;
+}
+.approve-main-content{
+    margin-top: 20px;  
+}
+.review-table {
+    min-height: calc(100vh - 396px) !important;
+    height: 100%;
+}
+.icon-with-svg{
+    padding-top:30px;
+}
+.payroll-data-svg{
+    cursor: pointer;
+}
+.download-pdf-btn{
+    cursor: pointer;
+}
+.visit-list{
+    display: none;
+}
+.visit-list.check-active{
+    display: block;
+}
+/* applay btn in process payroll page */
+.apply-details-list{
+    margin-top: 135px;
+}
+
+/* summary data */
+
+/* .data-summary {
+    border: 1px solid #DFDFDF;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-right: 26px;
+} */
+/* .data-summary h2 {
+    font-size: 35px;
+    margin-bottom: 0; */
+    /* height: 15px;
+    width: 36px; */
+/* } */
+.card{
+    padding: 20px;
+    border: 1px solid #DFDFDF;
+    border-radius: 20px;
+}
+.payroll-summary{
+    font-size: 16px;
+    color: #808080;
+    margin-bottom:5px; 
+}
+.payroll-summary-date{
+    padding-top: 14px;
+    padding-bottom: 20px;
+}
+.third-section-box {
+    border-radius: 20px;
+    border: 1px solid #EDF2FF;
+    background: #F5F8FF;
+    /* height: 106px; */
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* flex: 0 0 20%; */
+}
+.new-view-summary {
+    margin-bottom: 5px !important;
+}
+.payroll-report-review{
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+}
+.approve-report-data {
+    margin-top: 30px !important;
+}
+.report-inner-payroll {
+    margin-bottom: 30px !important;
 }

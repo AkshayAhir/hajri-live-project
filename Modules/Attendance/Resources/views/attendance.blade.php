@@ -367,7 +367,6 @@
         } else {
             $('.status_filter').val(localStorage.getItem('attendanceStatus')).prop('selected', true);
         }
-<<<<<<< HEAD
         function datatable(searchValue = null, calender_date = null, number_page_sorting = null, status = null) {
             if (status == null) {
                 var status = localStorage.getItem('attendanceStatus');
@@ -402,21 +401,6 @@
                         var calender_date = $('#calender_date').val();
                         changeStatus(id, status, calender_date);
                     });
-=======
-
-        $('.input-group.date').datepicker({
-            format: 'dd, M yyyy',
-            autoclose: true,
-        });
-        $('.input-group.date').datepicker('setDate', new Date());
-        
-        $('#calender_date').on('change', function() {
-            var calender_date = $('#calender_date').val();  
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
                 },
                 ajax: {
                     "url": "{{ route('attendance_list') }}",
@@ -695,7 +679,6 @@
                         }
 
                     });
-
                     $('#attendance_id').val(response['data'][0]['id']);
                     $('#note_area').val(response['data'][0]['note']);
                     $('.note_name').html(response['data'][0]['staff_note']['name']);

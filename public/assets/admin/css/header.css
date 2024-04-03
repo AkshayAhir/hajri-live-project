@@ -202,6 +202,7 @@ h3.topbar_title {
 
 .breadcrumbs-area {
     padding-top: 25px;
+    /* padding-left: 20px; */
 }
 
 .breadcrumbs {
@@ -389,8 +390,8 @@ h3.topbar_title {
         margin-left: 10px;
         margin-right: 5px;
     }
+}
 
-    /* .staff-profile-details-sec {
-        margin-left: 80px;
-    } */
+.breadcrumbs-area-details{
+    padding-top: 30px;
 }

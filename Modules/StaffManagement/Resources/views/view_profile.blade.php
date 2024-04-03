@@ -92,7 +92,6 @@
                                 @endif
                             </div>
                             @forelse ($staff_personal_info as $staff_personal_infos)
-{{--                            {{$staff_personal_infos->date_of_birth}}--}}
                                 <div class="shift-inner-sub-label-edit">
                                     <label class="shift-type-label">Date of Birth</label>
                                     <!-- <input type="date" class="form-control shift-edit-input" placeholder="Enter name" name="date_of_birth" id="date_of_birth" value="{{$staff_personal_infos->date_of_birth}}"> -->
@@ -198,6 +197,11 @@
                                 </div>
                             </div>
                         @endforelse
+                        <div class="location-atten">
+                            <input class="form-check-input" type="checkbox" value="1" name="is_remote" id="is_remote" {{($staff[0]->is_remote == 1) ? 'checked' : ''}}>
+{{--                                <p class="section_sub_title ">Give Selfie & Location Attendance Access</p>--}}
+                            <p class="section_sub_title ">Remote Attendance Access</p>
+                        </div>
                     </div>
                     <div class="staff-view-form-profile">
                         <h2 class="proxima_nova_semibold staff-pay-title">Employment Information</h2>
@@ -224,7 +228,7 @@
                                     <label class="shift-type-label">Department</label>
                                     <div class="filters staff_attendance" id="department_error">
                                         <select class="form-select create-select section_sub_title select-club-services" id="department_id" name="department_id">
-                                            <option value="">Select Department</option>
+                                            <option value=""></option>
                                             @foreach($departments as $department)
                                                 <option value="{{$department->id}}" {{($staff[0]->department_id == $department->id) ? 'selected' : ''}}>{{$department->name}}</option>
                                             @endforeach
@@ -249,6 +253,11 @@
                                     <input type="text" class="form-control shift-edit-input" placeholder="Enter PAN Number" name="PAN_number" id="PAN_number" value="{{$staff_infos->PAN_number}}">
                                 </div>
                             </div>
+{{--                            <div class="location-atten">--}}
+{{--                                <input class="form-check-input" type="checkbox" name="is_remote" id="is_remote" value="1" {{($staff[0]->is_remote == 1) ? 'checked' : ''}}>--}}
+{{--                                <p class="section_sub_title ">Give Selfie & Location Attendance Access</p>--}}
+{{--                                <p class="section_sub_title ">Remote Attendance Access</p>--}}
+{{--                            </div>--}}
                         @empty
                             <div class="shift-main-inner-edit">
                                 <div class="shift-inner-sub-label-edit">
@@ -293,6 +302,11 @@
                                     <label class="shift-type-label">PAN Number</label>
                                     <input type="text" class="form-control shift-edit-input" placeholder="Enter PAN Number" name="PAN_number" id="PAN_number">
                                 </div>
+                            </div>
+                            <div class="location-atten">
+                                <input class="form-check-input" type="checkbox" value="1" name="is_remote" id="is_remote">
+{{--                                <p class="section_sub_title ">Give Selfie & Location Attendance Access</p>--}}
+                                <p class="section_sub_title ">Remote Attendance Access</p>
                             </div>
                         @endforelse
                     </div>
@@ -607,40 +621,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
     <script>
 
-$(document).ready(function() {
-    // Select the PAN_number input
-    var panNumberInput = $('#PAN_number');
+        $(document).ready(function() {
+            // Select the PAN_number input
+            var panNumberInput = $('#PAN_number');
+            // Select the submit button
+            var submitButton = $('#staff_step1_btn');
+            // Attach a keydown event handler to the PAN_number input
+            panNumberInput.on('keydown', function(event) {
+                // Check if the pressed key is 'Enter'
+                if (event.key === 'Enter') {
+                    // Trigger the submit button click event
+                    submitButton.click();
+                }
+            });
+        });
+        var today = new Date();
+        $('#date_of_birth').datepicker({
+            format: 'dd M yyyy',
+            autoclose: true,
+            endDate: today,
+        });
+        $('#date_of_joining').datepicker({
+            format: 'dd M yyyy',
+            autoclose: true,
+        });
 
-    // Select the submit button
-    var submitButton = $('#staff_step1_btn');
+        $('#date_of_birth').datepicker('setDate', '<?= $date_of_birthday?>');
+        $('#date_of_joining').datepicker('setDate', '<?= $date_of_joining?>');
 
-    // Attach a keydown event handler to the PAN_number input
-    panNumberInput.on('keydown', function(event) {
-        // Check if the pressed key is 'Enter'
-        if (event.key === 'Enter') {
-            // Trigger the submit button click event
-            submitButton.click();
-        }
-    });
-});
-
-var today = new Date();
-    $('#date_of_birth').datepicker({
-        format: 'dd M yyyy',
-        autoclose: true,
-        endDate: today,
-    });
-    $('#date_of_joining').datepicker({
-        format: 'dd M yyyy',
-        autoclose: true,
-    });
-
-    $('#date_of_birth').datepicker('setDate', '<?= $date_of_birthday?>');
-    $('#date_of_joining').datepicker('setDate', '<?= $date_of_joining?>');
-
-        // var formattedValue = $('#phone_number').val().replace(/(\d{5})(?!$)/g, '$1 ').trim();
-        // // console.log(formattedValue);
-        // var phone_number = $('#phone_number').val(formattedValue);
+        var formattedValue = $('#phone_number').val().replace(/(\d{5})(?!$)/g, '$1 ').trim();
+        var phone_number = $('#phone_number').val(formattedValue);
 
         $('#bank_details_form_data').click(function(){
             $('.profile-step').removeClass('active');
@@ -744,7 +754,7 @@ var today = new Date();
         //         });
         //     }
         // });
-        
+
         const phoneNumberInput = document.getElementById('phone_number');
         phoneNumberInput.addEventListener('input', function (event) {
             let value = event.target.value.replace(/\D/g, ''); // Remove non-numeric characters

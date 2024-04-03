@@ -160,10 +160,11 @@ class AttendanceController extends Controller
             // 6 => 'fine',
             7 => 'action',
         );
+        
         $search_text = $request->searchValue;
         $calender_date = str_replace(',', '', $request->calender_date);
+        
         $date = Carbon::parse($calender_date)->format('Y-m-d');
-
         $totalDataRecord = Attendance::whereHas('Staff', function ($query){
                 $query->where('business_id', $this->business_id);
             })
@@ -231,11 +232,13 @@ class AttendanceController extends Controller
             $totalFilteredRecord = Attendance::with(['Staff' => function ($query) use ($search_text) {
                 $query->where('business_id', $this->business_id)->where('name', 'LIKE', "%{$search_text}%");
             }])
+            
             ->where(function($query) use ($status){
                 if($status != 'all' && $status != null){
                     $query->where('status', $status);
                 }
             })
+            
                 // ->where('status', 'LIKE' ,$status)
                 ->where(function ($query) use ($date) {
                     if ($date !== null) {
@@ -248,6 +251,7 @@ class AttendanceController extends Controller
                     $query->where('business_id', $this->business_id)->where('name', 'LIKE', "%{$search_text}%");
                 })
                 ->count();
+                
         }
         $data_val = array();
         if (!empty($post_data)) {

@@ -5,5 +5,6 @@
     "Attendance": true,
     "Test": true,
     "Weeklyholidaypolicy": true,
-    "Report": true
+    "Report": true,
+    "Payroll": true
 }

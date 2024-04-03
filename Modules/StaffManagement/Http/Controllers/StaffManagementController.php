@@ -2,6 +2,7 @@
 
 namespace Modules\StaffManagement\Http\Controllers;
 
+use App\Models\DepartmentHistory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -56,7 +57,9 @@ class StaffManagementController extends Controller
         return view('staffmanagement::staff', ['header_title'=>$header_title, 'business'=>$this->business, 'user_profile'=>$this->user_profile,'staff_count'=>$staff_count,'departments'=>$departments]);
     }
     public function allStaff(Request $request){
+        
         $totalFilteredRecord = $totalDataRecord = $draw_val = "";
+       
         $columns_list = array(
             0 =>'id',
             1 =>'name',
@@ -65,6 +68,7 @@ class StaffManagementController extends Controller
             4 =>'salary_cycle',
             5=> 'department_id',
         );
+        
         $character_page_sorting = $request->character_page_sorting;
         $number_page_sorting = $request->number_page_sorting;
         $search_text = $request->searchValue;
@@ -189,13 +193,18 @@ class StaffManagementController extends Controller
         } else {
             $staff_id = Staff::insertGetId(['name'=>$request->first_name,'last_name'=>$request->last_name, 'middle_name'=>$request->middle_name, 'phone_number'=>str_replace(' ', '', $request->phone_number), 'salary_amount'=>$request->salary_amount, 'email' => $request->staff_email,
             // 'salary_cycle'=>$salary_cycle, 
-            'department_id'=>$request->department_id, 'business_id'=>$this->business_id]);
+            'department_id'=>$request->department_id, 'business_id'=>$this->business_id,'is_remote'=>($request->is_remote) ? 1 : 0]);
             if($request->account_holder_name !=null || $request->account_number != null || $request->IFSC_code != null || $request->UPI_id !=null){
                 StaffBankDetail::insert(['staff_id'=>$staff_id,'account_holder_name'=>$request->account_holder_name,'account_number'=>$request->account_number,'IFSC_code'=>$request->IFSC_code,'UPI_id'=>$request->UPI_id]);
             }
             // foreach ($request->photos as $value){
             //     $staff_photo = StaffPhoto::insert(['staff_id'=>$staff_id,'photo'=>$value]);
             // }
+            DepartmentHistory::insert([
+                'department_id'=>$request->department_id,
+                'staff_id'=>$staff_id,
+                'start_date'=>Carbon::now()->format('Y-m-d'),
+            ]);
             if($staff_id){
                 return response()->json(["message" => 'Staff insert successfully', "status" => 1]);
             }else{
@@ -213,7 +222,8 @@ class StaffManagementController extends Controller
     }
 
     public function staffProfile($id){
-        if(Staff::where('id', $id)->having('business_id', $this->business_id)->exists()){
+       
+        if(Staff::where('id', $id)->where('business_id', $this->business_id)->exists()){
             // $month_count =date('t');
             // $attendanceCounts = Attendance::where('staff_id', $id)
             //     ->whereMonth('date', now()->month)
@@ -362,6 +372,11 @@ class StaffManagementController extends Controller
         foreach ($add_staff as $key=>$staff){
             $staff_id = Staff::insertGetId($staff);
             $add_bank_staff[$key]['staff_id'] = $staff_id;
+            DepartmentHistory::insert([
+                'department_id'=>1,
+                'staff_id'=>$staff_id,
+                'start_date'=>Carbon::now()->format('Y-m-d'),
+            ]);
             $staffs = StaffBankDetail::insert($add_bank_staff[$key]);
         }
         session()->forget('bulkExcelData');
@@ -634,7 +649,24 @@ class StaffManagementController extends Controller
                 return response()->json(["message" => 'Email should not be duplicate (two employees can not have same email )', "status" => 2]);
             }
         }
-        Staff::where('id',$request->staff_id)->update(['name'=>$request->first_name,'last_name'=>$request->last_name,'middle_name'=>$request->middle_name,'phone_number'=>str_replace(' ', '', $request->phone_number),'department_id'=>$request->department_id,'email' => $request->staff_email]);
+        $old_department_id = Staff::where('id',$request->staff_id)->value('department_id');
+        if(DepartmentHistory::where('staff_id',$request->staff_id)->where('department_id',$old_department_id)->exists()){
+            if($old_department_id != $request->department_id){
+                DepartmentHistory::where('staff_id',$request->staff_id)->where('department_id',$old_department_id)->update(['end_date'=>Carbon::now()->format('Y-m-d')]);
+                DepartmentHistory::insert([
+                    'department_id'=>$request->department_id,
+                    'staff_id'=>$request->staff_id,
+                    'start_date'=>Carbon::now()->format('Y-m-d'),
+                ]);
+            }
+        }else{
+            DepartmentHistory::insert([
+                'department_id'=>$request->department_id,
+                'staff_id'=>$request->staff_id,
+                'start_date'=>Carbon::now()->format('Y-m-d'),
+            ]);
+        }
+        Staff::where('id',$request->staff_id)->update(['name'=>$request->first_name,'last_name'=>$request->last_name,'middle_name'=>$request->middle_name,'phone_number'=>str_replace(' ', '', $request->phone_number),'department_id'=>$request->department_id,'email' => $request->staff_email,'is_remote'=>($request->is_remote) ? 1 : 0]);
         if(StaffProfile::where('staff_id',$request->staff_id)->exists()){
             StaffProfile::where('staff_id',$request->staff_id)->update(['date_of_birth'=>$date_of_birth,'gender'=>$request->gender,'address1'=>$request->address1,
                 'address2'=>$request->address2,'city'=>$request->city,'state'=>$request->state,'pincode'=>$request->pincode]);

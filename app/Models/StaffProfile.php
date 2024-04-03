@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StaffProfile extends Model
 {
-    use HasFactory;
+    public function staff(){
+        return $this->belongsTo(Staff::class,'staff_id','id');
+    }
 }

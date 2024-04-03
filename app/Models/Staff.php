@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 use App\Traits\GlobalSearchable;
 
-class Staff extends Model
+class Staff extends Authenticatable
 {
-    use HasFactory ,SoftDeletes, LogsActivity, GlobalSearchable;
+    use HasApiTokens,HasFactory ,SoftDeletes, LogsActivity, GlobalSearchable;
     
     protected static $globalSearchColumns = ['name'];
 
@@ -51,5 +53,14 @@ class Staff extends Model
     }
     public function WeeklyHolidayStaff(){
         return $this->belongsTo(WeeklyHolidayStaff::class,'id','staff_id');
+    }
+    public function StaffProfile(){
+        return $this->belongsTo(StaffProfile::class,'id','staff_id');
+    }
+    public function PayrollSalary(){
+        return $this->belongsTo(Payroll::class,'id','staff_id');
+    }
+    public function Business(){
+        return $this->belongsTo(Business::class,'business_id','id');
     }
 }

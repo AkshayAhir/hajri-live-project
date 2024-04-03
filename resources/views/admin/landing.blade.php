@@ -165,6 +165,9 @@
     });
 
     $(document).ready(function () {
+        // $('#mobile-form')[0].reset();
+        // location.reload();
+        // $('#mobile_code').val(''); 
         toastr.options = {
             "closeButton": true,
             "debug": false,
@@ -183,10 +186,10 @@
             "hideMethod": "fadeOut"
         }
         // $(".hajri-phone-otp").hide();
-        $(".hajri-submit-btn").click(function () {
-            $(".hajri-phone-number").hide()
-            $(".hajri-phone-otp").show();
-        });
+        // $(".hajri-submit-btn").click(function () {
+        //     $(".hajri-phone-number").hide()
+        //     $(".hajri-phone-otp").show();
+        // });
     });
 
     function getAll() {
@@ -312,7 +315,9 @@
             }
         }, 1000);
     }
+    
     const phoneNumberInput = document.getElementById('mobile_code');
+    
 
     // Add an input event listener to format the phone number
     phoneNumberInput.addEventListener('input', function (event) {
@@ -355,6 +360,7 @@
         // var countryCode = countryData.dialCode;
         countdown();
         var phone_number = $('#mobile_code').val();
+        
         var phone_number = phone_number.replace(/\s/g, '');
         if (loginValidation()) {
             $.ajax({
@@ -391,6 +397,12 @@
 
                         localStorage.setItem('data_register_number', JSON.stringify(response.data[0]));
                         toastr["success"](response.message)
+                        setTimeout(function () {
+                            $('#mobile-form')[0].reset();
+                            $('.hajri-submit-btnss').prop('disabled', false);
+                            $('.loader').hide();
+                        }, 3000);
+                       
                     }  else {
                         toastr["error"](response.message)
                     }
@@ -410,7 +422,7 @@
         }
         return valid;
     }
-    
+ 
     $(".otp-button").click(function (e) {
         // $('.otp-button').removeAttr('disabled');
         // $('.otp-button').prop('disabled', true);

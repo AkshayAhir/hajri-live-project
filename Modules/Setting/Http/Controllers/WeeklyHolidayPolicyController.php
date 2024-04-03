@@ -51,7 +51,7 @@ class WeeklyHolidayPolicyController extends Controller
         $header_title = "Business Settings";
 
         $sunday_staff = Staff::whereHas('WeeklyHolidayStaff', function($query){
-            $query->where('business_id', $this->business_id)->where('days',1);
+            $query->where('business_id', $this->business_id)->where('days',0);
         });
         if($sunday_staff->count() > 10){
             $sunday = $sunday_staff->limit(5)->get();
@@ -60,7 +60,7 @@ class WeeklyHolidayPolicyController extends Controller
         }
 
         $monday_staff = Staff::whereHas('WeeklyHolidayStaff', function($query){
-            $query->where('business_id', $this->business_id)->where('days',2);
+            $query->where('business_id', $this->business_id)->where('days',1);
         });
         if($monday_staff->count() > 10){
             $monday = $monday_staff->limit(5)->get();
@@ -68,7 +68,7 @@ class WeeklyHolidayPolicyController extends Controller
             $monday = $monday_staff->get();
         }
         $tuesday_staff = Staff::whereHas('WeeklyHolidayStaff', function($query){
-            $query->where('business_id', $this->business_id)->where('days',3);
+            $query->where('business_id', $this->business_id)->where('days',2);
         });
         if($tuesday_staff->count() > 10){
             $tuesday = $tuesday_staff->limit(5)->get();
@@ -77,7 +77,7 @@ class WeeklyHolidayPolicyController extends Controller
         }
 
         $wednesday_staff = Staff::whereHas('WeeklyHolidayStaff', function($query){
-            $query->where('business_id', $this->business_id)->where('days',4);
+            $query->where('business_id', $this->business_id)->where('days',3);
         });
         if($wednesday_staff->count() > 10){
             $wednesday = $wednesday_staff->limit(5)->get();
@@ -86,7 +86,7 @@ class WeeklyHolidayPolicyController extends Controller
         }
 
         $thursday_staff = Staff::whereHas('WeeklyHolidayStaff', function($query){
-            $query->where('business_id', $this->business_id)->where('days',5);
+            $query->where('business_id', $this->business_id)->where('days',4);
         });
         if($thursday_staff->count() > 10){
             $thursday = $thursday_staff->limit(5)->get();
@@ -95,7 +95,7 @@ class WeeklyHolidayPolicyController extends Controller
         }
 
         $friday_staff = Staff::whereHas('WeeklyHolidayStaff', function($query){
-            $query->where('business_id', $this->business_id)->where('days',6);
+            $query->where('business_id', $this->business_id)->where('days',5);
         });
         if($friday_staff->count() > 10){
             $friday = $friday_staff->limit(5)->get();
@@ -104,7 +104,7 @@ class WeeklyHolidayPolicyController extends Controller
         }
 
         $saturday_staff = Staff::whereHas('WeeklyHolidayStaff', function($query){
-            $query->where('business_id', $this->business_id)->where('days',7);
+            $query->where('business_id', $this->business_id)->where('days',6);
         });
         if($saturday_staff->count() > 10){
             $saturday = $saturday_staff->limit(5)->get();
@@ -144,15 +144,9 @@ class WeeklyHolidayPolicyController extends Controller
     public function staffManage()
     {
         $day = request()->day;
-<<<<<<< HEAD
         $staff_day = request()->staff_day;
         $header_title = "Business Settings";
         return view('setting::weeklyholidaypolicy.business_settings_weekly_holiday_policy_manage_staff_list', ['header_title' => $header_title, 'business' => $this->business, 'user_profile' => $this->user_profile, 'day' => $day, 'staff_day' => $staff_day]);
-=======
-        $business_id = Session::get('business_id');
-        $header_title = "Business Settings";
-        return view('setting::weeklyholidaypolicy.business_settings_weekly_holiday_policy_manage_staff_list', ['header_title' => $header_title, 'business' => $this->business, 'user_profile' => $this->user_profile, 'day' => $day]);
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
     }
 
     public function saveWeeklyBusinessHoliday(Request $request)

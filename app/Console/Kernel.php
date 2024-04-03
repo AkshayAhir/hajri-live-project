@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
             $business_holidays = WeeklyHolidayBusiness::select('id','business_id','days')->whereIn('business_id',$business_ids)->get()->groupBy('business_id');
             foreach($business_holidays as $key=>$value){
                 foreach ($value as $obj) {
-                    if ($obj["days"] == Carbon::now()->format('w') + 1) {
+                    if ($obj["days"] == Carbon::now()->format('w')) {
                         $keyToRemove = array_search($obj["business_id"], $business_ids);
                         if ($keyToRemove !== false) {
                             unset($business_ids[$keyToRemove]);

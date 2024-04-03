@@ -51,32 +51,32 @@
                     <div class="shift-main-inner-edit">
                         <div class="shift-inner-sub-label-edit">
                             <div class="staff-work-date">
-                                <input type="checkbox" class="days" name="sunday" id="sunday" value="1">
+                                <input type="checkbox" class="days" name="sunday" id="sunday" value="0">
                                 <label for="sunday"
                                     class="staff-setting-holiday section_sub_title">Sunday</label>
                             </div>
                             <div class="staff-work-date">
-                                <input type="checkbox" class="days" name="monday" id="monday" value="2">
+                                <input type="checkbox" class="days" name="monday" id="monday" value="1">
                                 <label for="monday" class="staff-setting-holiday section_sub_title">Monday</label>
                             </div>
                             <div class="staff-work-date">
-                                <input type="checkbox" class="days" name="Tuesday" id="Tuesday" value="3">
+                                <input type="checkbox" class="days" name="Tuesday" id="Tuesday" value="2">
                                 <label for="Tuesday" class="staff-setting-holiday section_sub_title">Tuesday</label>
                             </div>
                             <div class="staff-work-date">
-                                <input type="checkbox" class="days" name="wednesday" id="wednesday" value="4">
+                                <input type="checkbox" class="days" name="wednesday" id="wednesday" value="3">
                                 <label for="wednesday" class="staff-setting-holiday section_sub_title">Wednesday</label>
                             </div>
                             <div class="staff-work-date">
-                                <input type="checkbox" class="days" name="thursday" id="thursday" value="5">
+                                <input type="checkbox" class="days" name="thursday" id="thursday" value="4">
                                 <label for="thursday" class="staff-setting-holiday section_sub_title">Thursday</label>
                             </div>
                             <div class="staff-work-date">
-                                <input type="checkbox" class="days" name="friday" id="friday" value="6">
+                                <input type="checkbox" class="days" name="friday" id="friday" value="5">
                                 <label for="friday" class="staff-setting-holiday section_sub_title">Friday</label>
                             </div>
                             <div class="staff-work-date">
-                                <input type="checkbox" class="days" name="saturday" id="saturday" value="7">
+                                <input type="checkbox" class="days" name="saturday" id="saturday" value="6">
                                 <label for="saturday" class="staff-setting-holiday section_sub_title">Saturday</label>
                             </div>
                         </div>
@@ -210,25 +210,25 @@
                     // console.log(response);
                     if ( response['status'] == 1){                        
                         response['business_holiday'].forEach(function(holiday) {
-                            if(holiday == 1){
+                            if(holiday == 0){
                                 $('#sunday').prop("checked", true);
                             }
-                            if(holiday == 2){
+                            if(holiday == 1){
                                 $('#monday').prop("checked", true);
                             }
-                            if(holiday == 3){
+                            if(holiday == 2){
                                 $('#tuesday').prop("checked", true);
                             }
-                            if(holiday == 4){
+                            if(holiday == 3){
                                 $('#wednesday').prop("checked", true);
                             }
-                            if(holiday == 5){
+                            if(holiday == 4){
                                 $('#thursday').prop("checked", true);
                             }
-                            if(holiday == 6){
+                            if(holiday == 5){
                                 $('#friday').prop("checked", true);
                             }
-                            if(holiday == 7){
+                            if(holiday == 6){
                                 $('#saturday').prop("checked", true);
                             }
                         });                                            

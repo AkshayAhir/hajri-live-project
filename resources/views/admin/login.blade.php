@@ -73,7 +73,6 @@
                     <p class="footer-number proxima_nova_semibold">+91 8460460916</p>
                     <p class="footer-email proxima_nova_semibold">hajri.app@gmail.com</p>
                 </div>
-
             </div>
         </div>
         <div class="hajri-left-right">
@@ -446,7 +445,7 @@
         let ele = document.querySelectorAll('.digit-inner-num input');
         if (ele[val - 1].value != '') {
             ele[val].focus();
-            $('.otp-button').removeAttr('disabled');
+            $('.otp-button').removeAttr();
             $('.main-loader').css("display", "none");
         } else if (ele[val - 1].value == '') {
             ele[val - 2].focus();
@@ -478,6 +477,7 @@
         }
         }, 1000);
     }
+    countdown();
     $("#edit-mobile").hide();
     $(".phone-number-text").click(function () {
         // $(this).hide();
@@ -611,14 +611,17 @@
         }
     });
     // });
-    const phoneNumberInput = document.getElementById('mobile_code');
 
+    const phoneNumberInput = document.getElementById('mobile_code');
+    
     // Add an input event listener to format the phone number
     phoneNumberInput.addEventListener('input', function (event) {
         let value = event.target.value.replace(/\D/g, ''); // Remove non-numeric characters
         const formattedValue = formatPhoneNumber(value);
         event.target.value = formattedValue;
     });
+    
+    
 
     // Function to format the phone number with spaces after every 5 digits
     function formatPhoneNumber(value) {

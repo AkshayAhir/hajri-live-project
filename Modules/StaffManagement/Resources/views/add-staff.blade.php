@@ -79,19 +79,14 @@
                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M17.4902 16.4062C18.0943 16.4062 18.584 16.8959 18.584 17.5V24.7917C18.584 25.3957 18.0943 25.8854 17.4902 25.8854C16.8862 25.8854 16.3965 25.3957 16.3965 24.7917V17.5C16.3965 16.8959 16.8862 16.4062 17.4902 16.4062Z" fill="#808080" />
                                         </svg>
                                     </div>
-                                    <p class="staff-image-dragdrop">Drag & drop your image or <label for="custom-file-upload" class="file-uploadphp">Select Files</label></p>
+                                    <p class="staff-image-dragdrop">Drag & drop your image or <label for="custom-file-upload" class="file-upload ">Select Files</label></p>
                                 </div>
                             </div>
-<<<<<<< HEAD
                             <div class="image-error"></div>
                         </div> -->
                         
                     </div>
                     <div class="shift-main-inner-edit">
-=======
-                            <span class="image-error"></span>
-                        </div>
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
                         <div class="shift-inner-sub-label-edit">
                             <label class="shift-type-label">Department <i class="fa-solid fa-star-of-life text-danger fa-2xs" style="font-size: 6px; margin-top: 8px;"></i></label>
                             <div class="filters staff_attendance" id="department_error">
@@ -102,10 +97,11 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <!-- <div class="location-atten">
-                                <input class="form-check-input" type="checkbox" value="" checked id="flexCheckChecked">
-                                <p class="section_sub_title ">Give Selfie & Location Attendance Access</p>
-                            </div> -->
+                            <div class="location-atten">
+                                <input class="form-check-input" type="checkbox" value="1" name="is_remote" id="is_remote">
+{{--                                <p class="section_sub_title ">Give Selfie & Location Attendance Access</p>--}}
+                                <p class="section_sub_title ">Remote Attendance Access</p>
+                            </div>
                         </div>
                         <div class="shift-inner-sub-label-edit">
                             <label class="shift-type-label">Email <i class="fa-solid fa-star-of-life text-danger fa-2xs" style="font-size: 6px; margin-top: 8px;"></i></label>
@@ -181,7 +177,6 @@
             separateDialCode: true,
         });</script>
     <script>
-<<<<<<< HEAD
         // $('.add-staff-dropzone').on('click',function (){
         //     $('#images-dropzone').click();
         // })
@@ -256,84 +251,6 @@
         //             alert('An error occurred while uploading the file.');
         //         }
         //     }
-=======
-        $('.add-staff-dropzone').on('click',function (){
-            $('#images-dropzone').click();
-        })
-        let uploadedDocumentMap = {};
-        Dropzone.autoDiscover = false;
-        let myDropzone = new Dropzone("div#images-dropzone",{
-            url: '{{ route('uploadStaffPhoto') }}',
-            autoProcessQueue: false,
-            thumbnailWidth:'50',
-            thumbnailHeight:'50',
-            uploadMultiple: true,
-            addRemoveLinks: true,
-            maxFilesize: 2,
-            parallelUploads: 10,
-            acceptedFiles: 'image/jpeg, image/jpg, image/png',
-            dictRemoveFile: `
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.84154 2.83958C3.07296 2.60816 3.44817 2.60816 3.67959 2.83958L13.1611 12.3211C13.3925 12.5525 13.3925 12.9277 13.1611 13.1591C12.9296 13.3905 12.5544 13.3905 12.323 13.1591L2.84154 3.67763C2.61011 3.44621 2.61011 3.071 2.84154 2.83958Z" fill="#ffffff"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.1611 2.83958C13.3925 3.071 13.3925 3.44621 13.1611 3.67763L3.67959 13.1591C3.44817 13.3905 3.07296 13.3905 2.84154 13.1591C2.61011 12.9277 2.61011 12.5525 2.84154 12.3211L12.323 2.83958C12.5544 2.60816 12.9296 2.60816 13.1611 2.83958Z" fill="#ffffff"/>
-                        </svg>`,
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}"
-            },
-            successmultiple: function(data, response) {
-                $.each(response['name'], function (key, val) {
-                    $('form').append('<input type="hidden" name="photos[]" value="' + val + '">');
-                    uploadedDocumentMap[data[key].name] = val;
-                });
-                var formData = new FormData($('#add_staff')[0]);
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: 'POST',
-                    url: "{{ route('add-record-staff') }}",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        console.log(response);
-                        if (response['status'] == 1) {
-                            toastr["success"](response.message);
-                            $('#add_staff')[0].reset();
-                            setTimeout(function () {
-                                window.location.href = '/staff';
-                            }, 3000);
-                        }else{
-                            toastr["error"](response.message)
-                        }
-                    }
-                });
-                // }
-            },
-            removedfile: function (file) {
-                $(".image-error").html('');
-                file.previewElement.remove()
-                let name = '';
-                if (typeof file.file_name !== 'undefined') {
-                    name = file.file_name;
-                } else {
-                    name = uploadedDocumentMap[file.name];
-                }
-                $('form').find('input[name="photos[]"][value="' + name + '"]').remove();
-            },
-            error: function(file, response) {
-                if (file.size > this.options.maxFilesize * 1024 * 1024) {
-                    alert('File size exceeds the limit of ' + this.options.maxFilesize + ' MB');
-                    $(".error").remove();
-                    $(".image-error").html(
-                        '<span class="error error_message proxima_nova_semibold">File size upload on ' + this.options.maxFilesize + ' MB</span>'
-                    );
-                }
-            }
-        });
-        // $('#staff-images').on('click',function (){
-        //     $('#photo').click();
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
         // });
         const phoneNumberInput = document.getElementById('phone_number');
         phoneNumberInput.addEventListener('input', function (event) {
@@ -416,21 +333,12 @@
                 );
                 valid = false;
             }
-<<<<<<< HEAD
             // if (myDropzone.getQueuedFiles().length === 0) {
             //     $(".image-error").html(
             //         '<span class="error error_message proxima_nova_semibold">At least one image is required</span>'
             //     );
             //     valid = false;
             // }
-=======
-            if (myDropzone.getQueuedFiles().length === 0) {
-                $(".image-error").html(
-                    '<span class="error error_message proxima_nova_semibold">At least one image is required</span>'
-                );
-                valid = false;
-            }
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
             // if ($('#photo').val() == "") {
             //     $(".staff-images").after(
             //         '<span class="error error_message proxima_nova_semibold">Photo field is required</span>'

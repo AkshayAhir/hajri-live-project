@@ -27,23 +27,29 @@ class LoginController extends Controller
     }
    
     public function registerNumber(Request $request){
+       
         $validator = Validator::make($request->all(), [
             'phone_number' => 'required|regex:/^[6-9]\d{9}$/|min:10',
         ]);
         if($validator->fails()){
+            
             $error_msg = $validator->errors()->first();
             return response()->json(['message' => $error_msg, 'status' => '0', 'data' => []]);
         }
         $otp = rand(1000,9999);
+       
         if(User::where('phone_number',$request->phone_number)->exists()){
             $user = User::where('phone_number',$request->phone_number)->get();
+            
             $user_data = User::where('id',$user[0]['id'])->update(['otp'=>$otp]);
             // set otp in input field 
             $user = User::where('phone_number',$request->phone_number)->get();
             $users = $user->first();
+            
             if ($users->token === null) {
                 return response()->json(["message" => 'OTP Sent', "status" => "2",'data'=>$user]);
             } else {
+                // dd($users);
                 return response()->json(["message" => 'OTP Sent', "status" => "1",'data'=>$user]);
             }
             
@@ -56,6 +62,7 @@ class LoginController extends Controller
             // }
         }else{
             $user = new User;
+            
             $user->country_code = '91';
             $user->phone_number = $request->phone_number;
             $user->otp = $otp;

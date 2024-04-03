@@ -363,7 +363,6 @@
 </div>
 @endsection
 @section('scripts')
-<<<<<<< HEAD
 <script>
     var table;
     var selectedIds = [];
@@ -374,15 +373,6 @@
         autoclose: true
     });
     $('.input-group.date').datepicker('setDate', new Date('2023-01-01'));
-=======
-    <script>
-        
-        $('.input-group.date').datepicker({
-            format: 'dd, M yyyy',
-            autoclose: true
-        });
-        $('.input-group.date').datepicker('setDate', new Date('2023-01-01'));
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
 
     $('.cancel_selected_id').click(function () {
         $('#myModal').hide();
