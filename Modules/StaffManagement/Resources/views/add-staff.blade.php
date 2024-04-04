@@ -56,17 +56,17 @@
                         </div> -->
                     </div>
                     <div class="shift-main-inner-edit">
-                            <div class="shift-inner-sub-label-edit">
-                                <label class="shift-type-label">Middle Name <i class="fa-solid fa-star-of-life text-danger fa-2xs" style="font-size: 6px; margin-top: 8px;"></i></label>
-                                <input type="text" class="form-control shift-edit-input" id="middle_name" name="middle_name" placeholder="Enter Middle Name">
+                        <div class="shift-inner-sub-label-edit">
+                            <label class="shift-type-label">Middle Name <i class="fa-solid fa-star-of-life text-danger fa-2xs" style="font-size: 6px; margin-top: 8px;"></i></label>
+                            <input type="text" class="form-control shift-edit-input" id="middle_name" name="middle_name" placeholder="Enter Middle Name">
+                        </div>
+
+                        <div class="shift-inner-sub-label-edit">
+                            <div class="form-group" id="error">
+                                <label for="exampleInputPassword1" class="form-label shift-type-label">Phone Number <i class="fa-solid fa-star-of-life text-danger fa-2xs" style="font-size: 6px; margin-top: 8px;"></i></label>
+                                <input type="tel" id="phone_number" class="form-control phone_input" placeholder="Phone Number" name="phone_number" maxlength="11">
                             </div>
-                                
-                            <div class="shift-inner-sub-label-edit">
-                                <div class="form-group" id="error">
-                                    <label for="exampleInputPassword1" class="form-label shift-type-label">Phone Number <i class="fa-solid fa-star-of-life text-danger fa-2xs" style="font-size: 6px; margin-top: 8px;"></i></label>
-                                    <input type="tel" id="phone_number" class="form-control phone_input" placeholder="Phone Number" name="phone_number" maxlength="11">
-                                </div>
-                            </div>
+                        </div>
                         <!-- <div class="shift-inner-sub-label-edit">
                             <label class="shift-type-label">Add Your Profile Photo <i class="fa-solid fa-star-of-life text-danger fa-2xs" style="font-size: 6px; margin-top: 8px;"></i></label>
                             <div class="needsclick dropzone" id="images-dropzone">
@@ -84,7 +84,7 @@
                             </div>
                             <div class="image-error"></div>
                         </div> -->
-                        
+
                     </div>
                     <div class="shift-main-inner-edit">
                         <div class="shift-inner-sub-label-edit">
@@ -105,7 +105,7 @@
                         <div class="shift-inner-sub-label-edit">
                             <label class="shift-type-label">Email <i class="fa-solid fa-star-of-life text-danger fa-2xs" style="font-size: 6px; margin-top: 8px;"></i></label>
                             <input type="text" class="form-control shift-edit-input" id="staff_email" name="staff_email" placeholder="Enter Your Email">
-                        </div>                 
+                        </div>
                     </div>
                     <h2 class="proxima_nova_semibold staff-pay-title">Staff Payment Details</h2>
                     <div class="shift-main-inner-edit steff-paymeny-detail">
@@ -155,7 +155,7 @@
         </div>
         <div>
             <div class="create-save-btn">
-{{--                <button type="submit" name="" class="create-staff-btn proxima_nova_semibold">Create & Continue</button>--}}
+                {{--                <button type="submit" name="" class="create-staff-btn proxima_nova_semibold">Create & Continue</button>--}}
                 <button type="submit" name="" class="download-btn create-staff-btn proxima_nova_semibold">Create Staff
                     <img class="loader" src="{{asset('assets/admin/images/white_loader.gif')}}" alt="">
                 </button>
@@ -305,7 +305,7 @@
                     '<span class="error error_message proxima_nova_semibold">Phone number field is required</span>'
                 );
                 valid = false;
-            } 
+            }
             else{
                 if (!filter.test($('#phone_number').val())) {
                     $("#error").after(
@@ -398,7 +398,7 @@
                             toastr["error"](response.message)
                         }
                     }
-                    });
+                });
                 // myDropzone.processQueue();
             }
         });
