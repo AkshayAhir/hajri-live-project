@@ -214,7 +214,7 @@
                                                 <div class="user-images dash-user-images">
                                                     <div>
                                                     <!-- /assets/admin/images/dummy/dummy-user.png -->
-                                                        @if($staff->staffPhoto[0]->photo)
+                                                        @if(count($staff->staffPhoto) > 0)
                                                             <img src="{{asset('assets/admin/images/staff_photos/'.$staff->staffPhoto[0]->photo)}}" class="approve-user-img dash-images-data" alt="">
                                                         @else
                                                             <img src="{{asset('assets/admin/images/dummy/dummy-user.png')}}" class="approve-user-img dash-images-data" alt="">
@@ -265,7 +265,7 @@
                                         <a href="/staff/staff-profile/{{$absentstaffs['staff_id']}}" class="staff-edit">
                                                 <div class="user-images dash-user-images">
                                                     <div>
-                                                        @if($staff->staffPhoto[0]->photo)
+                                                        @if(count($staff->staffPhoto) > 0)
                                                             <img src="{{asset('assets/admin/images/staff_photos/'.$staff->staffPhoto[0]->photo)}}" class="approve-user-img dash-images-data" alt="">
                                                         @else
                                                             <img src="{{asset('assets/admin/images/dummy/dummy-user.png')}}" class="approve-user-img dash-images-data" alt="">
@@ -317,8 +317,8 @@
                                         <a href="/staff/staff-profile/{{$halfleaves['staff_id']}}" class="staff-edit">
                                                 <div class="user-images dash-user-images">
                                                     <div>
-                                                        @if($staff->photo_face)
-                                                            <img src="{{asset('assets/admin/images/staff_photos/'.$staff->photo_face)}}" class="approve-user-img dash-images-data" alt="">
+                                                        @if(count($staff->staffPhoto) > 0)
+                                                            <img src="{{asset('assets/admin/images/staff_photos/'.$staff->staffPhoto[0]->photo)}}" class="approve-user-img dash-images-data" alt="">
                                                         @else
                                                             <img src="{{asset('assets/admin/images/dummy/dummy-user.png')}}" class="approve-user-img dash-images-data" alt="">
                                                         @endif
@@ -379,7 +379,6 @@
 </div> -->
 @endsection
 @section('scripts')
-<<<<<<< HEAD
 <script>
     $(document).ready(function() {
         
@@ -398,24 +397,6 @@
             }
         });
         // })
-=======
-    <script>
-        $(document).ready(function () {
-            var business_id = $('#business_id').val();
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'POST',
-                url: "{{ route('set-session') }}",
-                data: { business_id: business_id },
-                success: function (response) {
-                    // console.log(response);
-                    // location.reload(true)
-                }
-            });
-        })
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
 
 
         // input datepicker

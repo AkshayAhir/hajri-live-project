@@ -627,7 +627,6 @@
             minViewMode: 'months',
             autoclose: true
         });
-<<<<<<< HEAD
         var currentDate = new Date();
         $('.leave-policy-time.date').datepicker('setDate', new Date(currentDate.getFullYear(), currentDate.getMonth(), 1));
         $('.leave-policy-to-time.date').datepicker('setDate', new Date(currentDate.getFullYear(), 11, 31));
@@ -694,10 +693,6 @@
                 });
             }
         })
-=======
-        $('.leave-policy-time.date').datepicker('setDate', new Date('2023-01-01'));
-        $('.leave-policy-to-time.date').datepicker('setDate', new Date('2023-12-01'));
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
         
     </script>
 @endsection

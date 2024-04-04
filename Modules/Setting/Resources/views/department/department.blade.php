@@ -394,7 +394,6 @@
                 }
             });
         }
-<<<<<<< HEAD
     });
     //end edit and update record
     //delete record
@@ -425,42 +424,6 @@
                     toastr["success"](response.message);
                     $('#deleteModal').modal('hide');
                     table.ajax.reload(null, false);
-=======
-        //end delete record
-    </script>
-    <script>
-
-        $('.input-group.date').datepicker({
-            format: 'dd, M yyyy',
-            autoclose: true
-        });
-        $('.input-group.date').datepicker('setDate', new Date('2023-01-01'));
-
-        //  datatable
-
-        $(document).ready(function () {
-            var table = $('#business-setting-department').DataTable({
-                searching: false,
-                lengthChange: false,
-                info: false,
-                responsive: true,
-            });
-
-            // muklti checkbox
-            $('#selectAllCheckbox').on('change', function () {
-                var isChecked = $(this).prop('checked');
-                $('.selectCheckbox_model').prop('checked', isChecked);
-            });
-
-            // search data
-            $('#staff_data_find').on('input', function () {
-                var searchValue = $(this).val();
-                table.search(searchValue).draw();
-            });
-            $('.selectCheckbox_model').change(function () {
-                if ($(this).is(':checked')) {
-                    $('#myModal').show();
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
                 } else {
                     toastr["error"](response.message)
                 }

@@ -369,11 +369,7 @@ $staff_prefix = strtoupper($firstThreeCharacters);
                             <div class="approve-data-search">
                                 <form action="" method="">
                                     <input class="input-search-rounded" type="text" id="staff_data_find"
-<<<<<<< HEAD
                                         placeholder="Search">
-=======
-                                           placeholder="Search">
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
                                 </form>
                             </div>
 
@@ -389,25 +385,10 @@ $staff_prefix = strtoupper($firstThreeCharacters);
                                 <a class="dropdown-item proxima_nova_semibold" href="#">PDF Report</a>
                             </div>
                             <div class="input-group date" data-provide="datepicker">
-<<<<<<< HEAD
                                 <input type="text" id="attendance_datepicker"
                                     class="form-control m-0 proxima_nova_semibold attence_datepicker input-group-addon"
                                     value="{{ date('M Y') }}">
-=======
-{{--                                <input type="text" class="form-control proxima_nova_semibold calender-picker">--}}
-                                <input type="text" class="form-control proxima_nova_semibold calender-picker input-group-addon" value="{{ date('M Y') }}" readonly='true'>
-{{--                                <div class="input-group-addon calender-img">--}}
-{{--                                    <!-- <img src="../assets/images/approve_punches/calender.svg" alt=""> -->--}}
-{{--                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"--}}
-{{--                                         viewBox="0 0 12 12" fill="none">--}}
-{{--                                        <path fill-rule="evenodd" clip-rule="evenodd"--}}
-{{--                                              d="M1.26898 3.26898C1.62763 2.91034 2.20911 2.91034 2.56775 3.26898L6 6.70123L9.43225 3.26898C9.79089 2.91034 10.3724 2.91034 10.731 3.26898C11.0897 3.62763 11.0897 4.20911 10.731 4.56775L6.64938 8.64938C6.29074 9.00803 5.70926 9.00803 5.35062 8.64938L1.26898 4.56775C0.910339 4.20911 0.910339 3.62763 1.26898 3.26898Z"--}}
-{{--                                              fill="#808080"></path>--}}
-{{--                                    </svg>--}}
-{{--                                </div>--}}
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
                             </div>
-
                         </div>
 
                     </div>
@@ -426,7 +407,6 @@ $staff_prefix = strtoupper($firstThreeCharacters);
                             </tr>
                         </thead>
                         <tbody>
-<<<<<<< HEAD
                             <tr>
                                 <td>12 Sep | Mon</td>
                                 <td class="leave_reject">Absent</td>
@@ -539,123 +519,6 @@ $staff_prefix = strtoupper($firstThreeCharacters);
                                     </div>
                                 </td>
                             </tr>
-=======
-                        <tr>
-                            <td>12 Sep | Mon</td>
-                            <td class="leave_reject">Absent</td>
-                            <td>Due to high fever.</td>
-                            <td>By Admin on 18-Apr-2023</td>
-                            <td class="leave_approve">Approved</td>
-                            <td>
-                                <div class="approve-main-sec"><button class="atten-coming-btn"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 16 16" fill="none">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M13.6882 3.98043C13.8835 4.17569 13.8835 4.49228 13.6882 4.68754L6.35486 12.0209C6.15959 12.2161 5.84301 12.2161 5.64775 12.0209L2.31442 8.68754C2.11915 8.49228 2.11915 8.17569 2.31442 7.98043C2.50968 7.78517 2.82626 7.78517 3.02152 7.98043L6.0013 10.9602L12.9811 3.98043C13.1763 3.78517 13.4929 3.78517 13.6882 3.98043Z"
-                                                  fill="#808080" />
-                                        </svg>
-                                    </button>
-                                    <button class="atten-coming-btn reject_danger_btn"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 16 16" fill="none">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M2.84154 2.84154C3.07296 2.61011 3.44817 2.61011 3.67959 2.84154L13.1611 12.323C13.3925 12.5544 13.3925 12.9296 13.1611 13.1611C12.9296 13.3925 12.5544 13.3925 12.323 13.1611L2.84154 3.67959C2.61011 3.44817 2.61011 3.07296 2.84154 2.84154Z"
-                                                  fill="#FF5E5E" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M13.1611 2.84154C13.3925 3.07296 13.3925 3.44817 13.1611 3.67959L3.67959 13.1611C3.44817 13.3925 3.07296 13.3925 2.84154 13.1611C2.61011 12.9296 2.61011 12.5544 2.84154 12.323L12.323 2.84154C12.5544 2.61011 12.9296 2.61011 13.1611 2.84154Z"
-                                                  fill="#FF5E5E" />
-                                        </svg></button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>12 Sep | Mon</td>
-                            <td>Paid Leave</td>
-                            <td>Due to family function.</td>
-                            <td>By Admin on 15-Apr-2023</td>
-                            <td class="leave_reject">Rejected</td>
-                            <td>
-                                <div class="approve-main-sec"><button
-                                            class="atten-coming-btn approve_success_btn"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 16 16" fill="none">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M13.6882 3.98043C13.8835 4.17569 13.8835 4.49228 13.6882 4.68754L6.35486 12.0209C6.15959 12.2161 5.84301 12.2161 5.64775 12.0209L2.31442 8.68754C2.11915 8.49228 2.11915 8.17569 2.31442 7.98043C2.50968 7.78517 2.82626 7.78517 3.02152 7.98043L6.0013 10.9602L12.9811 3.98043C13.1763 3.78517 13.4929 3.78517 13.6882 3.98043Z"
-                                                  fill="#17B643" />
-                                        </svg></button>
-                                    <button class="atten-coming-btn"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 16 16" fill="none">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M2.84154 2.84154C3.07296 2.61011 3.44817 2.61011 3.67959 2.84154L13.1611 12.323C13.3925 12.5544 13.3925 12.9296 13.1611 13.1611C12.9296 13.3925 12.5544 13.3925 12.323 13.1611L2.84154 3.67959C2.61011 3.44817 2.61011 3.07296 2.84154 2.84154Z"
-                                                  fill="#808080" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M13.1611 2.84154C13.3925 3.07296 13.3925 3.44817 13.1611 3.67959L3.67959 13.1611C3.44817 13.3925 3.07296 13.3925 2.84154 13.1611C2.61011 12.9296 2.61011 12.5544 2.84154 12.323L12.323 2.84154C12.5544 2.61011 12.9296 2.61011 13.1611 2.84154Z"
-                                                  fill="#808080" />
-                                        </svg></button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>13 Jun | Wed</td>
-                            <td>Unpaid Leave</td>
-                            <td>Due to health related issues.</td>
-                            <td>By Admin on 13-Apr-2023</td>
-                            <td class="leave_reject">Rejected</td>
-                            <td>
-                                <div class="approve-main-sec"><button class="atten-coming-btn"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 16 16" fill="none">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M13.6882 3.98043C13.8835 4.17569 13.8835 4.49228 13.6882 4.68754L6.35486 12.0209C6.15959 12.2161 5.84301 12.2161 5.64775 12.0209L2.31442 8.68754C2.11915 8.49228 2.11915 8.17569 2.31442 7.98043C2.50968 7.78517 2.82626 7.78517 3.02152 7.98043L6.0013 10.9602L12.9811 3.98043C13.1763 3.78517 13.4929 3.78517 13.6882 3.98043Z"
-                                                  fill="#808080" />
-                                        </svg>
-                                    </button>
-                                    <button class="atten-coming-btn reject_danger_btn"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 16 16" fill="none">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M2.84154 2.84154C3.07296 2.61011 3.44817 2.61011 3.67959 2.84154L13.1611 12.323C13.3925 12.5544 13.3925 12.9296 13.1611 13.1611C12.9296 13.3925 12.5544 13.3925 12.323 13.1611L2.84154 3.67959C2.61011 3.44817 2.61011 3.07296 2.84154 2.84154Z"
-                                                  fill="#FF5E5E" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M13.1611 2.84154C13.3925 3.07296 13.3925 3.44817 13.1611 3.67959L3.67959 13.1611C3.44817 13.3925 3.07296 13.3925 2.84154 13.1611C2.61011 12.9296 2.61011 12.5544 2.84154 12.323L12.323 2.84154C12.5544 2.61011 12.9296 2.61011 13.1611 2.84154Z"
-                                                  fill="#FF5E5E" />
-                                        </svg></button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>11 Sep | Mon</td>
-                            <td>Paid Leave</td>
-                            <td>Due to health related issues.</td>
-                            <td>By Admin on 13-Apr-2023</td>
-                            <td class="leave_pending">Pending</td>
-                            <td>
-                                <div class="approve-main-sec"><button class="atten-coming-btn"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 16 16" fill="none">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M13.6882 3.98043C13.8835 4.17569 13.8835 4.49228 13.6882 4.68754L6.35486 12.0209C6.15959 12.2161 5.84301 12.2161 5.64775 12.0209L2.31442 8.68754C2.11915 8.49228 2.11915 8.17569 2.31442 7.98043C2.50968 7.78517 2.82626 7.78517 3.02152 7.98043L6.0013 10.9602L12.9811 3.98043C13.1763 3.78517 13.4929 3.78517 13.6882 3.98043Z"
-                                                  fill="#808080" />
-                                        </svg>
-                                    </button>
-                                    <button class="atten-coming-btn"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 16 16" fill="none">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M2.84154 2.84154C3.07296 2.61011 3.44817 2.61011 3.67959 2.84154L13.1611 12.323C13.3925 12.5544 13.3925 12.9296 13.1611 13.1611C12.9296 13.3925 12.5544 13.3925 12.323 13.1611L2.84154 3.67959C2.61011 3.44817 2.61011 3.07296 2.84154 2.84154Z"
-                                                  fill="#808080" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                  d="M13.1611 2.84154C13.3925 3.07296 13.3925 3.44817 13.1611 3.67959L3.67959 13.1611C3.44817 13.3925 3.07296 13.3925 2.84154 13.1611C2.61011 12.9296 2.61011 12.5544 2.84154 12.323L12.323 2.84154C12.5544 2.61011 12.9296 2.61011 13.1611 2.84154Z"
-                                                  fill="#808080" />
-                                        </svg></button>
-                                </div>
-                            </td>
-                        </tr>
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
 
                         </tbody>
                     </table>
@@ -685,12 +548,8 @@ $staff_prefix = strtoupper($firstThreeCharacters);
                                     <a class="dropdown-item proxima_nova_semibold" href="#">PDF Report</a>
                                 </div>
                                 <div class="input-group date" data-provide="datepicker">
-<<<<<<< HEAD
                                     <input type="text" class="form-control proxima_nova_semibold calender-picker"
                                         readonly='true'>
-=======
-                                    <input type="text" class="form-control proxima_nova_semibold calender-picker"  readonly='true'>
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
                                     <div class="input-group-addon calender-img">
                                         <!-- <img src="../assets/images/approve_punches/calender.svg" alt=""> -->
                                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"
@@ -1787,20 +1646,7 @@ $(document).ready(function(){
         if (endDatepicker.datepicker('getDate') < selected.date) {
         endDatepicker.datepicker('setDate', selected.date);
         }
-<<<<<<< HEAD
     });
-=======
-        //  datepicker
-        $('.input-group.date').datepicker({
-            format: 'M yyyy',
-            autoclose: true,
-        });
-        $('.input-group.date-leave').datepicker({
-            format: 'M yyyy',
-            autoclose: true,
-        });
-        $('.input-group.date-leave').datepicker('setDate', new Date('2023-01-01'));
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
 
     endDatepicker.datepicker({
         format: 'dd M yyyy',

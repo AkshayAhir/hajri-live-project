@@ -394,6 +394,7 @@ class ReportController extends Controller
                     $totalMinutes = '-';
                     $total_Second = '-'; 
                 }
+//                dd($totalHours);
                 if ($totalHours !== '-' && $totalMinutes !== '-' && $total_Second !== '-') {
                     $totalTime = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $total_Second);
                     $totalSeconds = ($totalHours * 3600) + ($totalMinutes * 60) + $total_Second;

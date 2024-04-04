@@ -478,6 +478,7 @@
         }
         }, 1000);
     }
+    countdown();
     $("#edit-mobile").hide();
     $(".phone-number-text").click(function () {
         // $(this).hide();
@@ -510,8 +511,7 @@
     $(".otp-button").click(function () {
         // $('.otp-button').removeAttr('disabled');
         var allDatas = getAll();
-        $('.loader').show();
-        $('.otp-button').prop('disabled', true);
+
         var inputElements = $('.digit-inner-num input');
         var otp = '';
         inputElements.each(function() {
@@ -521,8 +521,10 @@
         var phone_number = phone_number.replace(/\s/g, '');
         // console.log(otp);
         if($('#countdowntimer').html() === "00:00"){
-            toastr["error"]('Time out resend otp')
+            toastr["error"]('Time out resend otp');
         } else {
+            $('.otp-button').prop('disabled', true);
+            $('.loader').show();
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

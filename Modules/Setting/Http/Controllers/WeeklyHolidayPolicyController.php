@@ -144,15 +144,9 @@ class WeeklyHolidayPolicyController extends Controller
     public function staffManage()
     {
         $day = request()->day;
-<<<<<<< HEAD
         $staff_day = request()->staff_day;
         $header_title = "Business Settings";
         return view('setting::weeklyholidaypolicy.business_settings_weekly_holiday_policy_manage_staff_list', ['header_title' => $header_title, 'business' => $this->business, 'user_profile' => $this->user_profile, 'day' => $day, 'staff_day' => $staff_day]);
-=======
-        $business_id = Session::get('business_id');
-        $header_title = "Business Settings";
-        return view('setting::weeklyholidaypolicy.business_settings_weekly_holiday_policy_manage_staff_list', ['header_title' => $header_title, 'business' => $this->business, 'user_profile' => $this->user_profile, 'day' => $day]);
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
     }
 
     public function saveWeeklyBusinessHoliday(Request $request)

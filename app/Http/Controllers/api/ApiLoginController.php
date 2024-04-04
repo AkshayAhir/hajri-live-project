@@ -10,6 +10,8 @@ use App\Models\Department;
 use App\Models\Staff;
 use App\Models\StaffBankDetail;
 use App\Models\StaffPhoto;
+use App\Models\WeeklyHolidayBusiness;
+use App\Models\HolidayPolicy;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -67,16 +69,8 @@ class ApiLoginController extends Controller
                     Auth::login($user);
                     $token = $user->createToken('token')->accessToken;
                     User::where('id', $user->id)->update(["token" => $token]);
-<<<<<<< HEAD
-                    $user_data = User::with('UserPhoto:id,user_id,photo','BusinessUser.business','BusinessUser.Department','BusinessUser.Department.Staff')->where('id', $user->id)->first(); // Append the business data to the user data.
-=======
                     $user_data = User::with('UserPhoto:id,user_id,photo','BusinessUser.business','BusinessUser.Department','BusinessUser.Department.departmentStaff')->where('id', $user->id)->first(); // Append the business data to the user data.
-<<<<<<< HEAD
                     return response()->json(["message" => 'You are logged in successfully.','is_register'=>1 ,"status" => "1",'data'=>$user_data]);
-=======
->>>>>>> 4f832deba4ea79fb5a57cb0329b081dc6a8c41de
-                    return response()->json(["message" => 'Login successfully','is_register'=>1 ,"status" => 1,'data'=>$user_data]);
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
                 }
             }else{
                 $user_data = User::with('UserPhoto:id,user_id,photo','BusinessUser.business','BusinessUser.Department','BusinessUser.Department.departmentStaff')->where('id', $user->id)->first();
@@ -86,7 +80,7 @@ class ApiLoginController extends Controller
             return response()->json(['message'=>'Wrong otp.', 'status'=> 0]);
         }
     }
-    public function storeBusiness(Request $request){
+    public function addBusiness(Request $request){
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
             'name' => 'required',
@@ -115,11 +109,7 @@ class ApiLoginController extends Controller
             $token = $user->createToken('token')->accessToken;
             User::where('id', $user->id)->update(["token" => $token]);
         }
-<<<<<<< HEAD
-        $user_data = User::with('UserPhoto:id,user_id,photo','BusinessUser.business','BusinessUser.Department','BusinessUser.Department.Staff')->where('id', $user->id)->first();
-=======
         $user_data = User::with('UserPhoto:id,user_id,photo','BusinessUser.business','BusinessUser.Department','BusinessUser.Department.departmentStaff')->where('id', $user->id)->first();
->>>>>>> 4f832deba4ea79fb5a57cb0329b081dc6a8c41de
         if (!$business_user) {
             return response()->json(['message'=>'Something is wrong.', 'status'=>0]);
         } else {
@@ -150,11 +140,7 @@ class ApiLoginController extends Controller
             $error_msg = $validator->errors()->first();
             return response()->json(['message' => $error_msg, 'status' => 0]);
         }
-<<<<<<< HEAD
-        $user = User::with('UserPhoto:id,user_id,photo','BusinessUser.business','BusinessUser.Department','BusinessUser.Department.Staff')->where('id', $request->user_id)->first();
-=======
         $user = User::with('UserPhoto:id,user_id,photo','BusinessUser.business','BusinessUser.Department','BusinessUser.Department.departmentStaff')->where('id', $request->user_id)->first();
->>>>>>> 4f832deba4ea79fb5a57cb0329b081dc6a8c41de
         if (!$user) {
             return response()->json(['message'=>'Something is wrong.', 'status'=>0]);
         } else {
@@ -597,7 +583,120 @@ class ApiLoginController extends Controller
             return response()->json(['message'=>'Something is wrong.', 'status'=>0]);
         }
     }
-    public function addAttendance(Request $request){    
+//    public function addAttendance(Request $request){
+//        $validator = Validator::make($request->all(), [
+//            'staff_id' => 'required',
+//        ]);
+//        if($validator->fails()){
+//            $error_msg = $validator->errors()->first();
+//            return response()->json(['message' => $error_msg, 'status' => 0]);
+//        }
+//        if(Staff::where('id', $request->staff_id)->where('is_deactivate',1)->exists()){
+//            return response()->json(["message" => 'This staff is deactivated.', "status" => "0"]);
+//        } else {
+//            if($request->status == 1){
+//                if (Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->exists()) {
+//                    if (Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->where('status','LIKE',"Absent")->exists() OR
+//                    Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->where('status','LIKE',"Half Day")->exists()) {
+//                        Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['status' => "Present"]);
+//                        if(Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->value('in_time') == null){
+//                            $attendance = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['in_time'=> Carbon::now('Asia/Kolkata')->toTimeString()]);
+//                        }
+//                        // $attendance = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->delete();
+//                        return response()->json(["message" => 'success', "status" => "1"]);
+//                    }
+//                    $attendance = Attendance::where('staff_id', $request->staff_id)->orderBy('id','desc')->limit(1)->get();
+//                    // return Carbon::now('Asia/Kolkata')->toTimeString();
+//                    $in_time_diff = Carbon::createFromFormat('H:i:s', $attendance[0]['in_time'])->diff(Carbon::createFromFormat('H:i:s', $request->time))->format('%H:%I:%S');
+//                    $out_time_diff = $attendance[0]['out_time'] ? Carbon::createFromFormat('H:i:s', $attendance[0]['out_time'])->diff(Carbon::createFromFormat('H:i:s', $request->time))->format('%H:%I:%S') : '-';
+//                    if($in_time_diff < '00:15:00'){
+//                        return response()->json(["message" => 'Attendance Already Recorded', "status" => "0"]);
+//                    }
+//                    if($out_time_diff != '-'){
+//                        if($out_time_diff < '00:15:00'){
+//                            return response()->json(["message" => 'Attendance Already Recorded', "status" => "0"]);
+//                        }
+//                    }
+//                    if($attendance[0]->out_time == null){
+//                        $outTime = Carbon::parse($request->time);
+//                        $hours = $outTime->diffInHours($attendance[0]['in_time']);
+//                        $minutes = $outTime->diffInMinutes($attendance[0]['in_time']) % 60;
+//                        $seconds = $outTime->diffInSeconds($attendance[0]['in_time']) % 60;
+//                        $total_time = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
+//                        $attendance = Attendance::where('id',$attendance[0]->id)->update(['out_time'=>$request->time, 'total_time' => $total_time]);
+//                    }else{
+//                        $out_time = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->orderBy('id','desc')->value('out_time');
+////                        $breakSeconds = Attendance::where('staff_id', $request->staff_id)->whereDate('date', $request->date)->get();
+////                        $breakTimeInSeconds = 0;
+////                        // Loop through each attendance record
+////                        foreach ($breakSeconds as $attendance) {
+////                            // Extract break time from each record and convert it to seconds
+////                            $breakTimeInSeconds += CarbonInterval::createFromFormat('H:i:s', $attendance->break_time)->totalSeconds;
+////                        }
+////                        // Convert total break time from seconds to a formatted string
+////                        $totalBreakTime = CarbonInterval::seconds($breakTimeInSeconds)->cascade()->format('%H:%I:%S');
+//
+////                        return $totalBreakTime;
+//
+//                        $last_out_time = Carbon::parse($out_time);
+//                        $again_in_time = Carbon::parse($request->time);
+//                        $minutes = $last_out_time->diffInMinutes($again_in_time);
+//                        $hours = $last_out_time->diffInHours($again_in_time) % 60;
+//                        $break_time = sprintf("%02d:%02d:%02d", ($minutes / 60) % 60, $minutes % 60,($minutes / 60) / 60);
+//                        $attendance = Attendance::insert([
+//                            'staff_id' => $request->staff_id,
+//                            'in_time' => $request->time,
+//                            'status' => "Present",
+//                            'date' => $request->date,
+//                            'total_time' => '00:00:00',
+//                        ]);
+//                        // if(Attendance::where('staff_id', $request->['staff_id'])->where('date', $request->date)->where('out_time','!=' ,null)->exists()){
+//                        Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['break_time' => $break_time]);
+//                        // }
+//                    }
+//
+//                }else{
+//                    $attendance = Attendance::insert([
+//                        'staff_id' => $request->staff_id,
+//                        'in_time' => $request->time,
+//                        'status' => "Present",
+//                        'date' => $request->date,
+//                        'total_time' => '00:00:00',
+//                    ]);
+//                }
+//                if($attendance){
+//                    return response()->json(["message" => 'success', "status" => "1"]);
+//                }else{
+//                    return response()->json(["message" => 'Something is wrong.', "status" => 0]);
+//                }
+//            } else if ($request->status == 2){
+//                if (Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->exists()) {
+//                    $attendance = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['status' => "Absent"]);
+//                    // $attendance = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->delete();
+//                    return response()->json(["message" => 'success', "status" => "1"]);
+//                }
+//                // if($attendance){
+//                // }else{
+//                //     return response()->json(["message" => 'Something is wrong.', "status" => 0]);
+//                // }
+//            } else if ($request->status == 3){
+//                if (Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->exists()) {
+//                    $attendance = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['status' => "Half Day"]);
+//                    return response()->json(["message" => 'success', "status" => "1"]);
+//                    // $attendance = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->delete();
+//                }
+//            }
+//        }
+//
+//        // $today_date = Carbon::now()->toDateString();
+//        //return $attendance;
+//        // if($attendance){
+//        //     return response()->json(["message" => 'success', "status" => "1"]);
+//        // }else{
+//        //     return response()->json(["message" => 'Something is wrong.', "status" => 0]);
+//        // }
+//    }
+    public function addAttendance(Request $request){
         $validator = Validator::make($request->all(), [
             'staff_id' => 'required',
         ]);
@@ -611,7 +710,7 @@ class ApiLoginController extends Controller
             if($request->status == 1){
                 if (Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->exists()) {
                     if (Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->where('status','LIKE',"Absent")->exists() OR
-                    Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->where('status','LIKE',"Half Day")->exists()) {
+                        Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->where('status','LIKE',"Half Day")->exists()) {
                         Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['status' => "Present"]);
                         if(Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->value('in_time') == null){
                             $attendance = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['in_time'=> Carbon::now('Asia/Kolkata')->toTimeString()]);
@@ -625,12 +724,12 @@ class ApiLoginController extends Controller
                     $out_time_diff = $attendance[0]['out_time'] ? Carbon::createFromFormat('H:i:s', $attendance[0]['out_time'])->diff(Carbon::createFromFormat('H:i:s', $request->time))->format('%H:%I:%S') : '-';
                     if($in_time_diff < '00:15:00'){
                         return response()->json(["message" => 'Attendance Already Recorded', "status" => "0"]);
-                    } 
+                    }
                     if($out_time_diff != '-'){
                         if($out_time_diff < '00:15:00'){
                             return response()->json(["message" => 'Attendance Already Recorded', "status" => "0"]);
                         }
-                    } 
+                    }
                     if($attendance[0]->out_time == null){
                         $outTime = Carbon::parse($request->time);
                         $hours = $outTime->diffInHours($attendance[0]['in_time']);
@@ -639,12 +738,24 @@ class ApiLoginController extends Controller
                         $total_time = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
                         $attendance = Attendance::where('id',$attendance[0]->id)->update(['out_time'=>$request->time, 'total_time' => $total_time]);
                     }else{
-                        $out_time = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->value('out_time');
+                        $out_time = Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->orderBy('id','desc')->value('out_time');
+                        $breakSeconds = Attendance::where('staff_id', $request->staff_id)->whereDate('date', $request->date)->orderBy('id','desc')->value('break_time');
+
                         $last_out_time = Carbon::parse($out_time);
                         $again_in_time = Carbon::parse($request->time);
                         $minutes = $last_out_time->diffInMinutes($again_in_time);
                         $hours = $last_out_time->diffInHours($again_in_time) % 60;
-                        $break_time = sprintf("%02d:%02d:%02d", ($minutes / 60) % 60, $minutes % 60,($minutes / 60) / 60);
+                        if($breakSeconds == null){
+                            $break_time = sprintf("%02d:%02d:%02d", ($minutes / 60) % 60, $minutes % 60,($minutes / 60) / 60);
+                        }else{
+                            $additionalBreakTime = sprintf("%02d:%02d:%02d", ($minutes / 60) % 60, $minutes % 60,($minutes / 60) / 60);
+                            list($breakHours, $breakMinutes, $breakSeconds) = explode(':', $breakSeconds);
+                            $totalBreakSeconds = $breakHours * 3600 + $breakMinutes * 60 + $breakSeconds;
+                            list($additionalHours, $additionalMinutes, $additionalSeconds) = explode(':', $additionalBreakTime);
+                            $additionalTotalSeconds = $additionalHours * 3600 + $additionalMinutes * 60 + $additionalSeconds;
+                            $totalBreakSeconds += $additionalTotalSeconds;
+                            $break_time = sprintf("%02d:%02d:%02d", ($totalBreakSeconds / 3600), ($totalBreakSeconds / 60 % 60), ($totalBreakSeconds % 60));
+                        }
                         $attendance = Attendance::insert([
                             'staff_id' => $request->staff_id,
                             'in_time' => $request->time,
@@ -656,7 +767,7 @@ class ApiLoginController extends Controller
                         Attendance::where('staff_id', $request->staff_id)->where('date', $request->date)->update(['break_time' => $break_time]);
                         // }
                     }
-                    
+
                 }else{
                     $attendance = Attendance::insert([
                         'staff_id' => $request->staff_id,
@@ -689,7 +800,7 @@ class ApiLoginController extends Controller
                 }
             }
         }
-       
+
         // $today_date = Carbon::now()->toDateString();
         //return $attendance;
         // if($attendance){
@@ -698,6 +809,7 @@ class ApiLoginController extends Controller
         //     return response()->json(["message" => 'Something is wrong.', "status" => 0]);
         // }
     }
+
     public function addAttendanceOld(Request $request){
         $validator = Validator::make($request->all(), [
             'staff_id' => 'required',
@@ -791,4 +903,45 @@ class ApiLoginController extends Controller
     //     }
     // }
     //and attendance api function
+
+
+    public function addAbsentAttendance(Request $request){
+        $present_staff = Attendance::where('date', Carbon::now()->toDateString())->distinct('staff_id')->pluck('staff_id');
+        //business holiday not Absent entry
+        $business_ids = Business::pluck('id')->toArray();
+        $business_holidays = WeeklyHolidayBusiness::select('id','business_id','days')->whereIn('business_id',$business_ids)->get()->groupBy('business_id');
+        foreach($business_holidays as $key=>$value){
+            foreach ($value as $obj) {
+                if ($obj["days"] == Carbon::now()->format('w') + 1) {
+                    $keyToRemove = array_search($obj["business_id"], $business_ids);
+                    if ($keyToRemove !== false) {
+                        unset($business_ids[$keyToRemove]);
+                    }
+                    break;
+                }
+            }
+        }
+        //holiday list not Absent entry
+        $holidays = HolidayPolicy::with('HolidayList')->whereIn('business_id',$business_ids)->get()->groupBy('business_id');
+        foreach ($holidays as $businessId => $businessHolidays) {
+            foreach ($businessHolidays as $holidayPolicy) {
+                foreach ($holidayPolicy->HolidayList as $holiday) {
+                    if ($holiday["holiday_date"] == Carbon::now()->format('d M Y | D')){
+                        $keyToRemove = array_search($businessId, $business_ids);
+                        if ($keyToRemove !== false) {
+                            unset($business_ids[$keyToRemove]);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        $staff_ids = Staff::whereIn('business_id', $business_ids)->whereNotIn('id', $present_staff)->where('is_deactivate', 0)->pluck('id');
+        foreach($staff_ids as $staff_id){
+            if(!Attendance::where('staff_id', $staff_id)->where('date', Carbon::now()->toDateString())->exists()){
+                $attendance =  Attendance::insert(['staff_id' => $staff_id, 'in_time' => null, 'out_time' => null, 'total_time' => null,  'status' => 'Absent', 'date' => Carbon::now()->toDateString()]);
+            }
+        }
+        return response()->json(["message" => 'success', "status" => "1"]);
+    }
 }

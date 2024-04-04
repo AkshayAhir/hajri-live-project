@@ -237,7 +237,6 @@
                 datatable(searchValue);
             });
 
-<<<<<<< HEAD
             $('.delete_div').on('click',function (event){
                 event.preventDefault();
                 $.ajax({
@@ -264,21 +263,6 @@
         })
         $('#closeModal').click(function () {
             $('#myModal').hide();
-=======
-
-            $('.selectCheckbox_model').change(function () {
-                var checkedCount = $('.selectCheckbox_model:checked').length;
-                $('.selected_check_member').html(checkedCount);
-                if (checkedCount > 0) {
-                    $('#myModal').show();
-                } else {
-                    $('#myModal').hide();
-                }
-            });
-            $('#closeModal').click(function () {
-                $('#myModal').hide();
-            });
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
         });
     </script>
 @endsection

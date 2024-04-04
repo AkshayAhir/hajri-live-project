@@ -305,7 +305,6 @@ $business_count = BusinessUser::where('user_id', $user['id'])->count();
             });
 
             document.addEventListener('click', function (event) {
-<<<<<<< HEAD
                 const dropdown = document.querySelector('.dropdown-content');
                 if (!event.target.closest('.profile-main-notification')) {
                     dropdown.classList.remove('active');
@@ -376,13 +375,6 @@ $business_count = BusinessUser::where('user_id', $user['id'])->count();
                 });
             })
             
-=======
-            const dropdown = document.querySelector('.dropdown-content');
-            if (!event.target.closest('.profile-main-notification')) {
-                dropdown.classList.remove('active');
-            }
-        });
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
         </script>
 </body>
 

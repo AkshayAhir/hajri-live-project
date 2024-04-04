@@ -353,7 +353,6 @@
 </div>
 @endsection
 @section('scripts')
-<<<<<<< HEAD
 <script>
     $('.input-group.date').datepicker({
         format: 'dd, M yyyy',
@@ -383,12 +382,6 @@
         $('#staff_data_find').on('input', function () {
             var searchValue = $(this).val();
             table.search(searchValue).draw();
-=======
-    <script>
-        $('.input-group.date').datepicker({
-            format: 'dd, M yyyy',
-            autoclose: true
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
         });
 
         $('.selectCheckbox_model').change(function () {

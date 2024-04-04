@@ -334,11 +334,7 @@
 @endsection
 
 @section('scripts')
-<<<<<<< HEAD
 <script>
-=======
-    <script>
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
 
     $('.staff-salary').datepicker({
         format: 'M yyyy',

@@ -388,9 +388,13 @@
                         $('.loader').show();
                         $('.hajri-submit-btnss').prop('disabled', true);
                         window.location.href = '/a_admin/login';
-
                         localStorage.setItem('data_register_number', JSON.stringify(response.data[0]));
                         toastr["success"](response.message)
+                        setTimeout(function () {
+                            $('#mobile-form')[0].reset();
+                            $('.hajri-submit-btnss').prop('disabled', false);
+                            $('.loader').hide();
+                        }, 3000);
                     }  else {
                         toastr["error"](response.message)
                     }
@@ -426,11 +430,11 @@
         var phone_number = phone_number.replace(/\s/g, '');
         // console.log(otp);
         if(otpvalidation()){
-            $('.loader').show();
-            $('.otp-button').prop('disabled', true);
             if ($('#countdowntimer').html() === "00:00") {
                 toastr["error"]('Time out resend otp');
             } else {
+                $('.otp-button').prop('disabled', true);
+                $('.loader').show();
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

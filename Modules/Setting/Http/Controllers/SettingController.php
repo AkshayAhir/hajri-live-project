@@ -39,7 +39,7 @@ class SettingController extends Controller
         $header_title = "Settings";
         $login_user = User::where('id', Auth::user()->id)->first();
         $businesses = BusinessUser::where('user_id', Auth::user()->id)->count();
-        $department = Department::where('business_id', $this->business_id)->count();
+        $department = Department::where('business_id', $this->business_id)->orWhereNull('business_id')->count();
         $business_data = Business::where('id',$this->business_id)->get();
         $business_category = BusinessCategory::where('id', $business_data[0]['category_id'])->value('name');
         $holiday_template_count = HolidayPolicy::where('business_id', $this->business_id)->count();

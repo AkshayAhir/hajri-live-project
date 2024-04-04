@@ -691,6 +691,10 @@ input[type="radio"]:checked {
 input[type="time"]::after {
     content: "Hrs ";
     padding-right: 10px;
+    right: 0;
+    position: absolute;
+    top: 8px;
+    bottom: 0;
 }
 
 /* input[type="time"]::-webkit-calendar-picker-indicator {
@@ -747,10 +751,22 @@ input[type="time"]::after {
 /******************************* media screen *******************************/
 
 @media screen and (max-width: 575px) {
-    .navigation_menu_mobile {
-        display: block;
-    }
+   
 
+    
+
+    
+}
+
+
+/* 575 end  */
+
+@media screen and (max-width: 767px) {
+
+    .hajri-step-3-title,
+    .hajri-salary-pay-main {
+        width: 300px;
+    }
     .hajri-left-bg {
         background-color: #F5F8FF;
         position: relative;
@@ -758,53 +774,20 @@ input[type="time"]::after {
         width: 100%;
         height: inherit;
     }
-
+    .hajri-signup {
+        height: unset !important;
+        display: flex !important;
+        flex-direction: column;
+    }
     .hajri-main-footer {
         display: none;
     }
 
-    .hajri-main-footer-mobile {
-        background-color: #F5F8FF;
-        width: 100%;
-        padding-left: 37px;
-        padding-right: 37px;
-        padding-top: 30px;
+    .navigation_menu_mobile {
         display: block;
-        /*position: absolute;*/
-        bottom: -180px;
-        margin-top: 130px;
     }
-
-    .navigation_tabs {
-        height: 225px;
-    }
-
-    .hajri-main-right {
-        padding-top: 50px;
-    }
-
-    #progress-dots {
-        margin-bottom: 40px;
-    }
-
-    .hajri-steps {
-        padding-top: 40px;
-    }
-
-    .navigation_menu li:not(:last-child) {
-        padding-bottom: 25px;
-    }
-
-    .navigation_menu li:before {
-        height: 65px;
-    }
-
-    .navigation_menu {
-        display: none;
-    }
-
     .hajri-step-3-title {
-        width: 300px;
+        width: unset;
     }
 
     .navigation_menu_mobile .navigation_tabs {
@@ -914,23 +897,53 @@ input[type="time"]::after {
         font-size: 14px;
         color: #808080;
     }
-
-    .hajri-signup {
-        height: unset !important;
-        display: flex !important;
-        flex-direction: column;
+    .hajri-step-3-con {
+        width: unset;
     }
-}
-
-
-/* 575 end  */
-
-@media screen and (max-width: 767px) {
-
-    .hajri-step-3-title,
-    .hajri-salary-pay-main {
-        width: 300px;
+    .hajri-structure {
+        width: unset;
     }
+
+    .hajri-main-footer-mobile {
+        background-color: #F5F8FF;
+        width: 100%;
+        padding-left: 37px;
+        padding-right: 37px;
+        padding-top: 30px;
+        display: block;
+        /*position: absolute;*/
+        bottom: -180px;
+        margin-top: 130px;
+    }
+
+    .navigation_tabs {
+        height: 225px;
+    }
+
+    .hajri-main-right {
+        padding-top: 50px;
+    }
+
+    #progress-dots {
+        margin-bottom: 40px;
+    }
+
+    .hajri-steps {
+        padding-top: 40px;
+    }
+
+    .navigation_menu li:not(:last-child) {
+        padding-bottom: 25px;
+    }
+
+    .navigation_menu li:before {
+        height: 65px;
+    }
+
+    .navigation_menu {
+        display: none;
+    }
+
 
 
     /* landing page */

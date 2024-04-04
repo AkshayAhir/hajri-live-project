@@ -146,7 +146,6 @@
         return $option;
     }
 
-<<<<<<< HEAD
     $('.input-group.date').datepicker({
         format: 'dd, M yyyy',
         autoclose: true,
@@ -163,11 +162,6 @@
             minimumResultsForSearch: Infinity,
         }).on('select2:open', function (e) {
             $('.select2-container').addClass('staff-down-data');
-=======
-        $('.input-group.date').datepicker({
-            format: 'dd, M yyyy',
-            autoclose: true,
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
         });
         function datatable(searchValue = null) {
             table = $('#staff_datas').DataTable({

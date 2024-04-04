@@ -34,7 +34,6 @@
             <row>
                 <div class="approve-datas atten-datas business-policy-staff-list">
                     <div class="atten-data-search assign-data-search col-md-6 col-sm-6">
-<<<<<<< HEAD
                         @if($day == 1 || $staff_day == 1)
                             <p class="proxima_nova_semibold holiday-staff-list-day">Sunday</p>
                         @elseif($day == 2 || $staff_day == 2)
@@ -48,21 +47,6 @@
                         @elseif($day == 6 || $staff_day == 6)
                             <p class="proxima_nova_semibold holiday-staff-list-day">Friday</p>
                         @elseif($day == 7 || $staff_day == 7)
-=======
-                        @if($day == 1)
-                            <p class="proxima_nova_semibold holiday-staff-list-day">Sunday</p>
-                        @elseif($day == 2)
-                            <p class="proxima_nova_semibold holiday-staff-list-day">Monday</p>
-                        @elseif($day == 3)
-                            <p class="proxima_nova_semibold holiday-staff-list-day">Tuesday</p>
-                        @elseif($day == 4)
-                            <p class="proxima_nova_semibold holiday-staff-list-day">Wednesday</p>
-                        @elseif($day == 5)
-                            <p class="proxima_nova_semibold holiday-staff-list-day">Thursday</p>
-                        @elseif($day == 6)
-                            <p class="proxima_nova_semibold holiday-staff-list-day">Friday</p>
-                        @elseif($day == 7)
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
                             <p class="proxima_nova_semibold holiday-staff-list-day">Saturday</p>
                         @endif
                         <form action="" method="">
@@ -103,237 +87,14 @@
             </div>
 
             <div class="assign-edit-btn">
-<<<<<<< HEAD
                 <button name="" class="save-staff-btn proxima_nova_semibold">Save (<span class="save_count">0</span>)
                     <img class="loader" src="{{asset('assets/admin/images/white_loader.gif')}}" alt="">
                 </button>
-=======
-                <button name="" class="save-staff-btn proxima_nova_semibold">Save (<span class="save_count">0</span>)</button>
-            </div>
-
-            <div class="offcanvas offcanvas-end daily-work-data-download" tabindex="-1" id="view-toggle-right"
-                data-bs-scroll="true" aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <div class="popup-close-btns" data-bs-dismiss="offcanvas" aria-label="Close"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                            fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M2.84154 2.84056C3.07296 2.60914 3.44817 2.60914 3.67959 2.84056L13.1611 12.322C13.3925 12.5535 13.3925 12.9287 13.1611 13.1601C12.9296 13.3915 12.5544 13.3915 12.323 13.1601L2.84154 3.67861C2.61011 3.44719 2.61011 3.07198 2.84154 2.84056Z"
-                                fill="#808080" />
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M13.1611 2.84056C13.3925 3.07198 13.3925 3.44719 13.1611 3.67861L3.67959 13.1601C3.44817 13.3915 3.07296 13.3915 2.84154 13.1601C2.61011 12.9287 2.61011 12.5535 2.84154 12.322L12.323 2.84056C12.5544 2.60914 12.9296 2.60914 13.1611 2.84056Z"
-                                fill="#808080" />
-                        </svg></div>
-                </div>
-                <h5 class="section_title_heading proxima_nova_bold download-work-main-header">View Log</h5>
-                <hr>
-
-                <div class="view-log-model">
-                    <h2 class="proxima_nova_semibold section_title">
-                        Sweta Vaghasiya
-                    </h2>
-                    <p>20 April | Wed</p>
-                </div>
-                <ul class="view-log-content">
-                    <li class="view-log-status proxima_nova_semibold section_title">Marked Absent</li>
-                    <p>By Dhruvi on 25 April, 10:31 AM</p>
-                </ul>
-                <div class="download-cancel-btns-main">
-                    <div class="download-cancel-btn">
-                        <button name="" class="download-btn proxima_nova_semibold">Done</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="offcanvas offcanvas-end daily-work-data-download" tabindex="-1" id="daily-toggle-right"
-                data-bs-scroll="true" aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <div class="popup-close-btns" data-bs-dismiss="offcanvas" aria-label="Close"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                            fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M2.84154 2.84056C3.07296 2.60914 3.44817 2.60914 3.67959 2.84056L13.1611 12.322C13.3925 12.5535 13.3925 12.9287 13.1611 13.1601C12.9296 13.3915 12.5544 13.3915 12.323 13.1601L2.84154 3.67861C2.61011 3.44719 2.61011 3.07198 2.84154 2.84056Z"
-                                fill="#808080" />
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M13.1611 2.84056C13.3925 3.07198 13.3925 3.44719 13.1611 3.67861L3.67959 13.1601C3.44817 13.3915 3.07296 13.3915 2.84154 13.1601C2.61011 12.9287 2.61011 12.5535 2.84154 12.322L12.323 2.84056C12.5544 2.60914 12.9296 2.60914 13.1611 2.84056Z"
-                                fill="#808080" />
-                        </svg></div>
-                </div>
-                <div class="offcanvas-body overflow-auto">
-                    <h5 class="section_title_heading proxima_nova_bold download-work-main-header">
-                        Daily Report</h5>
-                    <span class="allow-name">Download daily report</span>
-                    <hr>
-                    <div class="filter-sub-sec">
-                        <form method="">
-                            <div class="download-report-sec">
-                                <h2
-                                    class="filter-shiftcheck proxima_nova_semibold section_sub_title atten-download-report">
-                                    Excel Report</h2>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
-                                    fill="none">
-                                    <path d="M11.667 9.16699L9.99953 10.8337L8.33203 9.16699" stroke="#808080"
-                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    <rect x="2.5" y="2.5" width="15" height="15" rx="5" stroke="#808080"
-                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M9.99967 6.66699V10.8337" stroke="#808080" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M12.5 13.3337H7.5" stroke="#808080" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </div>
-                            <div class="download-report-sec pdf-report">
-                                <h2
-                                    class="filter-shiftcheck proxima_nova_semibold section_sub_title atten-download-report">
-                                    PDF Report</h2>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
-                                    fill="none">
-                                    <path d="M11.667 9.16699L9.99953 10.8337L8.33203 9.16699" stroke="#808080"
-                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    <rect x="2.5" y="2.5" width="15" height="15" rx="5" stroke="#808080"
-                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M9.99967 6.66699V10.8337" stroke="#808080" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M12.5 13.3337H7.5" stroke="#808080" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </div>
-
-                            <div class="download-cancel-btns-main">
-                                <div class="download-cancel-btn">
-                                    <button name="" class="download-btn proxima_nova_semibold">Apply</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="offcanvas offcanvas-end daily-work-data-download" tabindex="-1" id="filter-toggle-right"
-                data-bs-scroll="true" aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <div class="popup-close-btns" data-bs-dismiss="offcanvas" aria-label="Close"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                            fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M2.84154 2.84056C3.07296 2.60914 3.44817 2.60914 3.67959 2.84056L13.1611 12.322C13.3925 12.5535 13.3925 12.9287 13.1611 13.1601C12.9296 13.3915 12.5544 13.3915 12.323 13.1601L2.84154 3.67861C2.61011 3.44719 2.61011 3.07198 2.84154 2.84056Z"
-                                fill="#808080" />
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M13.1611 2.84056C13.3925 3.07198 13.3925 3.44719 13.1611 3.67861L3.67959 13.1601C3.44817 13.3915 3.07296 13.3915 2.84154 13.1601C2.61011 12.9287 2.61011 12.5535 2.84154 12.322L12.323 2.84056C12.5544 2.60914 12.9296 2.60914 13.1611 2.84056Z"
-                                fill="#808080" />
-                        </svg></div>
-                </div>
-                <div class="offcanvas-body overflow-auto">
-                    <h5 class="section_title_heading proxima_nova_bold download-work-main-header filter-title-main">
-                        Filter</h5>
-                    <hr>
-                    <div class="filter-sub-sec">
-                        <form method="">
-                            <div class="daily-work-select">
-                                <h2 class="filter-shiftcheck section_title proxima_nova_semibold">Shift Type</h2>
-                                <div class="form-check filter-shift-main">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                    <label class="form-check-label proxima_nova_regular" for="flexCheckChecked">
-                                        Monthly
-                                    </label>
-                                </div>
-                                <div class="form-check filter-shift-main">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                    <label class="form-check-label proxima_nova_regular" for="flexCheckChecked">
-                                        Pay Per Work
-                                    </label>
-                                </div>
-                                <div class="form-check filter-shift-main">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                    <label class="form-check-label proxima_nova_regular" for="flexCheckChecked">
-                                        Weekly
-                                    </label>
-                                </div>
-                                <div class="form-check filter-shift-main">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                    <label class="form-check-label proxima_nova_regular" for="flexCheckChecked">
-                                        Daily Regular
-                                    </label>
-                                </div>
-                                <div class="form-check filter-shift-main">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                    <label class="form-check-label proxima_nova_regular" for="flexCheckChecked">
-                                        Daily
-                                    </label>
-                                </div>
-                                <div class="form-check filter-shift-main">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                    <label class="form-check-label proxima_nova_regular" for="flexCheckChecked">
-                                        Hourly
-                                    </label>
-                                </div>
-                                <div class="form-check filter-shift-main">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                    <label class="form-check-label proxima_nova_regular" for="flexCheckChecked">
-                                        Monthly Regular
-                                    </label>
-                                </div>
-                                <div class="form-check filter-shift-main">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                    <label class="form-check-label proxima_nova_regular" for="flexCheckChecked">
-                                        Hourly Regular
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="download-cancel-btns-main">
-                                <div class="download-cancel-btn">
-                                    <button name="" class="download-btn proxima_nova_semibold">Apply</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="offcanvas offcanvas-end daily-work-data-download" tabindex="-1" id="create-toggle-right"
-                data-bs-scroll="true" aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <div class="popup-close-btns" data-bs-dismiss="offcanvas" aria-label="Close"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                            fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M2.84154 2.84056C3.07296 2.60914 3.44817 2.60914 3.67959 2.84056L13.1611 12.322C13.3925 12.5535 13.3925 12.9287 13.1611 13.1601C12.9296 13.3915 12.5544 13.3915 12.323 13.1601L2.84154 3.67861C2.61011 3.44719 2.61011 3.07198 2.84154 2.84056Z"
-                                fill="#808080" />
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M13.1611 2.84056C13.3925 3.07198 13.3925 3.44719 13.1611 3.67861L3.67959 13.1601C3.44817 13.3915 3.07296 13.3915 2.84154 13.1601C2.61011 12.9287 2.61011 12.5535 2.84154 12.322L12.323 2.84056C12.5544 2.60914 12.9296 2.60914 13.1611 2.84056Z"
-                                fill="#808080" />
-                        </svg></div>
-                </div>
-                <div class="offcanvas-body overflow-auto">
-                    <h5 class="section_title_heading proxima_nova_bold download-work-main-header filter-title-main">
-                        Add Note</h5>
-                    <hr>
-                    <div class="filter-sub-sec">
-                        <form method="">
-                            <div class="daily-work-select">
-                                <h2 class="filter-shiftcheck section_title proxima_nova_semibold">Sweta Vaghasiya
-                                </h2>
-                                <div class="form-check add-note-main">
-                                    <textarea placeholder="Leave needs to be added."
-                                        class="section_sub_title"></textarea> </textarea>
-                                </div>
-
-                                <div class="download-cancel-btns-main">
-                                    <div class="download-cancel-btn">
-                                        <button name="" class="download-btn proxima_nova_semibold">Save</button>
-                                    </div>
-                                </div>
-                        </form>
-                    </div>
-                </div>
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
             </div>
         </div>
 @endsection
 @section('scripts')
     <script>                 
-<<<<<<< HEAD
         //  datatable
         var table;
         var selectedIds = [];
@@ -386,17 +147,6 @@
                             }
                             // console.log('Selected IDs:', selectedIds);
                         });
-=======
-        //  datatable 
-        $(document).ready(function () {
-            var table = $('#staff_datas').DataTable({
-                searching: false,
-                lengthChange: false,
-                info: false,
-                responsive: true,
-                // bPaginate: false,
-            });                
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
 
                         $('.selectCheckbox_model').change(function () {
                             var checkedCount = $('.selectCheckbox_model:checked').length;
@@ -480,7 +230,6 @@
             }
             datatable();
             $('#staff_data_find').on('input', function () {
-<<<<<<< HEAD
                 var searchValue = $('#staff_data_find').val();
                 var number_page_sorting = $('.number_page_sorting').val();
                 table.destroy();
@@ -545,23 +294,6 @@
                         toastr["error"](response.message)
                     }
                 }
-=======
-                var searchValue = $(this).val();
-                table.search(searchValue).draw();
-            });
-
-            $('#selectAllCheckbox').on('change', function () {
-                var isChecked = $(this).prop('checked');
-                $('.selectCheckbox_model').prop('checked', isChecked);
-                var checkedCount = $('.selectCheckbox_model:checked').length;
-                $('.save_count').html(checkedCount);
-                
-            });
-
-            $('.selectCheckbox_model').change(function () {
-                var checkedCount = $('.selectCheckbox_model:checked').length;
-                $('.save_count').html(checkedCount);
->>>>>>> 9ee7d98de403d43c1e001aefae0ecaf8228cb55b
             });
         })
 

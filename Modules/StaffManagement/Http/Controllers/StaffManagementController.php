@@ -227,6 +227,7 @@ class StaffManagementController extends Controller
             $month = Carbon::now();
             $startDate = \Carbon\Carbon::parse($month)->startOfMonth();
             $endDate = \Carbon\Carbon::parse($month)->now();
+
             $workingDaysCount = 0;
             $days = $startDate->copy();
 
@@ -236,11 +237,13 @@ class StaffManagementController extends Controller
                 }
                 $days->addDay();
             }
-            $present_count = Attendance::where('staff_id', $id)->whereYear('date', $month->year)->whereMonth('date', $month->month)->where('status', 'Present')->distinct('date')->count();
-            // $absent_count = Attendance::where('staff_id', $id)->whereYear('date', $month->year)->whereMonth('date', $month->month)->where('status', 'Absent')->distinct('date')->count();
-            $absent_count = $workingDaysCount - $present_count;
-            $halfday_count = Attendance::where('staff_id',$id)->whereYear('date', $month->year)->whereMonth('date', $month->month)->where('status', 'Half Day')->distinct('date')->count();
-            $paidleave_count = Attendance::where('staff_id',$id)->whereYear('date', $month->year)->whereMonth('date', $month->month)->where('status', 'Paid Leave')->distinct('date')->count();
+//            dd($workingDaysCount);
+            $present_count = Attendance::where('staff_id', $id)->whereBetween('date', [$startDate, $endDate])->where('status', 'Present')->distinct('date')->count();
+            $absent_count = Attendance::where('staff_id', $id)->whereBetween('date', [$startDate, $endDate])->where('status', 'Absent')->distinct('date')->count();
+//            $absent_count = Attendance::where('staff_id', $id)->whereYear('date', $month->year)->whereMonth('date', $month->month)->where('status', 'Absent')->distinct('date')->count();
+//            $absent_count = $workingDaysCount - $present_count;
+            $halfday_count = Attendance::where('staff_id',$id)->whereBetween('date', [$startDate, $endDate])->where('status', 'Half Day')->distinct('date')->count();
+            $paidleave_count = Attendance::where('staff_id',$id)->whereBetween('date', [$startDate, $endDate])->where('status', 'Paid Leave')->distinct('date')->count();
 
             $staff = Staff::with(['StaffPhoto:id,staff_id,photo', 'StaffBankDetail:id,staff_id,account_holder_name,account_number,IFSC_code,UPI_id', 'Department:id,name'])->where('id',$id)->get();
             return view('staffmanagement::staff_profile', ['header_title'=>$header_title, 'business'=>$this->business, 'user_profile'=>$this->user_profile,'staff'=>$staff,'month_count'=>$workingDaysCount,'present_count'=>$present_count,'absent_count'=>$absent_count, 'halfday_count'=>$halfday_count, 'paidleave_count'=>$paidleave_count, 'start_date' => $startDate->format('d M Y'), 'end_date' => $endDate->format('d M Y')]);
@@ -388,6 +391,7 @@ class StaffManagementController extends Controller
         // $calender_date = str_replace(',', '', $request->calender_date);
         $start_date = Carbon::parse($request->start_date)->toDateString();
         $end_date = Carbon::parse($request->end_date)->toDateString();
+
         $totalDataRecord = Attendance::where('staff_id',$request->staff_id)
             ->whereBetween('date', [$start_date, $end_date])
             ->groupBy('date')
@@ -397,6 +401,7 @@ class StaffManagementController extends Controller
             ->whereBetween('date', [$start_date, $end_date])
             ->groupBy('date')
             ->get();
+
         $data_val = array();
         if (!empty($post_data)) {
             foreach ($post_data as $post_val) {
@@ -518,7 +523,6 @@ class StaffManagementController extends Controller
     }
 
     public function attendanceStaffOnDateChange(Request $request){
-
             // if(!($request->start_date && $request->end_date)){
             //     $start_date = Carbon::parse($request->start_date)->toDateString();
             //     $end_date = Carbon::parse($request->end_date)->toDateString();
@@ -530,12 +534,13 @@ class StaffManagementController extends Controller
 //            $to = Carbon::parse($request->end_date);
 //            $workingDaysCount = $to->diffInWeekdays($from);
 
-            $to = Carbon::parse($request->end_date)->endOfDay();
-            $from = Carbon::parse($request->start_date)->startOfDay();
-
-            $workingDaysCount = $from->diffInDaysFiltered(function (Carbon $date) {
-                return $date->isWeekday();
-            }, $to);
+//            $to = Carbon::parse($request->end_date)->endOfDay();
+//            $from = Carbon::parse($request->start_date)->startOfDay();
+//
+//
+//            $workingDaysCount = $from->diffInDaysFiltered(function (Carbon $date) {
+//                return $date->isWeekday();
+//            }, $to);
 
             // $month = Carbon::now();
             // $startDate = \Carbon\Carbon::parse($month)->startOfMonth();
@@ -549,12 +554,12 @@ class StaffManagementController extends Controller
             //     }
             //     $days->addDay();
             // }
-            $present_count = Attendance::where('staff_id',$request->staff_id)->whereBetween('date', [$start_date, $end_date])->where('status', 'Present')->distinct('date')->count();
-            // $absent_count = Attendance::where('staff_id',$request->staff_id)->whereYear('date', $month->year)->whereMonth('date', $month->month)->where('status', 'Absent')->distinct('date')->count();
-            $absent_count = $workingDaysCount - $present_count;
-            $halfday_count = Attendance::where('staff_id',$request->staff_id)->whereBetween('date', [$start_date, $end_date])->where('status', 'Half Day')->distinct('date')->count();
-            $paidleave_count = Attendance::where('staff_id',$request->staff_id)->whereBetween('date', [$start_date, $end_date])->where('status', 'Paid Leave')->distinct('date')->count();
-
+        $present_count = Attendance::where('staff_id',$request->staff_id)->whereBetween('date', [$start_date, $end_date])->where('status', 'Present')->distinct('date')->count();
+        $absent_count = Attendance::where('staff_id',$request->staff_id)->whereBetween('date', [$start_date, $end_date])->where('status', 'Absent')->distinct('date')->count();
+//            $absent_count = $workingDaysCount - $present_count;
+        $halfday_count = Attendance::where('staff_id',$request->staff_id)->whereBetween('date', [$start_date, $end_date])->where('status', 'Half Day')->distinct('date')->count();
+        $paidleave_count = Attendance::where('staff_id',$request->staff_id)->whereBetween('date', [$start_date, $end_date])->where('status', 'Paid Leave')->distinct('date')->count();
+        $workingDaysCount = $present_count + $absent_count;
         return response()->json(['message' => 'success', 'status' => 1, 'month_count'=>$workingDaysCount,'present_count'=>$present_count,'absent_count'=>$absent_count,'halfday_count'=>$halfday_count, 'paidleave_count'=>$paidleave_count]);
     }
 
@@ -582,7 +587,8 @@ class StaffManagementController extends Controller
         // }
 
         $present_count = Attendance::where('staff_id',$staff_id)->whereBetween('date', [$start_date, $end_date])->where('status', 'Present')->distinct('date')->count();
-        $absent_count = $workingDaysCount - $present_count;
+        $absent_count = Attendance::where('staff_id',$staff_id)->whereBetween('date', [$start_date, $end_date])->where('status', 'Absent')->distinct('date')->count();
+//        $absent_count = $workingDaysCount - $present_count;
         $halfday_count = Attendance::where('staff_id',$staff_id)->whereBetween('date', [$start_date, $end_date])->where('status', 'Half Day')->distinct('date')->count();
         $paidleave_count = Attendance::where('staff_id',$staff_id)->whereBetween('date', [$start_date, $end_date])->where('status', 'Paid Leave')->distinct('date')->count();
 

@@ -20,7 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login',[ApiLoginController::class,'login'])->name('api.login');
 Route::post('verify_otp',[ApiLoginController::class,'verifyOtp'])->name('api.verify_otp');
-Route::post('store_business',[ApiLoginController::class ,'storeBusiness'])->name('api.store-business');
+Route::post('add_business',[ApiLoginController::class ,'addBusiness'])->name('api.add-business');
+
+Route::post('add_absent_attendance', [ApiLoginController::class, 'addAbsentAttendance'])->name('api.add_absent_attendance');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('edit_business',[ApiLoginController::class ,'editBusiness'])->name('api.edit_business');
@@ -42,4 +44,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     //    attendance api route
     Route::post('get_attendance', [ApiLoginController::class, 'getAttendance'])->name('api.get-attendance');
     Route::post('add_attendance', [ApiLoginController::class, 'addAttendance'])->name('api.add-attendance');
+
+//    Route::post('add_attendance_new', [ApiLoginController::class, 'addAttendanceNew'])->name('add-attendance');
 });
