@@ -198,7 +198,12 @@ class ApiLoginController extends Controller
         $user->token()->revoke();
         return response()->json(["message" => 'Logout successfully', "status" => "1"]);
     }
-
+    public function staffLogout(){
+        $user = Auth::guard('staff')->user();
+        Staff::where('id',$user->id)->update(['otp'=>null]);
+        $user->token()->revoke();
+        return response()->json(["message" => 'Logout successfully', "status" => "1"]);
+    }
     public function deleteUser(Request $request){
         $login_user = Auth::user()->phone_number;
         if($login_user == $request->phone){
