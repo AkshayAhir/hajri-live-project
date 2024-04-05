@@ -46,7 +46,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('get_attendance', [ApiLoginController::class, 'getAttendance'])->name('api.get-attendance');
     Route::post('add_attendance', [ApiLoginController::class, 'addAttendance'])->name('api.add-attendance');
 
-
+});
+Route::group(['middleware' => 'auth:staff'], function () {
     //staff business
     Route::post('staff_businesses', [ApiLoginController::class, 'staffBusinesses'])->name('api.staff-businesses');
     Route::post('get_staff_attendance', [ApiLoginController::class, 'getStaffAttendance'])->name('api.get-staff-attendance');
