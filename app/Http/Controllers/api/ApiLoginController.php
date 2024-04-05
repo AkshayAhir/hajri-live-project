@@ -112,7 +112,7 @@ class ApiLoginController extends Controller
             $staff = Staff::where('phone_number', $request->phone)->first();
             if($staff->token == ''){
                 if ($staff) {
-                    Auth::guard('staff')->login($staff);
+                    Auth::guard('staff')->setUser($staff);
                     $token = $staff->createToken('token')->accessToken;
                     Staff::where('id', $staff->id)->update(["token" => $token]);
                     $staff_data = Staff::with(['StaffPhoto:id,staff_id,photo', 'StaffBankDetail:id,staff_id,account_holder_name,account_number,IFSC_code,UPI_id', 'Department:id,name'])->where('id', $staff->id)->first(); // Append the business data to the user data.
