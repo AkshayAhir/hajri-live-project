@@ -745,9 +745,11 @@ class AttendanceController extends Controller
                     $query->where('date', Carbon::now()->toDateString());
                 }
             })
+            ->where('is_manual',1)
             ->distinct('staff_id')
             ->count();
-        if ($search_text == null or $date == null) {
+
+        if ($search_text == null) {
             $post_data = Attendance::with(['Staff.StaffPhoto', 'Staff.Department', 'Staff' => function ($query){
                 $query->where('business_id', $this->business_id);
             }])
@@ -761,8 +763,20 @@ class AttendanceController extends Controller
                 ->whereHas('Staff', function ($query){
                     $query->where('business_id', $this->business_id);
                 })
+                ->where('is_manual',1)
                 ->groupBy('staff_id')
                 ->get();
+            $requested_data = Attendance::with(['Staff.StaffPhoto', 'Staff.Department', 'Staff'])
+                ->where(function ($query) use ($date) {
+                    if ($date !== null) {
+                        $query->where('date', $date);
+                    } else {
+                        $query->where('date', Carbon::now()->toDateString());
+                    }
+                })
+                ->where('is_manual',1)
+                ->get()
+                ->groupBy('staff_id');
         } else {
             $post_data = Attendance::with(['Staff.StaffPhoto', 'Staff.Department', 'Staff' => function ($query) use ($search_text) {
                 $query->where('business_id', $this->business_id)->where('name', 'LIKE', "%{$search_text}%");
@@ -777,8 +791,21 @@ class AttendanceController extends Controller
                 ->whereHas('Staff', function ($query) use ($search_text) {
                     $query->where('business_id', $this->business_id)->where('name', 'LIKE', "%{$search_text}%");
                 })
+                ->where('is_manual',1)
                 ->groupBy('staff_id')
                 ->get();
+
+            $requested_data = Attendance::with(['Staff.StaffPhoto', 'Staff.Department', 'Staff'])
+                ->where(function ($query) use ($date) {
+                    if ($date !== null) {
+                        $query->where('date', $date);
+                    } else {
+                        $query->where('date', Carbon::now()->toDateString());
+                    }
+                })
+                ->where('is_manual',1)
+                ->get()
+                ->groupBy('staff_id');
             $totalFilteredRecord = Attendance::with(['Staff' => function ($query) use ($search_text) {
                 $query->where('business_id', $this->business_id)->where('name', 'LIKE', "%{$search_text}%");
             }])
@@ -792,6 +819,7 @@ class AttendanceController extends Controller
                 ->whereHas('Staff', function ($query) use ($search_text) {
                     $query->where('business_id', $this->business_id)->where('name', 'LIKE', "%{$search_text}%");
                 })
+                ->where('is_manual',1)
                 ->groupBy('staff_id')
                 ->count();
         }
@@ -809,44 +837,57 @@ class AttendanceController extends Controller
                     }
                 }
                 $last_out_time = Attendance::where('staff_id', $post_val->staff_id)->where(function ($query) use ($date) {
+                    
                     if ($date !== null) {
                         $query->where('date', $date);
                     } else {
                         $query->where('date', Carbon::now()->toDateString());
                     }
                 })->orderBy('id','desc')->limit(1)->first();
+                
                 $punchout_time = '-';
                 if($last_out_time['out_time'] !== null){
                     $punchout_time = Carbon::parse($last_out_time['out_time'])->format('h:i');
-                    $inTime = Carbon::parse($post_val->in_time);
-                    $out_time = Carbon::parse($last_out_time['out_time']);
-                    $hour = $inTime->diffInHours($out_time);
-                    $minutes = $inTime->diffInMinutes($out_time) % 60;
-                    if ($hour > 0 && $minutes > 0) {
-                        $total_time = sprintf("%02d:%02d Hrs", $hour, $minutes);
-                    } elseif ($hour > 0) {
-                        $total_time = sprintf("%02d Hrs", $hour);
-                    } elseif ($minutes > 0) {
-                        $total_time = sprintf("%02d Mins", $minutes);
+                }
+                $total_hours = Attendance::where('staff_id', $post_val->staff_id)->where('date', $post_val->date)->pluck('total_time')->toArray();
+
+                $total_seconds = $total_hours
+                ? array_reduce($total_hours, function ($carry, $time) {
+                    $timeParts = explode(':', $time);
+                    if (count($timeParts) === 3) {
+                        list($hours, $minutes) = $timeParts;
+                        return $carry + ($hours * 3600) + ($minutes * 60);
                     }
-                } else{
-                    $total_time = '-';
+                    return $carry; // Return the existing carry value if the format is incorrect
+                }, 0)
+                : '-';
+                
+                if ($total_seconds !== '-') {
+                    $totalHours = floor($total_seconds / 3600);
+                    $totalMinutes = round(($total_seconds % 3600) / 60);
+                    $totalTime = sprintf("%02d:%02d", $totalHours, $totalMinutes);
+                } else {
+                    $totalTime = "-";
                 }
                 
                 $postnestedData['id'] = $post_val->id;
-
+                // dd($postnestedData);
+// dd($post_val->id);
                 foreach ($post_val->Staff as $staff) {
                     $postnestedData['name'] = $staff['name'];
                     $postnestedData['staff_photo'] = url('/assets/admin/images/staff_photos/' . $staff['StaffPhoto'][0]['photo']);
                     $postnestedData['department_name'] = $staff['Department']['name'];
                 }
+                
+                $postnestedData['staff_id'] = $post_val->staff_id;
                 $postnestedData['break_time'] = $formatted_time;
                 $postnestedData['in_time'] = Carbon::parse($post_val->in_time)->format('h:i');
                 $postnestedData['out_time'] = $punchout_time;
-                $postnestedData['total_time'] = $total_time;
+                $postnestedData['total_time'] = $totalTime;
+                $postnestedData['requested'] = $requested_data[$post_val->staff_id];
                 $postnestedData['action'] = '
                     <div class="approve-main-sec">
-                        <button class="atten-coming-btn approve_success"><svg
+                        <button class="atten-coming-btn approve_success" onclick="allApproveDecline('.$post_val->staff_id.', \''.$date.'\',\''.$punchout_time.'\',\'' . 0 .'\')"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 viewBox="0 0 16 16" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -854,7 +895,7 @@ class AttendanceController extends Controller
                                 fill="#808080" />
                             </svg>
                         </button>
-                        <button class="atten-coming-btn reject_danger"><svg
+                        <button class="atten-coming-btn reject_danger" onclick="allApproveDecline('.$post_val->staff_id.', \''.$date.'\',\''.$punchout_time.'\',\''. 1 .'\')"><svg
                             xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                             viewBox="0 0 16 16" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -865,6 +906,10 @@ class AttendanceController extends Controller
                                 fill="#808080" />
                         </svg>
                         </button>
+                    </div>';
+                $postnestedData['staff_logs'] = '
+                    <div> 
+                        <button class="atten-coming-btn reject_danger view-data">View</button>
                     </div>';
                 $data_val[] = $postnestedData;
             }
@@ -878,6 +923,47 @@ class AttendanceController extends Controller
         );
         echo json_encode($get_json_data);
     }
+
+    public function attendanceApproveDecline(Request $request){
+        if($request->status == 0){
+            $punch_data = Attendance::where('id', $request->id)->update(['attendance_status' => 1,'status' => 'Present' ]);
+            if (!$punch_data) {
+                return response()->json(['message' => 'error', 'status' => 0]);
+            } else {
+                return response()->json(['message' => 'Approve successfully', 'status' => 1]);
+            }
+        }else{
+            $punch_decline = Attendance::where('id', $request->id)->update(['attendance_status' => 2,'status' => 'Absent' ]);
+            if (!$punch_decline) {
+                return response()->json(['message' => 'error', 'status' => 0]);
+            } else {
+                return response()->json(['message' => 'Decline successfully', 'status' => 1]);
+            }
+        }
+    }
+
+    public function allAttendanceApproveDecline(Request $request){
+        if($request->status == 0){
+            $punch_allapprove = Attendance::where('staff_id', $request->staff_id)
+            ->whereDate('date', $request->date)
+            ->update(['attendance_status' => 1, 'status' => 'Present']);
+            if (!$punch_allapprove) {
+                return response()->json(['message' => 'error', 'status' => 0]);
+            } else {
+                return response()->json(['message' => 'All attendance approve successfully', 'status' => 1]);
+            }
+        }else{
+            $punch_alldecline = Attendance::where('staff_id', $request->staff_id)
+            ->whereDate('date', $request->date)
+            ->update(['attendance_status' => 2,'status' => 'Absent']);
+            if (!$punch_alldecline) {
+                return response()->json(['message' => 'error', 'status' => 0]);
+            } else {
+                return response()->json(['message' => 'All attendance decline successfully', 'status' => 1]);
+            }
+        }
+    }
+
     public function deleteCheckedPunches(Request $request){
         $ids = $request->selectedIds;
         $calender_date = str_replace(',', '', $request->calender_date);

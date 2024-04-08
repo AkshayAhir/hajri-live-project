@@ -39,5 +39,7 @@ Route::group(['prefix'=>'attendance','middleware' => 'auth'], function () {
     Route::post('attendance_punches_list', [AttendanceController::class, 'allAttendancePunches'])->name('attendance_punches_list');
     Route::post('delete_check_punches', [AttendanceController::class, 'deleteCheckedPunches'])->name('delete_check_punches');
 
+    Route::post('attendance_approve_decline', [AttendanceController::class, 'attendanceApproveDecline'])->name('attendance_approve_decline');
+    Route::post('all_attendance_approve_decline', [AttendanceController::class, 'allAttendanceApproveDecline'])->name('all_attendance_approve_decline');
 
 });

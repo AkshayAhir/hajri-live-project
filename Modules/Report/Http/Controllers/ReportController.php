@@ -645,7 +645,6 @@ class ReportController extends Controller
         }
         // Create a response with the zip file
         $response = response()->download(public_path('assets/admin/payroll_zip/'.$fileName));
-
         // Delete the zip file after sending the response
         $response->deleteFileAfterSend(true);
 

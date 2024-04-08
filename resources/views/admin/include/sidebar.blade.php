@@ -88,9 +88,9 @@ $business_id = Session::get('business_id');
                     </a>
                 </li>
                 <li class="nav_menu">
-                    <!-- <a class="{{ Request::is('attendance*') ? 'hr_active' : '' }}" href="#sidebarLayouts"
-                        data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts"> -->
-                    <a href="{{route('attendance')}}" class="{{ Request::is('attendance*') ? 'hr_active' : '' }}" >
+                    <a class="{{ Request::is('attendance*') ? 'hr_active' : '' }}" href="#sidebarLayouts"
+                        data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                    {{-- <a href="{{route('attendance')}}" class="{{ Request::is('attendance*') ? 'hr_active' : '' }}" > --}}
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M4.16667 3.25C3.66041 3.25 3.25 3.66041 3.25 4.16667V15.8333C3.25 16.3396 3.66041 16.75 4.16667 16.75H15C15.5063 16.75 15.9167 16.3396 15.9167 15.8333V14.1667C15.9167 13.7525 16.2525 13.4167 16.6667 13.4167C17.0809 13.4167 17.4167 13.7525 17.4167 14.1667V15.8333C17.4167 17.168 16.3347 18.25 15 18.25H4.16667C2.83198 18.25 1.75 17.168 1.75 15.8333V4.16667C1.75 2.83198 2.83198 1.75 4.16667 1.75H15C16.3347 1.75 17.4167 2.83198 17.4167 4.16667V5.83333C17.4167 6.24755 17.0809 6.58333 16.6667 6.58333C16.2525 6.58333 15.9167 6.24755 15.9167 5.83333V4.16667C15.9167 3.66041 15.5063 3.25 15 3.25H4.16667Z"
@@ -110,26 +110,26 @@ $business_id = Session::get('business_id');
                         </svg>
 
                         <span class="proxima_nova_semibold">Attendance</span>
-                        <!-- <span class="arrow"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            <span class="arrow"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 viewBox="0 0 16 16" fill="none">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M13.1196 5.26322C12.7686 4.91226 12.1996 4.91226 11.8487 5.26322L7.69116 9.42074L3.53365 5.26322C3.18269 4.91226 2.61367 4.91226 2.26272 5.26322C1.91176 5.61418 1.91176 6.18319 2.26272 6.53415L7.05569 11.3271C7.40665 11.6781 7.97566 11.6781 8.32662 11.3271L13.1196 6.53415C13.4706 6.18319 13.4706 5.61418 13.1196 5.26322Z"
                                     fill="#808080" />
-                            </svg></span> -->
+                            </svg></span>
                     </a>
-                    <!-- <div class="menu-dropdown collapse sidebar-layout" id="sidebarLayouts" style="">
+                     <div class="menu-dropdown collapse sidebar-layout" id="sidebarLayouts" style="">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{ route('attendance') }}"
                                     class="{{ Request::is('attendance') ? 'hr_sub_active' : '' }} nav-link proxima_nova_semibold">Attendance</a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('review_fines') }}" class="{{ Request::is('attendance/review_fines') ? 'hr_sub_active' : '' }} nav-link proxima_nova_semibold">View
                                     Fines</a>
-                            </li>
-                            <li class="nav-item">
+                            </li> --}}
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('review_overtime') }}" class="{{ Request::is('attendance/review_overtime') ? 'hr_sub_active' : '' }} nav-link proxima_nova_semibold">View Overtime</a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a href="{{ route('attendance_punches') }}"
                                     class="{{ Request::is('attendance/attendance_punches') ? 'hr_sub_active' : '' }} nav-link proxima_nova_semibold">View
@@ -140,18 +140,18 @@ $business_id = Session::get('business_id');
                                     class="{{ Request::is('attendance/attendance_leave') ? 'hr_sub_active' : '' }} nav-link proxima_nova_semibold">Leave
                                     Management</a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="detached.html"
                                    class="nav-link proxima_nova_semibold create-data dropdown-toggle proxima_nova_bold"
                                    data-bs-toggle="offcanvas" data-bs-target="#daily-toggle-right"
                                    aria-controls="daily-toggle-right">Daily Report</a>
-                            </li>
-                            <li class="nav-item">
+                            </li> --}}
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('attendance_settings') }}"
                                     class="{{ Request::is('attendance/attendance_settings') ? 'hr_sub_active' : '' }} nav-link proxima_nova_semibold">Settings</a>
-                            </li>
+                            </li> --}}
                         </ul>
-                    </div> -->
+                    </div>
                 </li>
                 <li class="nav_menu">
                     <a href="{{route('report')}}" class="{{ Request::is('report*') ? 'hr_active' : '' }}">
