@@ -89,6 +89,7 @@ class ApiLoginController extends Controller
         $otp = rand(1000, 9999);
         if(Staff::where('phone_number',$request->phone)->exists()) {
             $staff_id = Staff::where('phone_number', $request->phone)->value('id');
+            
             $staff_data = Staff::where('id', $staff_id)->update(['otp' => $otp]);
             if ($staff_data) {
                 return response()->json(['message' => 'OTP Sent', 'status' => 1, 'data' => ['phone' => $request->phone, 'otp' => $otp]]);
