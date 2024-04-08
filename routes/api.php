@@ -24,6 +24,7 @@ Route::post('add_business',[ApiLoginController::class ,'addBusiness'])->name('ap
 
 Route::post('staff_login',[ApiLoginController::class,'staffLogin'])->name('api.staff_login');
 Route::post('staff_verify_otp',[ApiLoginController::class,'staffVerifyOtp'])->name('api.staff_verify_otp');
+Route::post('set_business', [ApiLoginController::class, 'setBusiness'])->name('api.set-business');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('edit_business',[ApiLoginController::class ,'editBusiness'])->name('api.edit_business');
@@ -46,8 +47,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('get_attendance', [ApiLoginController::class, 'getAttendance'])->name('api.get-attendance');
     Route::post('add_attendance', [ApiLoginController::class, 'addAttendance'])->name('api.add-attendance');
 
-
+});
+Route::group(['middleware' => 'auth:staff'], function () {
     //staff business
     Route::post('staff_businesses', [ApiLoginController::class, 'staffBusinesses'])->name('api.staff-businesses');
     Route::post('get_staff_attendance', [ApiLoginController::class, 'getStaffAttendance'])->name('api.get-staff-attendance');
+    Route::get('staff-logout', [ApiLoginController::class, 'staffLogout'])->name('api.staff-logout');
 });
