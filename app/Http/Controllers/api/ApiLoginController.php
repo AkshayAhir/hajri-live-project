@@ -109,21 +109,40 @@ class ApiLoginController extends Controller
             return response()->json(['message' => $error_msg, 'status' => 0]);
         }
         if(Staff::where('phone_number',$request->phone)->where('otp',$request->otp)->exists()) {
-            $staff = Staff::where('phone_number', $request->phone)->first();
-            if($staff->token == ''){
-                if ($staff) {
-                    Auth::guard('staff')->setUser($staff);
-                    $token = $staff->createToken('token')->accessToken;
-                    Staff::where('id', $staff->id)->update(["token" => $token]);
-                    $staff_data = Staff::with(['StaffPhoto:id,staff_id,photo', 'StaffBankDetail:id,staff_id,account_holder_name,account_number,IFSC_code,UPI_id', 'Department:id,name'])->where('id', $staff->id)->first(); // Append the business data to the user data.
-                    return response()->json(["message" => 'You are logged in successfully.','is_register'=>1 ,"status" => "1",'data'=>$staff_data]);
-                }
-            }else{
-                $staff_data = Staff::with(['StaffPhoto:id,staff_id,photo', 'StaffBankDetail:id,staff_id,account_holder_name,account_number,IFSC_code,UPI_id', 'Department:id,name'])->where('id', $staff->id)->first();
-                return response()->json(["message" => 'You are logged in successfully.','is_register'=>0, "status" => "1",'data'=>$staff_data]);
-            }
+            $business = Staff::with('Business:id,name')->select('id','name','email','phone_number','business_id')->where('phone_number',$request->phone)->get();
+            return response()->json(["message" => 'success', "status" => "1","data"=>$business]);
+//            $staff = Staff::where('phone_number', $request->phone)->first();
+//            if($staff->token == ''){
+//                if ($staff) {
+//                    Auth::guard('staff')->setUser($staff);
+//                    $business = Staff::with('Business:id,name')->select('id','name','email','phone_number','business_id')->where('phone_number',$request->phone)->get();
+//                    $token = $staff->createToken('token')->accessToken;
+//                    Staff::where('id', $staff->id)->update(["token" => $token]);
+//                    $staff_data = Staff::with(['StaffPhoto:id,staff_id,photo', 'StaffBankDetail:id,staff_id,account_holder_name,account_number,IFSC_code,UPI_id', 'Department:id,name'])->where('id', $staff->id)->first(); // Append the business data to the user data.
+//                    $staff_data['business'] = $business;
+//                    return response()->json(["message" => 'You are logged in successfully.','is_register'=>1 ,"status" => "1",'data'=>$staff_data]);
+//                }
+//            }else{
+//                $business = Staff::with('Business:id,name')->select('id','name','email','phone_number','business_id')->where('phone_number',$request->phone)->get();
+//                $staff_data['business'] = $business;
+//                $staff_data = Staff::with(['StaffPhoto:id,staff_id,photo', 'StaffBankDetail:id,staff_id,account_holder_name,account_number,IFSC_code,UPI_id', 'Department:id,name'])->where('id', $staff->id)->first();
+//                return response()->json(["message" => 'You are logged in successfully.','is_register'=>0, "status" => "1",'data'=>$staff_data]);
+//            }
         }else{
             return response()->json(['message'=>'Wrong otp.', 'status'=> 0]);
+        }
+    }
+    public function setBusiness(Request $request){
+        $staff = Staff::where('id', $request->staff_id)->first();
+        if($staff->token == ''){
+            Auth::guard('staff')->setUser($staff);
+            $token = $staff->createToken('token')->accessToken;
+            Staff::where('id', $request->staff_id)->update(["token" => $token]);
+            $staff_data = Staff::with(['StaffPhoto:id,staff_id,photo', 'StaffBankDetail:id,staff_id,account_holder_name,account_number,IFSC_code,UPI_id', 'Department:id,name','Business:id,name,business_address'])->where('id', $request->staff_id)->first(); // Append the business data to the user data.
+            return response()->json(["message" => 'You are logged in successfully.','is_register'=>1 ,"status" => "1",'data'=>$staff_data]);
+        }else{
+            $staff_data = Staff::with(['StaffPhoto:id,staff_id,photo', 'StaffBankDetail:id,staff_id,account_holder_name,account_number,IFSC_code,UPI_id', 'Department:id,name','Business:id,name,business_address'])->where('id', $staff->id)->first();
+            return response()->json(["message" => 'You are logged in successfully.','is_register'=>0, "status" => "1",'data'=>$staff_data]);
         }
     }
     public function addBusiness(Request $request){

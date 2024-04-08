@@ -24,6 +24,7 @@ Route::post('add_business',[ApiLoginController::class ,'addBusiness'])->name('ap
 
 Route::post('staff_login',[ApiLoginController::class,'staffLogin'])->name('api.staff_login');
 Route::post('staff_verify_otp',[ApiLoginController::class,'staffVerifyOtp'])->name('api.staff_verify_otp');
+Route::post('set_business', [ApiLoginController::class, 'setBusiness'])->name('api.set-business');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('edit_business',[ApiLoginController::class ,'editBusiness'])->name('api.edit_business');
