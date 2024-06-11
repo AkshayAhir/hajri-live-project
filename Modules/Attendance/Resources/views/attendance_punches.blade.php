@@ -278,6 +278,8 @@
         <div>
             <div class="reject-approve-bttn">
                 <button name="" class="reject-btn proxima_nova_semibold attend_reject_select">Reject Selected</button>
+                {{-- <button name="" class="reject-btn proxima_nova_semibold" onclick="Rejectselect()">Reject Selected</button> --}}
+
                 <button name="" class="approve-btn-btn proxima_nova_semibold">Approve Selected</button>
             </div>
         </div>
@@ -422,7 +424,6 @@
                             data: 'id',
                             type: 'num',
                             render: function (data, type, row) {
-                                console.log(row);
                                 if(row.out_time == '-'){
                                     return '';
                                 }else{
@@ -471,6 +472,7 @@
                 $('.dataTables_length').addClass('bs-select');
             }
             function format(d) {
+                console.log(d);
                 var total = d.requested.length;
                 var requested = '';
                 var i = 1;
@@ -622,6 +624,27 @@
                 var calender_date = $('#calender_date').val();
                 datatable(searchValue,calender_date);
             });   
+
+            // function Rejectselect(row.staff_id) {
+            //     alert(staff_id);
+            // }
+
+            // $(".attend_reject_select").on('click', function(){
+            //     $.ajax({
+            //         headers: {
+            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //         },
+            //         url: "{{ route('attendance_reject_select') }}",
+            //         type: "POST",
+            //         data:{
+            //             'staff_id': staff_id,
+            //         },
+            //         success: function(response) {
+                     
+            //         },
+            //     });
+            // });
+
             
         });
         function approveDecline(id,final_out_time,status){
@@ -652,6 +675,7 @@
             }
         }
         
+        
         function allApproveDecline(staff_id,date,punchout_time,status){
             if(punchout_time == '-' && status == 0){
                 toastr["error"]("Not all Approve without out time");
@@ -681,6 +705,8 @@
             }
             
         }
+
+        
 
         function onCheckDelete(){
             var calender_date = $('#calender_date').val();  

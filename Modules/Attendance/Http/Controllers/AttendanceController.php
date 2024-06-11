@@ -964,6 +964,10 @@ class AttendanceController extends Controller
         }
     }
 
+    public function AttendanceRejectSelect(Request $request){
+ dd($request);
+    }
+
     public function deleteCheckedPunches(Request $request){
         $ids = $request->selectedIds;
         $calender_date = str_replace(',', '', $request->calender_date);
